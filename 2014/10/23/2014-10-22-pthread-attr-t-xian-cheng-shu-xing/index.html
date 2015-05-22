@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ylwhere.tk/2014/10/23/2014-10-22-pthread-attr-t-xian-cheng-shu-xing/index.html">
 <meta property="og:site_name" content="ylw Home">
 <meta property="og:description" content="‘pthread_attr_t’ 是posix线程库函数在创建线程时的属性，默认为NULL">
-<meta property="og:updated_time" content="2015-05-22T04:59:21.947Z">
+<meta property="og:updated_time" content="2015-05-22T14:01:56.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pthread_attr_t 线程属性">
 <meta name="twitter:description" content="‘pthread_attr_t’ 是posix线程库函数在创建线程时的属性，默认为NULL">
@@ -98,9 +98,9 @@
 					        
 								<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
 					        
-								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
 					        
-								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wang-yu-lin-74" title="zhihu">zhihu</a>
 					        
 						</div>
 					</nav>
@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a>
+						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/llvm/" style="font-size: 10px;">llvm</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/pthread/" style="font-size: 10px;">pthread</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 16.67px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -118,9 +118,7 @@
 				<section class="switch-part switch-part3">
 					<div id="js-friends">
 					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">friends的博客</a>
 			        
 			        </div>
 				</section>
@@ -168,9 +166,9 @@
 			        
 						<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
 			        
-						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
 			        
-						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wang-yu-lin-74" title="zhihu">zhihu</a>
 			        
 				</div>
 			</nav>
@@ -202,6 +200,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pthread/">pthread</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+	</div>
+
         
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/larbin/">larbin</a>
@@ -225,140 +227,29 @@
           
 
           <!-- 文章目录结束 -->
-        <p>‘pthread_attr_t’ 是posix线程库函数在创建线程时的属性，默认为NULL<br> <a id="more"></a><br>    intpthread_create(pthread_t<em>tidp,constpthread_attr_t</em>attr,(void<em>)(</em>start_rtn)(void<em>),void</em>arg);</p>
+        <p>‘pthread_attr_t’ 是posix线程库函数在创建线程时的属性，默认为NULL<br> <a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intpthread_create(pthread_t*tidp,constpthread_attr_t*attr,(void*)(*start_rtn)(void*),void*arg);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
 <p>pthread_aar_t 在pthread.h中的定义为：</p>
-<pre><code><span class="keyword">typedef</span> <span class="keyword">struct</span>
-{
-    <span class="keyword">int</span>      detachstate;     线程的分离状态
-    <span class="keyword">int</span>     schedpolicy;   线程调度策略
-    <span class="keyword">struct</span>  sched_param  schedparam;   线程的调度参数
-    <span class="keyword">int</span>      inheritsched;    线程的继承性
-    <span class="keyword">int</span>      scope;          线程的作用域
-    <span class="keyword">size_t</span>  guardsize; 线程栈末尾的警戒缓冲区大小
-    <span class="keyword">int</span>     stackaddr_set;
-    <span class="keyword">void</span> *  stackaddr;      线程栈的位置
-    <span class="keyword">size_t</span>  stacksize;       线程栈的大小
-}<span class="keyword">pthread_attr_t</span>;
-</code></pre><p> 线程的分离状态决定一个线程以什么样的方式来终止自己。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span>  	detachstate;     线程的分离状态</span><br><span class="line">    <span class="keyword">int</span> 	schedpolicy;   线程调度策略</span><br><span class="line">    <span class="keyword">struct</span>  sched_param  schedparam;   线程的调度参数</span><br><span class="line">    <span class="keyword">int</span>  	inheritsched;    线程的继承性</span><br><span class="line">    <span class="keyword">int</span>  	scope;          线程的作用域</span><br><span class="line">    <span class="keyword">size_t</span>  guardsize; 线程栈末尾的警戒缓冲区大小</span><br><span class="line">    <span class="keyword">int</span>     stackaddr_set;</span><br><span class="line">    <span class="keyword">void</span> *  stackaddr;      线程栈的位置</span><br><span class="line">    <span class="keyword">size_t</span>  stacksize;       线程栈的大小</span><br><span class="line">&#125;<span class="keyword">pthread_attr_t</span>;</span><br></pre></td></tr></table></figure>
+<p> 线程的分离状态决定一个线程以什么样的方式来终止自己。</p>
 <p>我们已经在前面已经知道，在默认情况下线程是非分离状态的，这种情况<br>下，原有的线程等待创建的线程结束。只有当pthread_join() 函数返回<br>时，创建的线程才算终止，才能释放自己占用的系统资源。   </p>
 <p>分离线程没有被其他的线程所等待，自己运行结束了，线程也就终止了，<br>马上释放系统资源。</p>
 <p>通俗的说也就是：我们知道一般我们要等待(pthread_join)一个线程的结束，<br>主要是想知道它的结束状态，否则等待一般是没有什么意义的！但是if有一<br>些线程的终止态我们压根就不想知道，那么就可以使用“分离”属性，那么我<br>们就无须等待管理，只要线程自己结束了，自己释放src就可以咯！这样更<br>方便！</p>
-<pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;pthread.h&gt;</span>
-<span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_getdetachstate</span><span class="params">(<span class="keyword">const</span> pthread_attr_t * attr, <span class="keyword">int</span> * detachstate)</span></span>;
-<span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_setdetachstate</span><span class="params">(pthread_attr_t * attr, <span class="keyword">int</span> detachstate)</span></span>;
-</code></pre><p>参数：attr:线程属性变量</p>
+<hr>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;pthread.h&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_getdetachstate</span><span class="params">(<span class="keyword">const</span> pthread_attr_t * attr, <span class="keyword">int</span> * detachstate)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_setdetachstate</span><span class="params">(pthread_attr_t * attr, <span class="keyword">int</span> detachstate)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>参数：attr:线程属性变量</p>
 <p>detachstate:分离状态属性<br>若成功返回0，若失败返回-1。</p>
 <p>设置的时候可以有两种选择：</p>
 <p><1>.detachstate参数为：PTHREAD_CREATE_DETACHED     分离状态启动</1></p>
 <p><2>.detachstate参数为：PTHREAD_CREATE_JOINABLE    正常启动线程</2></p>
+<hr>
 <p>下面是一个例子小程序，说明在线程创建的过程中主线程必须要等待子线程的结束以后才可以终止。其中等待是调用<code>pthread_join()</code>函数，此函数默认是阻塞函数。只有等子线程结果以后才可以返回。也就是说只有此函数返回以后才可以继续执行下面的代码。线程返回一是代码执行完成，二是调用<code>pthread_exit()</code>函数。</p>
-<pre><code>/<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>
-&gt; File Name: thread.c
-&gt; Author: wyl
-&gt; Mail: 
-&gt; Created Time: Wed 22 Oct 2014 06:58:43 AM PDT
-<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>/
-
-<span class="comment">#include &lt;stdio.h&gt;</span>
-<span class="comment">#include &lt;unistd.h&gt;</span>
-<span class="comment">#include &lt;pthread.h&gt;</span>
-<span class="comment">#include &lt;stdlib.h&gt;</span>
-
-<span class="comment">#define MAX1 10</span>
-<span class="comment">#define MAX2 20</span>
-
-pthread_t thread[2];
-pthread_mutex_t mut;
-int number, i;
-
-void <span class="keyword">*</span>thread1()
-{
-    printf(<span class="string">"htread1: i am thread 1\n"</span>);
-    for(i =0; i <span class="variable">&lt; MAX1; ++i)
-    {
-        printf("thread1: number = %d i = %d\n", number, i);
-        pthread_mutex_lock(&amp;mut);
-        number++;
-        pthread_mutex_unlock(&amp;mut);
-        sleep(2);
-    }
-    printf("thread1: is main function waiting for me\n");
-    pthread_exit(NULL);
-}
-
-void *thread2()
-{
-    printf("htread2: i am thread 2\n");
-    for(i =0; i &lt; MAX2; ++i)
-    {
-        printf("thread2: number = %d i = %d\n", number, i);
-        pthread_mutex_lock(&amp;mut);
-        number++;
-        pthread_mutex_unlock(&amp;mut);
-        sleep(3);
-    }
-    printf("thread2: is main function waiting for me\n");
-    pthread_exit(NULL);
-}
-
-void thread_create(void)
-{
-    int temp;
-    pthread_attr_t attr;
-    pthread_attr_init(&amp;attr);
-    pthread_attr_setdetachstate(&amp;attr, PTHREAD_CREATE_DETACHED);
-    if((temp = pthread_create(&amp;thread[0], &amp;attr, thread1, NULL)) != 0)
-        pthread_attr_destroy(&amp;attr), printf("thread1 create failed\n");
-    else
-        printf("thread1 is established\n");
-
-    if((temp = pthread_create(&amp;thread[1], NULL, thread2, NULL)) != 0)
-        printf("thread2 create failed\n");
-    else
-        printf("thread2 is established\n");
-
-}
-
-void thread_wait(void)
-{
-    if(thread[0] != 0)
-    {
-        pthread_join(thread[0], NULL);
-        printf("thread 1 is over\n");
-    }
-    if(thread[1] != 0)
-    {
-//        pthread_detach(thread[1]);
-        pthread_join(thread[1], NULL);
-        printf("thread 2 is over\n");
-    }
-}
-
-int main()
-{
-
-    pthread_mutex_init(&amp;mut, NULL);
-    printf("the main function\n");
-    thread_create();
-    printf("the main function wait for threads\n");
-    thread_wait();
-
-    return 0;
-}</span>
-</code></pre><p>larbin下有一段代码是创建的一个默认的线程。创建完线程就使它分离，也就是线程的作用只是执行函数，不用等待返回状态</p>
-<pre><code><span class="function"><span class="keyword">void</span> <span class="title">startThread</span> <span class="params">(StartFun run, <span class="keyword">void</span> *arg)</span> </span>{
-    <span class="keyword">pthread_t</span> t;
-    <span class="keyword">pthread_attr_t</span> attr;
-    <span class="keyword">if</span> (pthread_attr_init(&amp;attr) != <span class="number">0</span>
-          || pthread_create(&amp;t, &amp;attr, run, arg) != <span class="number">0</span>
-          || pthread_attr_destroy(&amp;attr) != <span class="number">0</span>
-          || pthread_detach(t) != <span class="number">0</span>) 
-    {
-        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"Unable to launch a thread\n"</span>;
-        <span class="built_in">exit</span>(<span class="number">1</span>);
-    }
-}
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span><br><span class="line">&gt; File Name: thread.c</span><br><span class="line">&gt; Author: wyl</span><br><span class="line">&gt; Mail: </span><br><span class="line">&gt; Created Time: Wed 22 Oct 2014 06:58:43 AM PDT</span><br><span class="line">************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;unistd.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;pthread.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdlib.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MAX1 10</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MAX2 20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pthread_t</span> thread[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">pthread_mutex_t</span> mut;</span><br><span class="line"><span class="keyword">int</span> number, i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> *thread1()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"htread1: i am thread 1\n"</span>);</span><br><span class="line">	<span class="keyword">for</span>(i =<span class="number">0</span>; i &lt; MAX1; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"thread1: number = %d i = %d\n"</span>, number, i);</span><br><span class="line">		pthread_mutex_lock(&amp;mut);</span><br><span class="line">		number++;</span><br><span class="line">		pthread_mutex_unlock(&amp;mut);</span><br><span class="line">		sleep(<span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"thread1: is main function waiting for me\n"</span>);</span><br><span class="line">	pthread_exit(NULL);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> *thread2()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"htread2: i am thread 2\n"</span>);</span><br><span class="line">	<span class="keyword">for</span>(i =<span class="number">0</span>; i &lt; MAX2; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"thread2: number = %d i = %d\n"</span>, number, i);</span><br><span class="line">		pthread_mutex_lock(&amp;mut);</span><br><span class="line">		number++;</span><br><span class="line">		pthread_mutex_unlock(&amp;mut);</span><br><span class="line">		sleep(<span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"thread2: is main function waiting for me\n"</span>);</span><br><span class="line">	pthread_exit(NULL);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">thread_create</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> temp;</span><br><span class="line">	<span class="keyword">pthread_attr_t</span> attr;</span><br><span class="line">	pthread_attr_init(&amp;attr);</span><br><span class="line">	pthread_attr_setdetachstate(&amp;attr, PTHREAD_CREATE_DETACHED);</span><br><span class="line">	<span class="keyword">if</span>((temp = pthread_create(&amp;thread[<span class="number">0</span>], &amp;attr, thread1, NULL)) != <span class="number">0</span>)</span><br><span class="line">		pthread_attr_destroy(&amp;attr), <span class="built_in">printf</span>(<span class="string">"thread1 create failed\n"</span>);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"thread1 is established\n"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>((temp = pthread_create(&amp;thread[<span class="number">1</span>], NULL, thread2, NULL)) != <span class="number">0</span>)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"thread2 create failed\n"</span>);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"thread2 is established\n"</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">thread_wait</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(thread[<span class="number">0</span>] != <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		pthread_join(thread[<span class="number">0</span>], NULL);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"thread 1 is over\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(thread[<span class="number">1</span>] != <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line"><span class="comment">//		pthread_detach(thread[1]);</span></span><br><span class="line">		pthread_join(thread[<span class="number">1</span>], NULL);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"thread 2 is over\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line">	pthread_mutex_init(&amp;mut, NULL);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"the main function\n"</span>);</span><br><span class="line">	thread_create();</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"the main function wait for threads\n"</span>);</span><br><span class="line">	thread_wait();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>larbin下有一段代码是创建的一个默认的线程。创建完线程就使它分离，也就是线程的作用只是执行函数，不用等待返回状态</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">startThread</span> <span class="params">(StartFun run, <span class="keyword">void</span> *arg)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">pthread_t</span> t;</span><br><span class="line">	<span class="keyword">pthread_attr_t</span> attr;</span><br><span class="line">	<span class="keyword">if</span> (pthread_attr_init(&amp;attr) != <span class="number">0</span></span><br><span class="line">  		|| pthread_create(&amp;t, &amp;attr, run, arg) != <span class="number">0</span></span><br><span class="line">  		|| pthread_attr_destroy(&amp;attr) != <span class="number">0</span></span><br><span class="line">  		|| pthread_detach(t) != <span class="number">0</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Unable to launch a thread\n"</span>;</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     

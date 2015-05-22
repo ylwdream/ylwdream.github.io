@@ -97,9 +97,9 @@
 					        
 								<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
 					        
-								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
 					        
-								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wang-yu-lin-74" title="zhihu">zhihu</a>
 					        
 						</div>
 					</nav>
@@ -108,7 +108,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a>
+						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/llvm/" style="font-size: 10px;">llvm</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/pthread/" style="font-size: 10px;">pthread</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 16.67px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -117,9 +117,7 @@
 				<section class="switch-part switch-part3">
 					<div id="js-friends">
 					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">friends的博客</a>
 			        
 			        </div>
 				</section>
@@ -167,9 +165,9 @@
 			        
 						<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
 			        
-						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
 			        
-						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wang-yu-lin-74" title="zhihu">zhihu</a>
 			        
 				</div>
 			</nav>
@@ -452,9 +450,13 @@
     
     <div class="article-info article-info-index">
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/octopress/">octopress</a></li></ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/octopress/">octopress</a>
+	<a class="article-category-link" href="/categories/blog/">blog</a>
 	</div>
 
 
@@ -502,15 +504,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>下面整理的是我在自己的电脑上安装llvm时遇到的问题，以前用makefile自己安装了几次，每次都没有成功，昨天寝室师兄告诉我要看软件的版本问题，才明白到以前根本没有注意到这些问题。好了下面是安装的步骤，记录下，也为了后面的人做个参考。
+        <p>下面整理的是我在自己的电脑上安装llvm时遇到的问题，以前用makefile自己安装了几次，每次都没有成功，昨天寝室师兄告诉我要看软件的版本问题，才明白到以前根本没有注意到这些问题。好了下面是安装的步骤，记录下，也为了后面的人做个参考。<br>
       
     </div>
     
     <div class="article-info article-info-index">
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/llvm/">llvm</a></li></ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/llvm/">llvm</a>
+	<a class="article-category-link" href="/categories/compiler/">compiler</a>
 	</div>
 
 
@@ -558,7 +564,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="typeid_运算符和C++显示定义的四种类型转换">typeid 运算符和C++显示定义的四种类型转换</h2><p>typeid 运算符主要是为了支持c++的RTTI(Runtime Type Identification).在有虚拟集成的类结构中，也就是有多态的情况下，当需要知道动态执行的指针或引用的类的类型时被使用。当然它也可以用在内置类型或者是没有虚函数的类继承的结构中。typeid返回的类型是<code>const std::type_info</code>。<br>
+        <h2 id="typeid_运算符">typeid 运算符</h2><p>typeid 运算符主要是为了支持c++的RTTI(Runtime Type Identification).在有虚拟集成的类结构中，也就是有多态的情况下，当需要知道动态执行的指针或引用的类的类型时被使用。当然它也可以用在内置类型或者是没有虚函数的类继承的结构中。typeid返回的类型是<code>const std::type_info</code>。<br>
       
     </div>
     
@@ -566,7 +572,7 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/c/">c++</a>
+	<a class="article-category-link" href="/categories/C-C/">C/C++</a>
 	</div>
 
 
@@ -620,6 +626,10 @@
     
     <div class="article-info article-info-index">
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pthread/">pthread</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/larbin/">larbin</a>
@@ -676,6 +686,10 @@
     
     <div class="article-info article-info-index">
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/larbin/">larbin</a>
@@ -738,9 +752,13 @@ rvm install <span class="number">2.1</span>.<span class="number">0</span> &amp;&
     
     <div class="article-info article-info-index">
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Octopress/">Octopress</a></li></ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Octopress/">Octopress</a>
+	<a class="article-category-link" href="/categories/blog/">blog</a>
 	</div>
 
 

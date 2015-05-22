@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ylwhere.tk/2014/10/22/2014-10-22-the-string-implement-code/index.html">
 <meta property="og:site_name" content="ylw Home">
 <meta property="og:description" content="最近在学习开源爬虫larbin的代码，里面有我觉得比较好的代码，想要记录下也想和大家分享下。">
-<meta property="og:updated_time" content="2015-05-22T04:59:21.956Z">
+<meta property="og:updated_time" content="2015-05-22T13:57:55.479Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The String Implement Code">
 <meta name="twitter:description" content="最近在学习开源爬虫larbin的代码，里面有我觉得比较好的代码，想要记录下也想和大家分享下。">
@@ -98,9 +98,9 @@
 					        
 								<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
 					        
-								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
 					        
-								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wang-yu-lin-74" title="zhihu">zhihu</a>
 					        
 						</div>
 					</nav>
@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a>
+						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/llvm/" style="font-size: 10px;">llvm</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/pthread/" style="font-size: 10px;">pthread</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 16.67px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -118,9 +118,7 @@
 				<section class="switch-part switch-part3">
 					<div id="js-friends">
 					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">friends的博客</a>
 			        
 			        </div>
 				</section>
@@ -168,9 +166,9 @@
 			        
 						<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
 			        
-						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
 			        
-						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wang-yu-lin-74" title="zhihu">zhihu</a>
 			        
 				</div>
 			</nav>
@@ -202,6 +200,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+	</div>
+
         
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/larbin/">larbin</a>
@@ -218,84 +220,22 @@
           <!-- 文章目录开始 -->
 
           
-            <div id="toc" class="toc-article">
-            <strong class="toc-title">contents</strong>
-            
-          </div>
-          
 
           <!-- 文章目录结束 -->
-        <p>最近在学习开源爬虫larbin的代码，里面有我觉得比较好的代码，想要记录下也想和大家分享下。<br><a id="more"></a><br>   1.扩大字符串容量的算法。先扩大一倍，然后不行就扩大到需要的大小。可以看看stl中vector的实现。</p>
-<pre><code><span class="keyword">void</span> LarbinString::addBuffer (<span class="keyword">char</span> *s, uint len) 
-{
-    <span class="keyword">if</span>(<span class="keyword">size</span> &lt;= pos + len){
-        <span class="keyword">size</span> *= <span class="number">2</span>;
-        <span class="keyword">if</span> (<span class="keyword">size</span> &lt;= pos + len) <span class="keyword">size</span> = pos + len + <span class="number">1</span>;
-        <span class="keyword">char</span> *tmp = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">size</span>];
-        memcpy(tmp, chaine, pos);
-        <span class="keyword">delete</span> [] chaine;
-        chaine = tmp;
-    }
-    memcpy(chaine+pos, s, len);
-    pos += len;
-    chaine[pos] = <span class="number">0</span>;
-}
-</code></pre><p>在stl中vector的实现方法与此类似，底层是一个数组，第一次扩大也是原来的二倍。</p>
-<p>   2.查找匹配特定的字符串可以带*模式</p>
-<pre><code><span class="comment">/* test if b is forbidden by pattern a */</span>
-<span class="function"><span class="keyword">bool</span> <span class="title">robotsMatch</span> <span class="params">(<span class="keyword">char</span> *a, <span class="keyword">char</span> *b)</span> 
-</span>{
-    <span class="keyword">int</span> i=<span class="number">0</span>;
-    <span class="keyword">int</span> j=<span class="number">0</span>;
-    <span class="keyword">while</span> (a[i] != <span class="number">0</span>) 
-    {
-        <span class="keyword">if</span> (a[i] == <span class="string">'*'</span>) 
-        {
-              i++;
-              <span class="keyword">char</span> *tmp = <span class="built_in">strchr</span>(b+j, a[i]);
-              <span class="keyword">if</span> (tmp == NULL) <span class="keyword">return</span> <span class="keyword">false</span>;
-              j = tmp - b;
-        } 
-        <span class="keyword">else</span> 
-        {
-              <span class="keyword">if</span> (a[i] != b[j]) <span class="keyword">return</span> <span class="keyword">false</span>;
-          i++; j++;
-        }
-    }
-  <span class="keyword">return</span> <span class="keyword">true</span>;
-}
-</code></pre><p>  3.从后向前找是否是字符串匹配，如果从前向后匹配的话会多浪费一个变量</p>
-<pre><code><span class="comment">//从后向前找</span>
-<span class="function"><span class="keyword">bool</span> <span class="title">caseContain</span> <span class="params">(<span class="keyword">char</span> *a, <span class="keyword">char</span> *b)</span> 
-</span>{
-    <span class="keyword">size_t</span> la = <span class="built_in">strlen</span>(a);
-    <span class="keyword">int</span> i = <span class="built_in">strlen</span>(b) - la;
-    <span class="keyword">while</span> (i &gt;= <span class="number">0</span>) 
-    {
-        <span class="keyword">if</span> (!strncasecmp(a, b+i, la)) 
-        {
-              <span class="keyword">return</span> <span class="keyword">true</span>;
-        }
-        i--;
-      }
-  <span class="keyword">return</span> <span class="keyword">false</span>;
-}
-<span class="comment">//如果从前向后匹配的话</span>
-<span class="function"><span class="keyword">bool</span> <span class="title">caseContain</span> <span class="params">(<span class="keyword">char</span> *a, <span class="keyword">char</span> *b)</span> 
-</span>{
-    <span class="keyword">size_t</span> la = <span class="built_in">strlen</span>(a);
-    <span class="keyword">size_t</span> lb = <span class="built_in">strlen</span>(b);
-    <span class="keyword">int</span> i = <span class="number">0</span>;
-    <span class="keyword">while</span> (i &lt;= lb - la) {
-    <span class="keyword">if</span> (!strncasecmp(a, b+i, la)) 
-    {
-          <span class="keyword">return</span> <span class="keyword">true</span>;
-    }
-    i++;
-    }
-    <span class="keyword">return</span> <span class="keyword">false</span>;
-}
-</code></pre>
+        <p>最近在学习开源爬虫larbin的代码，里面有我觉得比较好的代码，想要记录下也想和大家分享下。<br><a id="more"></a></p>
+<ol>
+<li>扩大字符串容量的算法。先扩大一倍，然后不行就扩大到需要的大小。可以看看stl中vector的实现。<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> LarbinString::addBuffer (<span class="keyword">char</span> *s, uint len) </span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(size &lt;= pos + len)&#123;</span><br><span class="line">		size *= <span class="number">2</span>;</span><br><span class="line">   		<span class="keyword">if</span> (size &lt;= pos + len) size = pos + len + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">char</span> *tmp = <span class="keyword">new</span> <span class="keyword">char</span>[size];</span><br><span class="line">		<span class="built_in">memcpy</span>(tmp, chaine, pos);</span><br><span class="line">		<span class="keyword">delete</span> [] chaine;</span><br><span class="line">		chaine = tmp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memcpy</span>(chaine+pos, s, len);</span><br><span class="line">	pos += len;</span><br><span class="line">	chaine[pos] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在stl中vector的实现方法与此类似，底层是一个数组，第一次扩大也是原来的二倍。</p>
+<ol>
+<li><p>查找匹配特定的字符串可以带*模式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">/* test if b is forbidden by pattern a */</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">robotsMatch</span> <span class="params">(<span class="keyword">char</span> *a, <span class="keyword">char</span> *b)</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (a[i] != <span class="number">0</span>) </span><br><span class="line">	&#123;</span><br><span class="line">	    <span class="keyword">if</span> (a[i] == <span class="string">'*'</span>) </span><br><span class="line">		&#123;</span><br><span class="line">      		i++;</span><br><span class="line">     			<span class="keyword">char</span> *tmp = <span class="built_in">strchr</span>(b+j, a[i]);</span><br><span class="line">     			<span class="keyword">if</span> (tmp == NULL) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">     			j = tmp - b;</span><br><span class="line">   		&#125; </span><br><span class="line">		<span class="keyword">else</span> </span><br><span class="line">		&#123;</span><br><span class="line">     			<span class="keyword">if</span> (a[i] != b[j]) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">     		i++; j++;</span><br><span class="line">   		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从后向前找是否是字符串匹配，如果从前向后匹配的话会多浪费一个变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从后向前找</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">caseContain</span> <span class="params">(<span class="keyword">char</span> *a, <span class="keyword">char</span> *b)</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">size_t</span> la = <span class="built_in">strlen</span>(a);</span><br><span class="line">	<span class="keyword">int</span> i = <span class="built_in">strlen</span>(b) - la;</span><br><span class="line">	<span class="keyword">while</span> (i &gt;= <span class="number">0</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (!strncasecmp(a, b+i, la)) </span><br><span class="line">		&#123;</span><br><span class="line">  			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		i--;</span><br><span class="line">		&#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果从前向后匹配的话</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">caseContain</span> <span class="params">(<span class="keyword">char</span> *a, <span class="keyword">char</span> *b)</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">size_t</span> la = <span class="built_in">strlen</span>(a);</span><br><span class="line">	<span class="keyword">size_t</span> lb = <span class="built_in">strlen</span>(b);</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (i &lt;= lb - la) &#123;</span><br><span class="line">	<span class="keyword">if</span> (!strncasecmp(a, b+i, la)) </span><br><span class="line">	&#123;</span><br><span class="line">  		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	i++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
       
     </div>
     
