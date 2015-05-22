@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>pthread_attr_t 线程属性 | ylw Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="‘pthread_attr_t’ 是posix线程库函数在创建线程时的属性，默认为NULL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pthread_attr_t 线程属性">
+<meta property="og:url" content="http://ylwhere.tk/2014/10/23/2014-10-22-pthread-attr-t-xian-cheng-shu-xing/index.html">
+<meta property="og:site_name" content="ylw Home">
+<meta property="og:description" content="‘pthread_attr_t’ 是posix线程库函数在创建线程时的属性，默认为NULL">
+<meta property="og:updated_time" content="2015-05-22T04:59:21.947Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pthread_attr_t 线程属性">
+<meta name="twitter:description" content="‘pthread_attr_t’ 是posix线程库函数在创建线程时的属性，默认为NULL">
+  
+    <link rel="alternative" href="/atom.xml" title="ylw Home" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="/img/favicon.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ylw Home</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">More Code More Confidence</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/About">ABOUT ME</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">ylw Home</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/favicon.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ylw Home</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">More Code More Confidence</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/About">ABOUT ME</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-2014-10-22-pthread-attr-t-xian-cheng-shu-xing" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/10/23/2014-10-22-pthread-attr-t-xian-cheng-shu-xing/" class="article-date">
+  	<time datetime="2014-10-22T16:14:39.000Z" itemprop="datePublished">2014-10-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      pthread_attr_t 线程属性
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/larbin/">larbin</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>‘pthread_attr_t’ 是posix线程库函数在创建线程时的属性，默认为NULL<br> <a id="more"></a><br>    intpthread_create(pthread_t<em>tidp,constpthread_attr_t</em>attr,(void<em>)(</em>start_rtn)(void<em>),void</em>arg);</p>
+<p>pthread_aar_t 在pthread.h中的定义为：</p>
+<pre><code><span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span>      detachstate;     线程的分离状态
+    <span class="keyword">int</span>     schedpolicy;   线程调度策略
+    <span class="keyword">struct</span>  sched_param  schedparam;   线程的调度参数
+    <span class="keyword">int</span>      inheritsched;    线程的继承性
+    <span class="keyword">int</span>      scope;          线程的作用域
+    <span class="keyword">size_t</span>  guardsize; 线程栈末尾的警戒缓冲区大小
+    <span class="keyword">int</span>     stackaddr_set;
+    <span class="keyword">void</span> *  stackaddr;      线程栈的位置
+    <span class="keyword">size_t</span>  stacksize;       线程栈的大小
+}<span class="keyword">pthread_attr_t</span>;
+</code></pre><p> 线程的分离状态决定一个线程以什么样的方式来终止自己。</p>
+<p>我们已经在前面已经知道，在默认情况下线程是非分离状态的，这种情况<br>下，原有的线程等待创建的线程结束。只有当pthread_join() 函数返回<br>时，创建的线程才算终止，才能释放自己占用的系统资源。   </p>
+<p>分离线程没有被其他的线程所等待，自己运行结束了，线程也就终止了，<br>马上释放系统资源。</p>
+<p>通俗的说也就是：我们知道一般我们要等待(pthread_join)一个线程的结束，<br>主要是想知道它的结束状态，否则等待一般是没有什么意义的！但是if有一<br>些线程的终止态我们压根就不想知道，那么就可以使用“分离”属性，那么我<br>们就无须等待管理，只要线程自己结束了，自己释放src就可以咯！这样更<br>方便！</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;pthread.h&gt;</span>
+<span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_getdetachstate</span><span class="params">(<span class="keyword">const</span> pthread_attr_t * attr, <span class="keyword">int</span> * detachstate)</span></span>;
+<span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_setdetachstate</span><span class="params">(pthread_attr_t * attr, <span class="keyword">int</span> detachstate)</span></span>;
+</code></pre><p>参数：attr:线程属性变量</p>
+<p>detachstate:分离状态属性<br>若成功返回0，若失败返回-1。</p>
+<p>设置的时候可以有两种选择：</p>
+<p><1>.detachstate参数为：PTHREAD_CREATE_DETACHED     分离状态启动</1></p>
+<p><2>.detachstate参数为：PTHREAD_CREATE_JOINABLE    正常启动线程</2></p>
+<p>下面是一个例子小程序，说明在线程创建的过程中主线程必须要等待子线程的结束以后才可以终止。其中等待是调用<code>pthread_join()</code>函数，此函数默认是阻塞函数。只有等子线程结果以后才可以返回。也就是说只有此函数返回以后才可以继续执行下面的代码。线程返回一是代码执行完成，二是调用<code>pthread_exit()</code>函数。</p>
+<pre><code>/<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>
+&gt; File Name: thread.c
+&gt; Author: wyl
+&gt; Mail: 
+&gt; Created Time: Wed 22 Oct 2014 06:58:43 AM PDT
+<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>/
+
+<span class="comment">#include &lt;stdio.h&gt;</span>
+<span class="comment">#include &lt;unistd.h&gt;</span>
+<span class="comment">#include &lt;pthread.h&gt;</span>
+<span class="comment">#include &lt;stdlib.h&gt;</span>
+
+<span class="comment">#define MAX1 10</span>
+<span class="comment">#define MAX2 20</span>
+
+pthread_t thread[2];
+pthread_mutex_t mut;
+int number, i;
+
+void <span class="keyword">*</span>thread1()
+{
+    printf(<span class="string">"htread1: i am thread 1\n"</span>);
+    for(i =0; i <span class="variable">&lt; MAX1; ++i)
+    {
+        printf("thread1: number = %d i = %d\n", number, i);
+        pthread_mutex_lock(&amp;mut);
+        number++;
+        pthread_mutex_unlock(&amp;mut);
+        sleep(2);
+    }
+    printf("thread1: is main function waiting for me\n");
+    pthread_exit(NULL);
+}
+
+void *thread2()
+{
+    printf("htread2: i am thread 2\n");
+    for(i =0; i &lt; MAX2; ++i)
+    {
+        printf("thread2: number = %d i = %d\n", number, i);
+        pthread_mutex_lock(&amp;mut);
+        number++;
+        pthread_mutex_unlock(&amp;mut);
+        sleep(3);
+    }
+    printf("thread2: is main function waiting for me\n");
+    pthread_exit(NULL);
+}
+
+void thread_create(void)
+{
+    int temp;
+    pthread_attr_t attr;
+    pthread_attr_init(&amp;attr);
+    pthread_attr_setdetachstate(&amp;attr, PTHREAD_CREATE_DETACHED);
+    if((temp = pthread_create(&amp;thread[0], &amp;attr, thread1, NULL)) != 0)
+        pthread_attr_destroy(&amp;attr), printf("thread1 create failed\n");
+    else
+        printf("thread1 is established\n");
+
+    if((temp = pthread_create(&amp;thread[1], NULL, thread2, NULL)) != 0)
+        printf("thread2 create failed\n");
+    else
+        printf("thread2 is established\n");
+
+}
+
+void thread_wait(void)
+{
+    if(thread[0] != 0)
+    {
+        pthread_join(thread[0], NULL);
+        printf("thread 1 is over\n");
+    }
+    if(thread[1] != 0)
+    {
+//        pthread_detach(thread[1]);
+        pthread_join(thread[1], NULL);
+        printf("thread 2 is over\n");
+    }
+}
+
+int main()
+{
+
+    pthread_mutex_init(&amp;mut, NULL);
+    printf("the main function\n");
+    thread_create();
+    printf("the main function wait for threads\n");
+    thread_wait();
+
+    return 0;
+}</span>
+</code></pre><p>larbin下有一段代码是创建的一个默认的线程。创建完线程就使它分离，也就是线程的作用只是执行函数，不用等待返回状态</p>
+<pre><code><span class="function"><span class="keyword">void</span> <span class="title">startThread</span> <span class="params">(StartFun run, <span class="keyword">void</span> *arg)</span> </span>{
+    <span class="keyword">pthread_t</span> t;
+    <span class="keyword">pthread_attr_t</span> attr;
+    <span class="keyword">if</span> (pthread_attr_init(&amp;attr) != <span class="number">0</span>
+          || pthread_create(&amp;t, &amp;attr, run, arg) != <span class="number">0</span>
+          || pthread_attr_destroy(&amp;attr) != <span class="number">0</span>
+          || pthread_detach(t) != <span class="number">0</span>) 
+    {
+        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"Unable to launch a thread\n"</span>;
+        <span class="built_in">exit</span>(<span class="number">1</span>);
+    }
+}
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/10/24/2014-10-23-c-plus-plus-zhong-de-typeidyun-suan-fu/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          c++ 中的typeid运算符
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/10/22/2014-10-22-the-string-implement-code/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">The String Implement Code</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2014-10-22-pthread-attr-t-xian-cheng-shu-xing" data-title="pthread_attr_t 线程属性" data-url="http://ylwhere.tk/2014/10/23/2014-10-22-pthread-attr-t-xian-cheng-shu-xing/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 ylw Home
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

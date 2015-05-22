@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>echo 简单的socket程序 | ylw Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="看到深入理解计算机系统，socket一张，进而对web服务器有了进一步的认识，但是这里却没有提到关于信号，中断等更多的知识。
+要学习网络编程，tcp/ip详解，和stevens的unix 网络编程是必须要看的。
+下面是从数据结构到函数的一个介绍。觉得实际写的时候最好有个.thm的帮助文档最好了。要不那么多函数和参数很容易记错的。而且里面有大量的强制类型转换。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="echo 简单的socket程序">
+<meta property="og:url" content="http://ylwhere.tk/2015/03/18/echo-jian-dan-de-socketcheng-xu/index.html">
+<meta property="og:site_name" content="ylw Home">
+<meta property="og:description" content="看到深入理解计算机系统，socket一张，进而对web服务器有了进一步的认识，但是这里却没有提到关于信号，中断等更多的知识。
+要学习网络编程，tcp/ip详解，和stevens的unix 网络编程是必须要看的。
+下面是从数据结构到函数的一个介绍。觉得实际写的时候最好有个.thm的帮助文档最好了。要不那么多函数和参数很容易记错的。而且里面有大量的强制类型转换。">
+<meta property="og:image" content="http://ylwhere.tk/images/blog-images/client_server.png">
+<meta property="og:updated_time" content="2015-05-22T06:55:41.211Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="echo 简单的socket程序">
+<meta name="twitter:description" content="看到深入理解计算机系统，socket一张，进而对web服务器有了进一步的认识，但是这里却没有提到关于信号，中断等更多的知识。
+要学习网络编程，tcp/ip详解，和stevens的unix 网络编程是必须要看的。
+下面是从数据结构到函数的一个介绍。觉得实际写的时候最好有个.thm的帮助文档最好了。要不那么多函数和参数很容易记错的。而且里面有大量的强制类型转换。">
+  
+    <link rel="alternative" href="/atom.xml" title="ylw Home" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="/img/favicon.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ylw Home</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">More Code More Confidence</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/About">ABOUT ME</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">ylw Home</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/favicon.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ylw Home</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">More Code More Confidence</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/About">ABOUT ME</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-echo-jian-dan-de-socketcheng-xu" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/18/echo-jian-dan-de-socketcheng-xu/" class="article-date">
+  	<time datetime="2015-03-18T05:23:48.000Z" itemprop="datePublished">2015-03-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      echo 简单的socket程序
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/socket/">socket</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>看到深入理解计算机系统，socket一张，进而对web服务器有了进一步的认识，但是这里却没有提到关于信号，中断等更多的知识。</p>
+<p>要学习网络编程，tcp/ip详解，和stevens的unix 网络编程是必须要看的。</p>
+<p>下面是从数据结构到函数的一个介绍。觉得实际写的时候最好有个.thm的帮助文档最好了。要不那么多函数和参数很容易记错的。而且里面有大量的强制类型转换。</p>
+<a id="more"></a>
+<p>1.首先客户端和主机通信时建立在socket上的高级i/o操作。<br>而这个通信线路由唯一的client ip：port和serverip:port确定。</p>
+<p>下面这个图真的十分重要。</p>
+<img src="/images/blog-images/client_server.png">
+<p>下面的两个定义的结构体其实是一样的东西，都是16个字节，只是不同的函数要求传递的参数不同，tcp/io遗留下来的诟病。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//ip address</span></span><br><span class="line"><span class="keyword">struct</span> in_addr</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> s_addr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> sockaddr</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">short</span> sa_family;</span><br><span class="line">	<span class="keyword">char</span> sa_data[<span class="number">14</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">struct</span> sockaddr_in</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">short</span> sin_family; <span class="comment">//总是AF_INT</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">short</span> sin_port;</span><br><span class="line">	<span class="keyword">struct</span> in_addr sin_addr;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span>  sin_zero[<span class="number">8</span>]l <span class="comment">//为了对齐要求</span></span><br><span class="line">&#125;；</span><br></pre></td></tr></table></figure>
+<p>INADDR_ANY就是指定地址为0.0.0.0的地址，这个地址事实上表示不确定地址，或“所有地址”、“任意地址”。 一般来说，在各个系统中均定义成为0值。<br>在linux下的定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/include/netinet/in.h&#10;/* Address to accept any incoming messages. */&#10;#define INADDR_ANY ((in_addr_t) 0x00000000)</span><br></pre></td></tr></table></figure>
+<p>定义好的函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "tiny.h"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">open_clientfd</span><span class="params">(<span class="keyword">char</span> *hostname, <span class="keyword">int</span> port)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> clientfd;</span><br><span class="line">    <span class="keyword">struct</span> hostent *hp;</span><br><span class="line">    <span class="keyword">struct</span> sockaddr_in serveraddr;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// AF_INT 表示的因特网协议，SOCK_STREAM 表示这个套接字是因特网的一个端点</span></span><br><span class="line">    <span class="comment">// 返回的clientfd是部分打开的，还不能直接对套接字读写</span></span><br><span class="line">    <span class="keyword">if</span>((clientfd = socket(AF_INT, SOCK_STREAM, <span class="number">0</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>; <span class="comment">//创建套接字失败</span></span><br><span class="line">    <span class="keyword">if</span>((hp = gethostbyname(hostname)) == NULL)</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">2</span>; <span class="comment">//DNS错误</span></span><br><span class="line"></span><br><span class="line">    bzero((<span class="keyword">char</span>*)&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</span><br><span class="line"></span><br><span class="line">    serveraddr.sin_family = AF_INT;</span><br><span class="line">    <span class="comment">//成员选择的优先级高于类型转换</span></span><br><span class="line">    <span class="comment">//设置服务器地址，已经是大端格式</span></span><br><span class="line">    bcopy((<span class="keyword">char</span>*)hp-&gt;h_addr_list[<span class="number">0</span>], (<span class="keyword">char</span>*)serveraddr.sin_addr.s_addr, hp-&gt;h_length);</span><br><span class="line">    serveraddr.sin_port = htons(port);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(connect(clientfd, (SA *)&amp;serveraddr, <span class="keyword">sizeof</span>(SA)) &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">3</span>; <span class="comment">//链接失败</span></span><br><span class="line">    <span class="keyword">return</span> clientfd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">open_listenfd</span><span class="params">(<span class="keyword">int</span> port)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> listenfd, optval = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">struct</span> sockaddr_in serveraddr;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>((listenfd = sock(AF_INT, SOCK_STREAM, <span class="number">0</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;  <span class="comment">//创建socket失败</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 能够使两个套接字和一个地址绑定，SO_RESUMEADDR */</span></span><br><span class="line">	<span class="keyword">if</span>(setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,</span><br><span class="line">				  (<span class="keyword">const</span> <span class="keyword">void</span> *)&amp;optval, <span class="keyword">sizeof</span>(<span class="keyword">int</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	</span><br><span class="line">	bzero((<span class="keyword">char</span>*)&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</span><br><span class="line">	serveraddr.sin_family = AF_INT;</span><br><span class="line">	serveraddr.sin_addr.s_addr = htonl(INADDR_ANY); <span class="comment">/* 表示服务器任意ip地址都可以 */</span></span><br><span class="line">	serveraddr.sin_port = htons(port);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(bind(listenfd, (SA *)&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr)) &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">2</span>; <span class="comment">// bind函数错误</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(listen(listenfd, LISTENQ) &lt;<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		errno = -<span class="number">3</span>;</span><br><span class="line">		<span class="built_in">fprintf</span>(stderr, <span class="string">"error: %d, listen error\n"</span>, errno);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> listenfd;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是对应的客户端程序。</p>
+<figure class="highlight c"><figcaption><span>echo_client.c</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "tiny.h"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> clientfd, port;</span><br><span class="line">	<span class="keyword">char</span> *host, buf[MAXLINE];</span><br><span class="line">	<span class="keyword">rio_t</span> rio;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(argc != <span class="number">3</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">fprintf</span>(stderr, <span class="string">"usage: %s &lt;host&gt; &lt;port&gt;\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	host = argv[<span class="number">1</span>];</span><br><span class="line">	port = atoi(argv[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">	clientfd = Open_clientfd(host, port);</span><br><span class="line">	Rio_readinitb(&amp;rio, clientfd);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(Fgets(buf, MAXLINE, stdin) != NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		Rio_writen(clientfd, buf, <span class="built_in">strlen</span>(buf));</span><br><span class="line">		Rio_readlineb(&amp;rio, buf, MAXLINE);</span><br><span class="line">		Fputs(buf, stdout);</span><br><span class="line">	&#125;</span><br><span class="line">	close(clientfd);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>服务器程序：</p>
+<figure class="highlight c"><figcaption><span>echo_server.c</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "tiny.h"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> lisenfd, connfd, port, clientlen;</span><br><span class="line">	<span class="keyword">struct</span> sockaddr_in clientaddr;</span><br><span class="line">	<span class="keyword">struct</span> hostent *hp; <span class="comment">/* dns条目 */</span></span><br><span class="line">	<span class="keyword">char</span> *haddrp;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(argc != <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">sprintf</span>(stderr, <span class="string">"usage: %s  &lt;port&gt;\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	port = atoi(argv[<span class="number">1</span>]);</span><br><span class="line">	lisenfd = Open_listenfd(port);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		clientlen = <span class="keyword">sizeof</span>(clientaddr);</span><br><span class="line">		connfd = accept(lisenfd, (SA *)&amp;clientaddr, &amp;clientlen);</span><br><span class="line"></span><br><span class="line">		hp = gethostbyaddr((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;clientaddr.sin_addr.s_addr,</span><br><span class="line">							<span class="keyword">sizeof</span>(clientaddr.sin_addr.s_addr), AF_INET);</span><br><span class="line">		haddrp = inet_ntoa(clientaddr.sin_addr);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"server connected to %s (%s) \n"</span>, hp-&gt;h_name, haddrp);</span><br><span class="line"></span><br><span class="line">		echo(connfd);</span><br><span class="line">		close(connfd);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">echo</span><span class="params">(<span class="keyword">int</span> connfd)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">size_t</span> n;</span><br><span class="line">	<span class="keyword">char</span> buf[MAXLINE];</span><br><span class="line">	<span class="keyword">rio_t</span> rio;</span><br><span class="line"></span><br><span class="line">	Rio_readinitb(&amp;rio, connfd);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>((n = Rio_readlineb(&amp;rio, buf, MAXLINE)) != <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"server received %d bytes\n"</span>, n);</span><br><span class="line">		Rio_writen(connfd, buf, n);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/18/tiny-webfu-wu-qi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Tiny Web服务器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/17/2015-03-16-linux-xia-wen-jian-de-yuan-shu-ju/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"> linux 下文件的元数据</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="echo-jian-dan-de-socketcheng-xu" data-title="echo 简单的socket程序" data-url="http://ylwhere.tk/2015/03/18/echo-jian-dan-de-socketcheng-xu/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 ylw Home
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

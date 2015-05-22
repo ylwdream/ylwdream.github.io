@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>c++ 中的typeid运算符 | ylw Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="typeid 运算符和C++显示定义的四种类型转换typeid 运算符主要是为了支持c++的RTTI(Runtime Type Identification).在有虚拟集成的类结构中，也就是有多态的情况下，当需要知道动态执行的指针或引用的类的类型时被使用。当然它也可以用在内置类型或者是没有虚函数的类继承的结构中。typeid返回的类型是const std::type_info。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++ 中的typeid运算符">
+<meta property="og:url" content="http://ylwhere.tk/2014/10/24/2014-10-23-c-plus-plus-zhong-de-typeidyun-suan-fu/index.html">
+<meta property="og:site_name" content="ylw Home">
+<meta property="og:description" content="typeid 运算符和C++显示定义的四种类型转换typeid 运算符主要是为了支持c++的RTTI(Runtime Type Identification).在有虚拟集成的类结构中，也就是有多态的情况下，当需要知道动态执行的指针或引用的类的类型时被使用。当然它也可以用在内置类型或者是没有虚函数的类继承的结构中。typeid返回的类型是const std::type_info。">
+<meta property="og:image" content="http://ylwhere.tk/images/blog-images/typeinfo.jpg">
+<meta property="og:updated_time" content="2015-05-22T04:59:22.066Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c++ 中的typeid运算符">
+<meta name="twitter:description" content="typeid 运算符和C++显示定义的四种类型转换typeid 运算符主要是为了支持c++的RTTI(Runtime Type Identification).在有虚拟集成的类结构中，也就是有多态的情况下，当需要知道动态执行的指针或引用的类的类型时被使用。当然它也可以用在内置类型或者是没有虚函数的类继承的结构中。typeid返回的类型是const std::type_info。">
+  
+    <link rel="alternative" href="/atom.xml" title="ylw Home" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="/img/favicon.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ylw Home</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">More Code More Confidence</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/About">ABOUT ME</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">ylw Home</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/favicon.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ylw Home</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">More Code More Confidence</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/About">ABOUT ME</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-2014-10-23-c-plus-plus-zhong-de-typeidyun-suan-fu" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/10/24/2014-10-23-c-plus-plus-zhong-de-typeidyun-suan-fu/" class="article-date">
+  	<time datetime="2014-10-23T17:01:33.000Z" itemprop="datePublished">2014-10-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      c++ 中的typeid运算符
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/c/">c++</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="typeid_运算符和C++显示定义的四种类型转换">typeid 运算符和C++显示定义的四种类型转换</h2><p>typeid 运算符主要是为了支持c++的RTTI(Runtime Type Identification).在有虚拟集成的类结构中，也就是有多态的情况下，当需要知道动态执行的指针或引用的类的类型时被使用。当然它也可以用在内置类型或者是没有虚函数的类继承的结构中。typeid返回的类型是<code>const std::type_info</code>。<br><a id="more"></a><br>看网上说typeid是定义在typeinfo头文件里的，但是我并没有找到定义，不知道为什么。</p>
+<pre><code><span class="function"><span class="title">typeid</span><span class="params">( expression )</span></span>
+</code></pre><p>  1.当expression是内置类型或者是没有多态的情况下，typeid不对表达式评估求值,并且typeid指向的是静态类型，在编译的阶段就可以确定下来。<br>对于内置类型，MSVC下面是这么定义的。</p>
+<pre><code>VCCORLIB_API Platform::Type^ float64::GetType()
+{
+    <span class="keyword">return</span> <span class="keyword">default</span>::float64::<span class="keyword">typeid</span>;
+}
+</code></pre><p>  2.当expression含有虚函数时，typeid就需要在执行期确定，这也正是为了实现RTTI机制。<br>typeinfo可以根据指针指向的类型，去取这个类型中的虚表的中的类的类型定义。在MSVC中，将类的typeinfo name 放到虚表的槽号为-1的位置。</p>
+<img src="/images/blog-images/typeinfo.jpg">
+<p>可以看到继承关系中，父类指针和派生类指针指向的开始地址都是一样的，只是指向的对象类型不同，所以向上转换时是安全的，但是向下转换时却有可能发生bad_typeid的错误。</p>
+<p>下面是标准库中队typeinfo的定义</p>
+<pre><code><span class="keyword">class</span> type_info {
+<span class="keyword">public</span>:
+    SECURITYCRITICAL_ATTRIBUTE
+    _CRTIMP <span class="keyword">virtual</span> <span class="keyword">__t</span>hiscall ~type_info();
+    _CRTIMP <span class="keyword">int</span> <span class="keyword">__t</span>hiscall <span class="keyword">operator</span>==(_In_ <span class="keyword">const</span> type_info&amp; _Rhs) <span class="keyword">const</span>;
+    _CRTIMP <span class="keyword">int</span> <span class="keyword">__t</span>hiscall <span class="keyword">operator</span>!=(_In_ <span class="keyword">const</span> type_info&amp; _Rhs) <span class="keyword">const</span>;
+    _CRTIMP <span class="keyword">bool</span> <span class="keyword">__t</span><span class="function">hiscall <span class="title">before</span><span class="params">(_In_ <span class="keyword">const</span> type_info&amp; _Rhs)</span> <span class="keyword">const</span></span>;
+<span class="preprocessor">#ifdef _SYSCRT</span>
+    _Check_return_ _CRTIMP <span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">__t</span><span class="function">hiscall <span class="title">name</span><span class="params">()</span> <span class="keyword">const</span></span>;
+<span class="preprocessor">#<span class="keyword">else</span>  /* _SYSCRT */</span>
+    _Check_return_ _CRTIMP <span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">__t</span><span class="function">hiscall <span class="title">name</span><span class="params">(_Inout_ __type_info_node* __ptype_info_node = &amp;__type_info_root_node)</span> <span class="keyword">const</span></span>;
+<span class="preprocessor">#<span class="keyword">endif</span>  /* _SYSCRT */</span>
+    _Check_return_ _CRTIMP <span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">__t</span><span class="function">hiscall <span class="title">raw_name</span><span class="params">()</span> <span class="keyword">const</span></span>;
+<span class="keyword">private</span>:
+    <span class="keyword">void</span> *_M_data;
+    <span class="keyword">char</span> _M_d_name[<span class="number">1</span>];
+    <span class="keyword">__t</span><span class="function">hiscall <span class="title">type_info</span><span class="params">(_In_ <span class="keyword">const</span> type_info&amp; _Rhs)</span></span>;
+    type_info&amp; <span class="keyword">__t</span>hiscall <span class="keyword">operator</span>=(_In_ <span class="keyword">const</span> type_info&amp; _Rhs);
+};
+<span class="preprocessor">#ifndef _TICORE</span>
+</code></pre><blockquote>
+<p>type_info类提供了public虚 析构函数，以使用户能够用其作为基类。它的默认构造函数和拷贝构造函数及赋值操作符都定义为private，所以不能定义或复制type_info类型的对象。<br>其中M_d_name[1]为一个字符串指针，指向的是类的名字。可以看下面的代码实现</p>
+</blockquote>
+<pre><code>char *tmp = <span class="list">(<span class="keyword">char*</span>)</span>malloc<span class="list">(<span class="keyword">sizeof</span><span class="list">(<span class="keyword">class</span> name)</span>)</span><span class="comment">;</span>
+M_d_name = tmp
+</code></pre><p>关于c++定义的四种转换的关键字<br>ANSI-C++标准定义了四个新的转换符：’reinterpret_cast’, ‘static_cast’, ‘dynamic_cast’ 和 ‘const_cast’，目的在于控制类(class)之间的类型转换。<br>代码:</p>
+<pre><code><span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">new_t</span>ype&gt;(expression)
+<span class="keyword">dynamic_cast</span>&lt;<span class="keyword">new_t</span>ype&gt;(expression)
+<span class="keyword">static_cast</span>&lt;<span class="keyword">new_t</span>ype&gt;(expression)
+<span class="keyword">const_cast</span>&lt;<span class="keyword">new_t</span>ype&gt;(expression)
+</code></pre><ul>
+<li>reinterpret_cast 是特意用于底层的强制转型，导致实现依赖（implementation-dependent）（就是说，不可移植）的结果，例如，将一个指针转型为一个整数。这样的强制转型在底层代码以外应该极为罕见</li>
+<li>dynamic_cast 主要用于执行“安全的向下转型（safe downcasting）”，也就是说，要确定一个对象是否是一个继承体系中的一个特定类型。它是唯一不能用旧风格语法执行的强制转型，也是唯一可能有重大运行时代价的强制转型。</li>
+<li>static_cast 可以被用于强制隐型转换（例如，non-const 对象转型为 const 对象，int 转型为 double，等等,不进行安全检查，效率比dynamic_cast 效率高。它还可以用于很多这样的转换的反向转换（例如，void* 指针转型为有类型指针，基类指针转型为派生类指针），但是它不能将一个 const 对象转型为 non-const 对象（只有 const_cast 能做到），它最接近于C-style的转换。</li>
+<li>const_cast 一般用于强制消除对象的常量性。它是唯一能做到这一点的 C++ 风格的强制转型。</li>
+</ul>
+<p>下面是我做的小实验的代码，GUN Gcc 和MSVC的输出可能会有不一样。</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span>
+<span class="preprocessor">#<span class="keyword">include</span> &lt;typeinfo&gt;</span>
+
+<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;
+
+<span class="keyword">class</span> Base
+{
+<span class="keyword">public</span>:
+    <span class="keyword">int</span> number = <span class="number">0</span>;
+    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span>
+    </span>{
+        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the base "</span> &lt;&lt; number &lt;&lt; endl;
+    }
+};
+
+<span class="keyword">class</span> Book : <span class="keyword">public</span> Base
+{
+<span class="keyword">public</span>:
+    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span>
+    </span>{
+        Base::number++;
+        <span class="built_in">cout</span> &lt;&lt; <span class="string">"the book "</span> &lt;&lt; Base::number &lt;&lt; endl;
+    }
+<span class="keyword">private</span>:
+    <span class="keyword">int</span> price;
+};
+<span class="function"><span class="keyword">void</span> <span class="title">classType</span><span class="params">(Base *p)</span>
+</span>{
+    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(*p).name() &lt;&lt; endl;
+    <span class="keyword">if</span> (<span class="keyword">typeid</span>(*p) == <span class="keyword">typeid</span>(Book))
+    {
+        Book *bo = <span class="keyword">static_cast</span>&lt;Book*&gt;(p);
+        <span class="built_in">cout</span> &lt;&lt; <span class="string">"static cast "</span>;
+        bo-&gt;print();
+    }
+    <span class="keyword">try</span>{
+
+        <span class="comment">// Book *bo = static_cast&lt;Book *&gt;(p);    </span>
+        <span class="keyword">if</span> (Book *bo = <span class="keyword">dynamic_cast</span>&lt;Book *&gt;(p))
+            bo-&gt;print();
+        <span class="comment">//else if(typeid(p) == typeid(Base))</span>
+        <span class="keyword">else</span> <span class="keyword">if</span> (Base *base = <span class="keyword">dynamic_cast</span>&lt;Base *&gt;(p))
+        {
+            <span class="comment">//Base *base = static_cast&lt;Base *&gt;(p);</span>
+            base-&gt;print();
+        }
+    }
+    <span class="keyword">catch</span> (...)
+    {
+        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"no type"</span> &lt;&lt; endl;
+    }
+}
+
+<span class="keyword">struct</span> Base2 {}; <span class="comment">// non-polymorphic</span>
+<span class="keyword">struct</span> Derived2 : Base2 {};
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    Base *base;
+    base = <span class="keyword">new</span> Book;
+    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"reference to polymorphic base: "</span> &lt;&lt; <span class="keyword">typeid</span>(*base).name() &lt;&lt; <span class="string">'\n'</span>;
+
+    Derived2 d2;
+    Base2&amp; b2 = d2;
+    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"reference to no-polymorphic base: "</span> &lt;&lt; <span class="keyword">typeid</span>(b2).name() &lt;&lt; <span class="string">'\n'</span>;
+
+    base-&gt;print();
+    classType(base);
+    classType(<span class="keyword">new</span> Base);
+
+
+
+    <span class="keyword">int</span> var;
+    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(var).name() &lt;&lt; endl;
+    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(var).raw_name() &lt;&lt; endl;
+    <span class="keyword">delete</span> base;
+    <span class="built_in">cin</span> &gt;&gt; var;
+    <span class="keyword">return</span> <span class="number">0</span>；
+}
+</code></pre><p>类中的函数和对象经过mangling会成为一个唯一命名的函数或者数据实例。我认为这也是为什么static 数据定义一次，下次使用是数据的值不会被再次初始化，就是因为编译器把它的定义域扩充为全局的。而这些只在mian函数前面由.init函数进行初始化。</p>
+<p>因为base是Base<em>类型，所以base指针就可以知道Base类的起始地址，在编译的时候也就是知道了print函数的slots号。（这里为1）所以对print函数的调用，就可能变为 `</em>base-&gt;vptr<a href="base">1</a>`。在执行的时候，base指向的对象为Book,Book里的vptr指针指向的是Book的虚函数表，而这在编译阶段是无法确定的，编译阶段唯一可以确定的就是base的指针类型。因为base现在是指向Book类，所以就会指针Book类中，槽号为1的虚函数。<br>暂时就是终结这些。还有好多疑问没有搞清楚。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/10/25/2014-10-24-llvm-zai-centos-6-dot-5shang-mian-de-an-zhuang-bu-zou/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          LLVM 在Centos 6.5上面的安装步骤
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/10/23/2014-10-22-pthread-attr-t-xian-cheng-shu-xing/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">pthread_attr_t 线程属性</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2014-10-23-c-plus-plus-zhong-de-typeidyun-suan-fu" data-title="c++ 中的typeid运算符" data-url="http://ylwhere.tk/2014/10/24/2014-10-23-c-plus-plus-zhong-de-typeidyun-suan-fu/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 ylw Home
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

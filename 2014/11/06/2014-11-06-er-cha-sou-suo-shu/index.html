@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>二叉搜索树 | ylw Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天这货搞得我很急躁啊，妈蛋，本来以为一会就可以把代码敲完的，但是设计数据结构的时候没有考虑递归，第一遍写了一点，发现没有父指针好麻烦，就修改，修改完还是觉得代码好麻烦，结果百度了下，看到递归这么简单，原来这个结构是天然的递归萌啊。。。。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉搜索树">
+<meta property="og:url" content="http://ylwhere.tk/2014/11/06/2014-11-06-er-cha-sou-suo-shu/index.html">
+<meta property="og:site_name" content="ylw Home">
+<meta property="og:description" content="今天这货搞得我很急躁啊，妈蛋，本来以为一会就可以把代码敲完的，但是设计数据结构的时候没有考虑递归，第一遍写了一点，发现没有父指针好麻烦，就修改，修改完还是觉得代码好麻烦，结果百度了下，看到递归这么简单，原来这个结构是天然的递归萌啊。。。。">
+<meta property="og:updated_time" content="2015-05-22T04:59:22.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二叉搜索树">
+<meta name="twitter:description" content="今天这货搞得我很急躁啊，妈蛋，本来以为一会就可以把代码敲完的，但是设计数据结构的时候没有考虑递归，第一遍写了一点，发现没有父指针好麻烦，就修改，修改完还是觉得代码好麻烦，结果百度了下，看到递归这么简单，原来这个结构是天然的递归萌啊。。。。">
+  
+    <link rel="alternative" href="/atom.xml" title="ylw Home" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="/img/favicon.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ylw Home</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">More Code More Confidence</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/About">ABOUT ME</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">ylw Home</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/favicon.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ylw Home</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">More Code More Confidence</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/About">ABOUT ME</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-2014-11-06-er-cha-sou-suo-shu" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/11/06/2014-11-06-er-cha-sou-suo-shu/" class="article-date">
+  	<time datetime="2014-11-06T14:01:16.000Z" itemprop="datePublished">2014-11-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      二叉搜索树
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天这货搞得我很急躁啊，妈蛋，本来以为一会就可以把代码敲完的，但是设计数据结构的时候没有考虑递归，第一遍写了一点，发现没有父指针好麻烦，就修改，修改完还是觉得代码好麻烦，结果百度了下，看到递归这么简单，原来这个结构是天然的递归萌啊。。。。<br><a id="more"></a></p>
+<p>今天在书上看到二叉搜索树和AVL树，所以想整理一下。</p>
+<p>二叉树的定义：</p>
+<p>根节点的值大于左节点小于右节点。<br>这个定义是递归的。</p>
+<p>二叉树的优点就是插入和查找的复杂度是o(logN)的。删除会稍微麻烦一点。</p>
+<p>排序好的二叉树中序遍历是从大到小有序的。</p>
+<p>下面是源代码，就不做图了，因为参考里面已经将的十分详细了，我就不在浪费时间了。</p>
+<figure class="highlight c++"><figcaption><span>Btree.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> node</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">struct</span> node&lt;T&gt; *left;</span><br><span class="line">	<span class="keyword">struct</span> node&lt;T&gt; *right;</span><br><span class="line"></span><br><span class="line">	T value;</span><br><span class="line"></span><br><span class="line">	node(T value)</span><br><span class="line">	&#123;</span><br><span class="line">		left = NULL;</span><br><span class="line">		right = NULL;</span><br><span class="line">		<span class="keyword">this</span>-&gt;value = value;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	node()</span><br><span class="line">	&#123;</span><br><span class="line">		left = NULL;</span><br><span class="line">		right = NULL;</span><br><span class="line">		<span class="keyword">this</span>-&gt;value = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> Btree</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	node&lt;T&gt; * root;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">insert_node</span><span class="params">(node&lt;T&gt;* &amp;root, T value)</span></span>;</span><br><span class="line">	node&lt;T&gt;* search_node(node&lt;T&gt;* node, T value);</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">printLDR</span><span class="params">(node&lt;T&gt;* node)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">delete_node</span><span class="params">(node&lt;T&gt;*, T value)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">length</span><span class="params">(node&lt;T&gt; *)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	</span><br><span class="line">	Btree() :root(NULL)&#123;&#125;</span><br><span class="line">	~Btree()&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">insert</span><span class="params">(T)</span></span>;</span><br><span class="line">	node&lt;T&gt;* search(T value);</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">erase</span><span class="params">(T value)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">length</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print_LDR</span><span class="params">()</span></span>;     <span class="comment">//中序遍历</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">bool</span> Btree&lt;T&gt;::insert_node(node&lt;T&gt;* &amp;root, T value)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		root = <span class="keyword">new</span> node&lt;T&gt;(value);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (root-&gt;value &gt; value)</span><br><span class="line">		insert_node(root-&gt;left, value);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (root-&gt;value &lt; value)</span><br><span class="line">		insert_node(root-&gt;right, value);</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">bool</span> Btree&lt;T&gt;::insert(T value)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> insert_node(root, value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</span><br><span class="line">node&lt;T&gt;* Btree&lt;T&gt;::search_node(node&lt;T&gt;* node, T value)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (node == NULL)</span><br><span class="line">		<span class="keyword">return</span> NULL;</span><br><span class="line">	<span class="keyword">if</span> (node-&gt;value &gt; x)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> search_node(node-&gt;left, value);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (node-&gt;value &lt; x)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> search_node(node-&gt;right, value);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line">node&lt;T&gt;* Btree&lt;T&gt;::search(T value)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> search_node(root, value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Btree&lt;T&gt;::delete_node(node&lt;T&gt;* root, T value)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == NULL)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (root-&gt;value &gt; value)</span><br><span class="line">		delete_node(root-&gt;left, value);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (root-&gt;value &lt; value)</span><br><span class="line">		delete_node(root-&gt;right, value);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (root-&gt;left &amp;&amp; root-&gt;right)</span><br><span class="line">		&#123;</span><br><span class="line">			node&lt;T&gt;* tmp = root-&gt;right;</span><br><span class="line">			<span class="keyword">while</span> (tmp-&gt;left != NULL)</span><br><span class="line">				tmp = tmp-&gt;left;</span><br><span class="line">			root-&gt;value = tmp-&gt;value;</span><br><span class="line">			delete_node(root-&gt;right, tmp-&gt;value);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			node&lt;T&gt;* tmp = root;</span><br><span class="line">			<span class="keyword">if</span> (root-&gt;left == NULL)</span><br><span class="line">				root = root-&gt;right;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (root-&gt;right == NULL)</span><br><span class="line">				root = root-&gt;left;</span><br><span class="line">			<span class="keyword">delete</span> tmp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Btree&lt;T&gt;::erase(T value)</span><br><span class="line">&#123;</span><br><span class="line">	delete_node(root, value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Btree&lt;T&gt;::printLDR(node&lt;T&gt;* node)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (node == NULL)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	printLDR(node-&gt;left);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; node-&gt;value &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	printLDR(node-&gt;right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> Btree&lt;T&gt;::print_LDR()</span><br><span class="line">&#123;</span><br><span class="line">	printLDR(root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">int</span> Btree&lt;T&gt;::length(node&lt;T&gt; * root)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == NULL)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> len_left = length(root-&gt;left);</span><br><span class="line">	<span class="keyword">int</span> len_right = length(root-&gt;right);</span><br><span class="line">	<span class="keyword">return</span> (len_left &gt; len_right ? len_left : len_right) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">int</span> Btree&lt;T&gt;::length()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> length(root);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>快速排序的过程其实就是二叉查找树，最坏的情况下，二叉树会是线性的。所以复杂度就会是o(N<em>N),如果是平衡的，那么查找的一个节点的复杂度就是o(logN)，查找的同时可以完成插入,N个节点排序的复杂度就是o(N</em>logN)。</p>
+<p><strong>下面讨论下AVL树，也就是平衡的二叉搜索树。</strong></p>
+<p>在AVL树中任何节点的两个子树的高度最大差别为一，所以它也被称为高度平衡树。查找、插入和删除在平均和最坏情况下都是O（log n）。</p>
+<p>AVL树得名于它的发明者G.M. Adelson-Velsky和E.M. Landis。</p>
+<p>在AVL树中任何节点的两个子树的高度最大差别为一，所以它也被称为高度平衡树。节点的平衡因子是它的左子树的高度减去它的右子树的高度（有时相反）。带有平衡因子1、0或 -1的节点被认为是平衡的。带有平衡因子 -2或2的节点被认为是不平衡的，并需要重新平衡这个树。平衡因子可以直接存储在每个节点中，或从可能存储在节点中的子树高度计算出来。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/11/07/2014-11-07-miller-rabin-su-shu-pan-ding/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Miller–Rabin 素数判定
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/11/02/2014-11-02-xian-xing-tong-yu-he-ha-xi-han-shu/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">线性同余和哈希函数</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2014-11-06-er-cha-sou-suo-shu" data-title="二叉搜索树" data-url="http://ylwhere.tk/2014/11/06/2014-11-06-er-cha-sou-suo-shu/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 ylw Home
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
