@@ -108,7 +108,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a>
+						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -210,6 +210,10 @@
     
     <div class="article-info article-info-index">
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tree/">tree</a></li></ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/algorithm/">algorithm</a>
@@ -316,7 +320,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最小堆是经过排序的完全二叉树。<br>
+        <p>最小堆是经过排序的完全二叉树。对于查找一组数据的前n个元素具有很好的复杂度。<br>堆是一种经过排序的完全二叉树，其中任一非终端节点的数据值均不大于（或不小于）其左孩子和右孩子节点的值。<br>最大堆和最小堆是二叉堆的两种形式。</p>
+<ul>
+<li>最大堆：根结点的键值是所有堆结点键值中最大者。</li>
+<li>最小堆：根结点的键值是所有堆结点键值中最小者。</li>
+</ul>
+<p>而最大-最小堆集结了最大堆和最小堆的优点，这也是其名字的由来。<br>最大-最小堆是最大层和最小层交替出现的二叉树，即最大层结点的儿子属于最小层，最小层结点的儿子属于最大层。<br>以最大（小）层结点为根结点的子树保有最大（小）堆性质：根结点的键值为该子树结点键值中最大（小）项<br>
       
     </div>
     
@@ -372,15 +381,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>使用非阻塞 I/O 的应用程序常常使用 poll, select, 和 epoll 系统调用.<br>
+        <p>使用非阻塞 I/O 的应用程序常常使用 poll, select, 和 epoll 系统调用.<br>poll, select 和 epoll 本质上有相同的功能: 每个允许一个进程来决定它是否可读或者写一个或多个文件而不阻塞. 这些调用也可阻塞进程直到任何一个给定集合的文件描述符可用来读或写. 因此, 它们常常用在必须使用多输入输出流的应用程序, 而不必粘连在它们任何一个上.<br>
       
     </div>
     
     <div class="article-info article-info-index">
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/socket/">socket</a></li></ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/socket/">socket</a>
+	<a class="article-category-link" href="/categories/linux/">linux</a>
 	</div>
 
 
@@ -436,7 +449,7 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/c/">c++</a>
+	<a class="article-category-link" href="/categories/C-C/">C/C++</a>
 	</div>
 
 
@@ -492,7 +505,7 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/c/">c++</a>
+	<a class="article-category-link" href="/categories/C-C/">C/C++</a>
 	</div>
 
 
@@ -540,9 +553,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>首先看下面这句表达式</p>
-<pre><code><span class="built_in">string</span> *<span class="keyword">sp</span> = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"initalliszed"</span>);
-</code></pre>
+        <p>new 运算符调用函数 <code>operator new</code>。 对于任何类型的数组以及不属于 <code>class、struct</code> 或 <code>union</code> 类型的对象，调用全局函数 <code>::operator new</code> 来分配存储。 类类型对象可基于每个类定义其自己的 <code>operator new</code> 静态成员函数。<br>当编译器遇到用于分配类型 type 的对象的 <code>new</code> 运算符时，它将发布对 <code>type::operator new( sizeof( type ) )</code> 的调用；或者，如果未定义用户定义的 <code>operator new</code>，则为 <code>::operator new( sizeof( type ) )</code>。 因此，new 运算符可以为对象分配正确的内存量。</p>
+<p>首先看下面这句表达式<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> *sp = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"initalliszed"</span>);</span><br></pre></td></tr></table></figure></p>
       
     </div>
     
@@ -550,7 +562,7 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/c/">c++</a>
+	<a class="article-category-link" href="/categories/C-C/">C/C++</a>
 	</div>
 
 
@@ -660,6 +672,10 @@
     
     <div class="article-info article-info-index">
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/io/">io</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/larbin/">larbin</a>
@@ -718,7 +734,7 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Design-Pattern/">Design-Pattern</a>
+	<a class="article-category-link" href="/categories/设计模式/">设计模式</a>
 	</div>
 
 

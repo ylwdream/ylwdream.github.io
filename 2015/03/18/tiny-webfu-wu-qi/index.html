@@ -5,22 +5,16 @@
   
   <title>Tiny Web服务器 | ylw Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;lt;!--toc--&amp;gt;
-
-初步了解了web服务器分为静态请求和动态请求。cgi处理动态请求，并把结果返回给客户端">
+  <meta name="description" content="初步了解了web服务器分为静态请求和动态请求。cgi处理动态请求，并把结果返回给客户端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tiny Web服务器">
 <meta property="og:url" content="http://ylwhere.tk/2015/03/18/tiny-webfu-wu-qi/index.html">
 <meta property="og:site_name" content="ylw Home">
-<meta property="og:description" content="&amp;lt;!--toc--&amp;gt;
-
-初步了解了web服务器分为静态请求和动态请求。cgi处理动态请求，并把结果返回给客户端">
-<meta property="og:updated_time" content="2015-05-22T08:45:28.383Z">
+<meta property="og:description" content="初步了解了web服务器分为静态请求和动态请求。cgi处理动态请求，并把结果返回给客户端">
+<meta property="og:updated_time" content="2015-05-22T10:45:02.432Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tiny Web服务器">
-<meta name="twitter:description" content="&amp;lt;!--toc--&amp;gt;
-
-初步了解了web服务器分为静态请求和动态请求。cgi处理动态请求，并把结果返回给客户端">
+<meta name="twitter:description" content="初步了解了web服务器分为静态请求和动态请求。cgi处理动态请求，并把结果返回给客户端">
   
     <link rel="alternative" href="/atom.xml" title="ylw Home" type="application/atom+xml">
   
@@ -115,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a>
+						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -224,111 +218,260 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!--toc-->
-<ol>
-<li>初步了解了web服务器分为静态请求和动态请求。<br>cgi处理动态请求，并把结果返回给客户端</li>
-</ol>
-<a id="more"></a>
-<ol>
-<li>表头文件:    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &#60;sys/stat.h&#62;&#10;#include &#60;unistd.h&#62;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>定义函数:    int stat(const char <em>file_name, struct stat </em>buf);<br>函数说明:    通过文件名filename获取文件信息，并保存在buf所指的结构体stat中<br>返回值:     执行成功则返回0，失败返回-1，错误代码存于errno</p>
-<p>先前所描述的st_mode 则定义了下列数种情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">S_IFMT   0170000    &#25991;&#20214;&#31867;&#22411;&#30340;&#20301;&#36974;&#32617;&#10;S_IFSOCK 0140000    scoket&#10;S_IFLNK 0120000     &#31526;&#21495;&#36830;&#25509;&#10;S_IFREG 0100000     &#19968;&#33324;&#25991;&#20214;&#10;S_IFBLK 0060000     &#21306;&#22359;&#35013;&#32622;&#10;S_IFDIR 0040000     &#30446;&#24405;&#10;S_IFCHR 0020000     &#23383;&#31526;&#35013;&#32622;&#10;S_IFIFO 0010000     &#20808;&#36827;&#20808;&#20986;&#10;&#10;S_ISUID 04000     &#25991;&#20214;&#30340;(set user-id on execution)&#20301;&#10;S_ISGID 02000     &#25991;&#20214;&#30340;(set group-id on execution)&#20301;&#10;S_ISVTX 01000     &#25991;&#20214;&#30340;sticky&#20301;&#10;&#10;S_IRUSR(S_IREAD) 00400     &#25991;&#20214;&#25152;&#26377;&#32773;&#20855;&#21487;&#35835;&#21462;&#26435;&#38480;&#10;S_IWUSR(S_IWRITE)00200     &#25991;&#20214;&#25152;&#26377;&#32773;&#20855;&#21487;&#20889;&#20837;&#26435;&#38480;&#10;S_IXUSR(S_IEXEC) 00100     &#25991;&#20214;&#25152;&#26377;&#32773;&#20855;&#21487;&#25191;&#34892;&#26435;&#38480;&#10;&#10;S_IRGRP 00040             &#29992;&#25143;&#32452;&#20855;&#21487;&#35835;&#21462;&#26435;&#38480;&#10;S_IWGRP 00020             &#29992;&#25143;&#32452;&#20855;&#21487;&#20889;&#20837;&#26435;&#38480;&#10;S_IXGRP 00010             &#29992;&#25143;&#32452;&#20855;&#21487;&#25191;&#34892;&#26435;&#38480;&#10;&#10;S_IROTH 00004             &#20854;&#20182;&#29992;&#25143;&#20855;&#21487;&#35835;&#21462;&#26435;&#38480;&#10;S_IWOTH 00002             &#20854;&#20182;&#29992;&#25143;&#20855;&#21487;&#20889;&#20837;&#26435;&#38480;&#10;S_IXOTH 00001             &#20854;&#20182;&#29992;&#25143;&#20855;&#21487;&#25191;&#34892;&#26435;&#38480;</span><br></pre></td></tr></table></figure></p>
-<ol>
-<li>web服务器程序</li>
-</ol>
-<p>``` c tiny_server.c </p>
-<p>/<em> $begin tinymain </em>/<br>/*</p>
-<ul>
-<li>tiny.c - A simple, iterative HTTP/1.0 Web server that uses the </li>
-<li>GET method to serve static and dynamic content.<br>*/<h1 id="include_“tiny-h”">include “tiny.h”</h1></li>
-</ul>
-<p>void doit(int fd);<br>void read_requesthdrs(rio_t <em>rp);<br>int parse_uri(char </em>uri, char <em>filename, char </em>cgiargs);<br>void serve_static(int fd, char <em>filename, int filesize);<br>void get_filetype(char </em>filename, char <em>filetype);<br>void serve_dynamic(int fd, char </em>filename, char <em>cgiargs);<br>void clienterror(int fd, char </em>cause, char <em>errnum,<br>         char </em>shortmsg, char *longmsg);</p>
-<p>int main(int argc, char **argv)<br>{<br>    int listenfd, connfd, port, clientlen;<br>    struct sockaddr_in clientaddr;</p>
-<pre><code><span class="comment">/* Check command line args */</span>
-<span class="keyword">if</span> <span class="params">(argc != <span class="number">2</span>)</span> {
-fprintf<span class="params">(stderr, <span class="string">"usage: %s &lt;port&gt;\n"</span>, argv[<span class="number">0</span>])</span>;
-exit<span class="params">(<span class="number">1</span>)</span>;
-}
-port = atoi<span class="params">(argv[<span class="number">1</span>])</span>;
 
-listenfd = Open_listenfd<span class="params">(port)</span>;
-while <span class="params">(<span class="number">1</span>)</span> {
-clientlen = sizeof<span class="params">(clientaddr)</span>;
-connfd = Accept<span class="params">(listenfd, <span class="params">(SA *)</span>&amp;clientaddr, &amp;clientlen)</span>; <span class="comment">//line:netp:tiny:accept</span>
-doit<span class="params">(connfd)</span>;                                             <span class="comment">//line:netp:tiny:doit</span>
-Close<span class="params">(connfd)</span>;                                            <span class="comment">//line:netp:tiny:close</span>
+          <!-- 文章目录开始 -->
+
+          
+            <div id="toc" class="toc-article">
+            <strong class="toc-title">contents</strong>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#表头文件"><span class="toc-number">1.</span> <span class="toc-text">表头文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web服务器程序"><span class="toc-number">2.</span> <span class="toc-text">web服务器程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行结果"><span class="toc-number">3.</span> <span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">4.</span> <span class="toc-text">附录</span></a></li></ol>
+          </div>
+          
+
+          <!-- 文章目录结束 -->
+        <p>初步了解了web服务器分为静态请求和动态请求。<br>cgi处理动态请求，并把结果返回给客户端</p>
+<a id="more"></a>
+<h3 id="表头文件">表头文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &#60;sys/stat.h&#62;    &#10;#include &#60;unistd.h&#62;</span><br></pre></td></tr></table></figure>
+<p>定义函数:    int stat(const char <em>file_name, struct stat </em>buf);</p>
+<p>函数说明:    通过文件名filename获取文件信息，并保存在buf所指的结构体stat中</p>
+<p>返回值:     执行成功则返回0，失败返回-1，错误代码存于errno</p>
+<p>先前所描述的st_mode 则定义了下列数种情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">S_IFMT   0170000    &#25991;&#20214;&#31867;&#22411;&#30340;&#20301;&#36974;&#32617;  &#10;S_IFSOCK 0140000    scoket  &#10;S_IFLNK 0120000     &#31526;&#21495;&#36830;&#25509;  &#10;S_IFREG 0100000     &#19968;&#33324;&#25991;&#20214;  &#10;S_IFBLK 0060000     &#21306;&#22359;&#35013;&#32622;  &#10;S_IFDIR 0040000     &#30446;&#24405;  &#10;S_IFCHR 0020000     &#23383;&#31526;&#35013;&#32622;  &#10;S_IFIFO 0010000     &#20808;&#36827;&#20808;&#20986;&#10;&#10;S_ISUID 04000     &#25991;&#20214;&#30340;(set user-id on execution)&#20301;  &#10;S_ISGID 02000     &#25991;&#20214;&#30340;(set group-id on execution)&#20301;  &#10;S_ISVTX 01000     &#25991;&#20214;&#30340;sticky&#20301;  &#10;&#10;S_IRUSR(S_IREAD) 00400     &#25991;&#20214;&#25152;&#26377;&#32773;&#20855;&#21487;&#35835;&#21462;&#26435;&#38480;  &#10;S_IWUSR(S_IWRITE)00200     &#25991;&#20214;&#25152;&#26377;&#32773;&#20855;&#21487;&#20889;&#20837;&#26435;&#38480;  &#10;S_IXUSR(S_IEXEC) 00100     &#25991;&#20214;&#25152;&#26377;&#32773;&#20855;&#21487;&#25191;&#34892;&#26435;&#38480;  &#10;&#10;S_IRGRP 00040             &#29992;&#25143;&#32452;&#20855;&#21487;&#35835;&#21462;&#26435;&#38480;  &#10;S_IWGRP 00020             &#29992;&#25143;&#32452;&#20855;&#21487;&#20889;&#20837;&#26435;&#38480;  &#10;S_IXGRP 00010             &#29992;&#25143;&#32452;&#20855;&#21487;&#25191;&#34892;&#26435;&#38480;  &#10;&#10;S_IROTH 00004             &#20854;&#20182;&#29992;&#25143;&#20855;&#21487;&#35835;&#21462;&#26435;&#38480;  &#10;S_IWOTH 00002             &#20854;&#20182;&#29992;&#25143;&#20855;&#21487;&#20889;&#20837;&#26435;&#38480;  &#10;S_IXOTH 00001             &#20854;&#20182;&#29992;&#25143;&#20855;&#21487;&#25191;&#34892;&#26435;&#38480;</span><br></pre></td></tr></table></figure>
+<h3 id="web服务器程序">web服务器程序</h3><pre><code class="c">
+<span class="comment">/* $begin tinymain */</span>
+<span class="comment">/*
+ * tiny.c - A simple, iterative HTTP/1.0 Web server that uses the 
+ *     GET method to serve static and dynamic content.
+ */</span>
+
+<span class="preprocessor">#<span class="keyword">include</span> "tiny.h"</span>
+
+<span class="function"><span class="keyword">void</span> <span class="title">doit</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;
+<span class="function"><span class="keyword">void</span> <span class="title">read_requesthdrs</span><span class="params">(rio_t *rp)</span></span>;
+<span class="function"><span class="keyword">int</span> <span class="title">parse_uri</span><span class="params">(<span class="keyword">char</span> *uri, <span class="keyword">char</span> *filename, <span class="keyword">char</span> *cgiargs)</span></span>;
+<span class="function"><span class="keyword">void</span> <span class="title">serve_static</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">char</span> *filename, <span class="keyword">int</span> filesize)</span></span>;
+<span class="function"><span class="keyword">void</span> <span class="title">get_filetype</span><span class="params">(<span class="keyword">char</span> *filename, <span class="keyword">char</span> *filetype)</span></span>;
+<span class="function"><span class="keyword">void</span> <span class="title">serve_dynamic</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">char</span> *filename, <span class="keyword">char</span> *cgiargs)</span></span>;
+<span class="function"><span class="keyword">void</span> <span class="title">clienterror</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">char</span> *cause, <span class="keyword">char</span> *errnum, 
+         <span class="keyword">char</span> *shortmsg, <span class="keyword">char</span> *longmsg)</span></span>;
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span> 
+</span>{
+    <span class="keyword">int</span> listenfd, connfd, port, clientlen;
+    <span class="keyword">struct</span> sockaddr_in clientaddr;
+
+    <span class="comment">/* Check command line args */</span>
+    <span class="keyword">if</span> (argc != <span class="number">2</span>) {
+    <span class="built_in">fprintf</span>(stderr, <span class="string">"usage: %s &lt;port&gt;\n"</span>, argv[<span class="number">0</span>]);
+    <span class="built_in">exit</span>(<span class="number">1</span>);
+    }
+    port = atoi(argv[<span class="number">1</span>]);
+
+    listenfd = Open_listenfd(port);
+    <span class="keyword">while</span> (<span class="number">1</span>) {
+    clientlen = <span class="keyword">sizeof</span>(clientaddr);
+    connfd = Accept(listenfd, (SA *)&amp;clientaddr, &amp;clientlen); <span class="comment">//line:netp:tiny:accept</span>
+    doit(connfd);                                             <span class="comment">//line:netp:tiny:doit</span>
+    Close(connfd);                                            <span class="comment">//line:netp:tiny:close</span>
+    }
 }
-</code></pre><p>}<br>/<em> $end tinymain </em>/</p>
-<p>/*</p>
-<ul>
-<li><p>doit - handle one HTTP request/response transaction<br><em>/<br>/</em> $begin doit */<br>void doit(int fd)<br>{<br> int is_static;<br> struct stat sbuf;<br> char buf[MAXLINE], method[MAXLINE], uri[MAXLINE], version[MAXLINE];<br> char filename[MAXLINE], cgiargs[MAXLINE];<br> rio_t rio;</p>
-<p> /<em> Read request line and headers </em>/<br> Rio_readinitb(&amp;rio, fd);<br> Rio_readlineb(&amp;rio, buf, MAXLINE);                   //line:netp:doit:readrequest<br> sscanf(buf, “%s %s %s”, method, uri, version);       //line:netp:doit:parserequest<br> if (strcasecmp(method, “GET”)) {                     //line:netp:doit:beginrequesterr</p>
-<pre><code>clienterror(fd, <span class="keyword">method</span>, <span class="string">"501"</span>, <span class="string">"Not Implemented"</span>,
-         <span class="string">"Tiny does not implement this method"</span>);
- <span class="keyword">return</span>;
-</code></pre><p> }                                                    //line:netp:doit:endrequesterr<br> read_requesthdrs(&amp;rio);                              //line:netp:doit:readrequesthdrs</p>
-<p> /<em> Parse URI from GET request </em>/<br> is_static = parse_uri(uri, filename, cgiargs);       //line:netp:doit:staticcheck<br> if (stat(filename, &amp;sbuf) &lt; 0) {                     //line:netp:doit:beginnotfound<br> clienterror(fd, filename, “404”, “Not found”,</p>
-<pre><code><span class="string">"Tiny couldn't find this file"</span>);
-</code></pre><p> return;<br> }                                                    //line:netp:doit:endnotfound</p>
-<p> if (is_static) { /<em> Serve static content </em>/<br> if (!(S_ISREG(sbuf.st_mode)) || !(S_IRUSR &amp; sbuf.st_mode)) { //line:netp:doit:readable</p>
-<pre><code>clienterror<span class="list">(<span class="keyword">fd</span>, filename, <span class="string">"403"</span>, <span class="string">"Forbidden"</span>,
-    <span class="string">"Tiny couldn't read the file"</span>)</span><span class="comment">;</span>
-return<span class="comment">;</span>
-</code></pre><p> }<br> serve_static(fd, filename, sbuf.st_size);        //line:netp:doit:servestatic<br> }<br> else { /<em> Serve dynamic content </em>/<br> if (!(S_ISREG(sbuf.st_mode)) || !(S_IXUSR &amp; sbuf.st_mode)) { //line:netp:doit:executable</p>
-<pre><code>clienterror<span class="list">(<span class="keyword">fd</span>, filename, <span class="string">"403"</span>, <span class="string">"Forbidden"</span>,
-    <span class="string">"Tiny couldn't run the CGI program"</span>)</span><span class="comment">;</span>
-return<span class="comment">;</span>
-</code></pre><p> }<br> serve_dynamic(fd, filename, cgiargs);            //line:netp:doit:servedynamic<br> }<br>}<br>/<em> $end doit </em>/</p>
-</li>
+<span class="comment">/* $end tinymain */</span>
+
+<span class="comment">/*
+ * doit - handle one HTTP request/response transaction
+ */</span>
+<span class="comment">/* $begin doit */</span>
+<span class="function"><span class="keyword">void</span> <span class="title">doit</span><span class="params">(<span class="keyword">int</span> fd)</span> 
+</span>{
+    <span class="keyword">int</span> is_static;
+    <span class="keyword">struct</span> stat sbuf;
+    <span class="keyword">char</span> buf[MAXLINE], method[MAXLINE], uri[MAXLINE], version[MAXLINE];
+    <span class="keyword">char</span> filename[MAXLINE], cgiargs[MAXLINE];
+    <span class="keyword">rio_t</span> rio;
+
+    <span class="comment">/* Read request line and headers */</span>
+    Rio_readinitb(&amp;rio, fd);
+    Rio_readlineb(&amp;rio, buf, MAXLINE);                   <span class="comment">//line:netp:doit:readrequest</span>
+    <span class="built_in">sscanf</span>(buf, <span class="string">"%s %s %s"</span>, method, uri, version);       <span class="comment">//line:netp:doit:parserequest</span>
+    <span class="keyword">if</span> (strcasecmp(method, <span class="string">"GET"</span>)) {                     <span class="comment">//line:netp:doit:beginrequesterr</span>
+       clienterror(fd, method, <span class="string">"501"</span>, <span class="string">"Not Implemented"</span>,
+                <span class="string">"Tiny does not implement this method"</span>);
+        <span class="keyword">return</span>;
+    }                                                    <span class="comment">//line:netp:doit:endrequesterr</span>
+    read_requesthdrs(&amp;rio);                              <span class="comment">//line:netp:doit:readrequesthdrs</span>
+
+    <span class="comment">/* Parse URI from GET request */</span>
+    is_static = parse_uri(uri, filename, cgiargs);       <span class="comment">//line:netp:doit:staticcheck</span>
+    <span class="keyword">if</span> (stat(filename, &amp;sbuf) &lt; <span class="number">0</span>) {                     <span class="comment">//line:netp:doit:beginnotfound</span>
+    clienterror(fd, filename, <span class="string">"404"</span>, <span class="string">"Not found"</span>,
+            <span class="string">"Tiny couldn't find this file"</span>);
+    <span class="keyword">return</span>;
+    }                                                    <span class="comment">//line:netp:doit:endnotfound</span>
+
+    <span class="keyword">if</span> (is_static) { <span class="comment">/* Serve static content */</span>          
+    <span class="keyword">if</span> (!(S_ISREG(sbuf.st_mode)) || !(S_IRUSR &amp; sbuf.st_mode)) { <span class="comment">//line:netp:doit:readable</span>
+        clienterror(fd, filename, <span class="string">"403"</span>, <span class="string">"Forbidden"</span>,
+            <span class="string">"Tiny couldn't read the file"</span>);
+        <span class="keyword">return</span>;
+    }
+    serve_static(fd, filename, sbuf.st_size);        <span class="comment">//line:netp:doit:servestatic</span>
+    }
+    <span class="keyword">else</span> { <span class="comment">/* Serve dynamic content */</span>
+    <span class="keyword">if</span> (!(S_ISREG(sbuf.st_mode)) || !(S_IXUSR &amp; sbuf.st_mode)) { <span class="comment">//line:netp:doit:executable</span>
+        clienterror(fd, filename, <span class="string">"403"</span>, <span class="string">"Forbidden"</span>,
+            <span class="string">"Tiny couldn't run the CGI program"</span>);
+        <span class="keyword">return</span>;
+    }
+    serve_dynamic(fd, filename, cgiargs);            <span class="comment">//line:netp:doit:servedynamic</span>
+    }
+}
+<span class="comment">/* $end doit */</span>
+
+<span class="comment">/*
+ * read_requesthdrs - read and parse HTTP request headers
+ */</span>
+<span class="comment">/* $begin read_requesthdrs */</span>
+<span class="function"><span class="keyword">void</span> <span class="title">read_requesthdrs</span><span class="params">(rio_t *rp)</span> 
+</span>{
+    <span class="keyword">char</span> buf[MAXLINE];
+
+    Rio_readlineb(rp, buf, MAXLINE);
+    <span class="keyword">while</span>(<span class="built_in">strcmp</span>(buf, <span class="string">"\r\n"</span>)) {          <span class="comment">//line:netp:readhdrs:checkterm</span>
+    Rio_readlineb(rp, buf, MAXLINE);
+    <span class="built_in">printf</span>(<span class="string">"%s"</span>, buf);
+    }
+    <span class="keyword">return</span>;
+}
+<span class="comment">/* $end read_requesthdrs */</span>
+
+<span class="comment">/*
+ * parse_uri - parse URI into filename and CGI args
+ *             return 0 if dynamic content, 1 if static
+ */</span>
+<span class="comment">/* $begin parse_uri */</span>
+<span class="function"><span class="keyword">int</span> <span class="title">parse_uri</span><span class="params">(<span class="keyword">char</span> *uri, <span class="keyword">char</span> *filename, <span class="keyword">char</span> *cgiargs)</span> 
+</span>{
+    <span class="keyword">char</span> *ptr;
+
+    <span class="keyword">if</span> (!<span class="built_in">strstr</span>(uri, <span class="string">"cgi-bin"</span>)) {  <span class="comment">/* Static content */</span> <span class="comment">//line:netp:parseuri:isstatic</span>
+    <span class="built_in">strcpy</span>(cgiargs, <span class="string">""</span>);                             <span class="comment">//line:netp:parseuri:clearcgi</span>
+    <span class="built_in">strcpy</span>(filename, <span class="string">"."</span>);                           <span class="comment">//line:netp:parseuri:beginconvert1</span>
+    <span class="built_in">strcat</span>(filename, uri);                           <span class="comment">//line:netp:parseuri:endconvert1</span>
+    <span class="keyword">if</span> (uri[<span class="built_in">strlen</span>(uri)-<span class="number">1</span>] == <span class="string">'/'</span>)                   <span class="comment">//line:netp:parseuri:slashcheck</span>
+        <span class="built_in">strcat</span>(filename, <span class="string">"index.html"</span>);               <span class="comment">//line:netp:parseuri:appenddefault</span>
+    <span class="keyword">return</span> <span class="number">1</span>;
+    }
+    <span class="keyword">else</span> {  <span class="comment">/* Dynamic content */</span>                        <span class="comment">//line:netp:parseuri:isdynamic</span>
+    ptr = index(uri, <span class="string">'?'</span>);                           <span class="comment">//line:netp:parseuri:beginextract</span>
+    <span class="keyword">if</span> (ptr) {
+        <span class="built_in">strcpy</span>(cgiargs, ptr+<span class="number">1</span>);
+        *ptr = <span class="string">'\0'</span>;
+    }
+    <span class="keyword">else</span> 
+        <span class="built_in">strcpy</span>(cgiargs, <span class="string">""</span>);                         <span class="comment">//line:netp:parseuri:endextract</span>
+    <span class="built_in">strcpy</span>(filename, <span class="string">"."</span>);                           <span class="comment">//line:netp:parseuri:beginconvert2</span>
+    <span class="built_in">strcat</span>(filename, uri);                           <span class="comment">//line:netp:parseuri:endconvert2</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+    }
+}
+<span class="comment">/* $end parse_uri */</span>
+
+<span class="comment">/*
+ * serve_static - copy a file back to the client 
+ */</span>
+<span class="comment">/* $begin serve_static */</span>
+<span class="function"><span class="keyword">void</span> <span class="title">serve_static</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">char</span> *filename, <span class="keyword">int</span> filesize)</span> 
+</span>{
+    <span class="keyword">int</span> srcfd;
+    <span class="keyword">char</span> *srcp, filetype[MAXLINE], buf[MAXBUF];
+
+    <span class="comment">/* Send response headers to client */</span>
+    get_filetype(filename, filetype);       <span class="comment">//line:netp:servestatic:getfiletype</span>
+    <span class="built_in">sprintf</span>(buf, <span class="string">"HTTP/1.0 200 OK\r\n"</span>);    <span class="comment">//line:netp:servestatic:beginserve</span>
+    <span class="built_in">sprintf</span>(buf, <span class="string">"%sServer: Tiny Web Server\r\n"</span>, buf);
+    <span class="built_in">sprintf</span>(buf, <span class="string">"%sContent-length: %d\r\n"</span>, buf, filesize);
+    <span class="built_in">sprintf</span>(buf, <span class="string">"%sContent-type: %s\r\n\r\n"</span>, buf, filetype);
+    Rio_writen(fd, buf, <span class="built_in">strlen</span>(buf));       <span class="comment">//line:netp:servestatic:endserve</span>
+
+    <span class="comment">/* Send response body to client */</span>
+    srcfd = Open(filename, O_RDONLY, <span class="number">0</span>);    <span class="comment">//line:netp:servestatic:open</span>
+    srcp = Mmap(<span class="number">0</span>, filesize, PROT_READ, MAP_PRIVATE, srcfd, <span class="number">0</span>);<span class="comment">//line:netp:servestatic:mmap</span>
+    Close(srcfd);                           <span class="comment">//line:netp:servestatic:close</span>
+    Rio_writen(fd, srcp, filesize);         <span class="comment">//line:netp:servestatic:write</span>
+    Munmap(srcp, filesize);                 <span class="comment">//line:netp:servestatic:munmap</span>
+}
+
+<span class="comment">/*
+ * get_filetype - derive file type from file name
+ */</span>
+<span class="function"><span class="keyword">void</span> <span class="title">get_filetype</span><span class="params">(<span class="keyword">char</span> *filename, <span class="keyword">char</span> *filetype)</span> 
+</span>{
+    <span class="keyword">if</span> (<span class="built_in">strstr</span>(filename, <span class="string">".html"</span>))
+    <span class="built_in">strcpy</span>(filetype, <span class="string">"text/html"</span>);
+    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">strstr</span>(filename, <span class="string">".gif"</span>))
+    <span class="built_in">strcpy</span>(filetype, <span class="string">"image/gif"</span>);
+    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">strstr</span>(filename, <span class="string">".jpg"</span>))
+    <span class="built_in">strcpy</span>(filetype, <span class="string">"image/jpeg"</span>);
+    <span class="keyword">else</span>
+    <span class="built_in">strcpy</span>(filetype, <span class="string">"text/plain"</span>);
+}  
+<span class="comment">/* $end serve_static */</span>
+
+<span class="comment">/*
+ * serve_dynamic - run a CGI program on behalf of the client
+ */</span>
+<span class="comment">/* $begin serve_dynamic */</span>
+<span class="function"><span class="keyword">void</span> <span class="title">serve_dynamic</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">char</span> *filename, <span class="keyword">char</span> *cgiargs)</span> 
+</span>{
+    <span class="keyword">char</span> buf[MAXLINE], *emptylist[] = { NULL };
+
+    <span class="comment">/* Return first part of HTTP response */</span>
+    <span class="built_in">sprintf</span>(buf, <span class="string">"HTTP/1.0 200 OK\r\n"</span>); 
+    Rio_writen(fd, buf, <span class="built_in">strlen</span>(buf));
+    <span class="built_in">sprintf</span>(buf, <span class="string">"Server: Tiny Web Server\r\n"</span>);
+    Rio_writen(fd, buf, <span class="built_in">strlen</span>(buf));
+
+    <span class="keyword">if</span> (Fork() == <span class="number">0</span>) { <span class="comment">/* child */</span> <span class="comment">//line:netp:servedynamic:fork</span>
+    <span class="comment">/* Real server would set all CGI vars here */</span>
+    setenv(<span class="string">"QUERY_STRING"</span>, cgiargs, <span class="number">1</span>); <span class="comment">//line:netp:servedynamic:setenv</span>
+    Dup2(fd, STDOUT_FILENO);         <span class="comment">/* Redirect stdout to client */</span> <span class="comment">//line:netp:servedynamic:dup2</span>
+    Execve(filename, emptylist, environ); <span class="comment">/* Run CGI program */</span> <span class="comment">//line:netp:servedynamic:execve</span>
+    }
+    Wait(NULL); <span class="comment">/* Parent waits for and reaps child */</span> <span class="comment">//line:netp:servedynamic:wait</span>
+}
+<span class="comment">/* $end serve_dynamic */</span>
+
+<span class="comment">/*
+ * clienterror - returns an error message to the client
+ */</span>
+<span class="comment">/* $begin clienterror */</span>
+<span class="function"><span class="keyword">void</span> <span class="title">clienterror</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">char</span> *cause, <span class="keyword">char</span> *errnum, 
+         <span class="keyword">char</span> *shortmsg, <span class="keyword">char</span> *longmsg)</span> 
+</span>{
+    <span class="keyword">char</span> buf[MAXLINE], body[MAXBUF];
+
+    <span class="comment">/* Build the HTTP response body */</span>
+    <span class="built_in">sprintf</span>(body, <span class="string">"&lt;html&gt;&lt;title&gt;Tiny Error&lt;/title&gt;"</span>);
+    <span class="built_in">sprintf</span>(body, <span class="string">"%s&lt;body bgcolor="</span><span class="string">"ffffff"</span><span class="string">"&gt;\r\n"</span>, body);
+    <span class="built_in">sprintf</span>(body, <span class="string">"%s%s: %s\r\n"</span>, body, errnum, shortmsg);
+    <span class="built_in">sprintf</span>(body, <span class="string">"%s&lt;p&gt;%s: %s\r\n"</span>, body, longmsg, cause);
+    <span class="built_in">sprintf</span>(body, <span class="string">"%s&lt;hr&gt;&lt;em&gt;The Tiny Web server&lt;/em&gt;\r\n"</span>, body);
+
+    <span class="comment">/* Print the HTTP response */</span>
+    <span class="built_in">sprintf</span>(buf, <span class="string">"HTTP/1.0 %s %s\r\n"</span>, errnum, shortmsg);
+    Rio_writen(fd, buf, <span class="built_in">strlen</span>(buf));
+    <span class="built_in">sprintf</span>(buf, <span class="string">"Content-type: text/html\r\n"</span>);
+    Rio_writen(fd, buf, <span class="built_in">strlen</span>(buf));
+    <span class="built_in">sprintf</span>(buf, <span class="string">"Content-length: %d\r\n\r\n"</span>, (<span class="keyword">int</span>)<span class="built_in">strlen</span>(body));
+    Rio_writen(fd, buf, <span class="built_in">strlen</span>(buf));
+    Rio_writen(fd, body, <span class="built_in">strlen</span>(body));
+}
+<span class="comment">/* $end clienterror */</span>
+</code></pre>
+<h3 id="运行结果">运行结果</h3><ul>
+<li>编译好后可以使用fixfox访问 <a href="locahost:post/index.html" target="_blank" rel="external">locahost:post/index.html</a></li>
 </ul>
-<p>/*</p>
-<ul>
-<li><p>read_requesthdrs - read and parse HTTP request headers<br><em>/<br>/</em> $begin read_requesthdrs <em>/<br>void read_requesthdrs(rio_t </em>rp)<br>{<br> char buf[MAXLINE];</p>
-<p> Rio_readlineb(rp, buf, MAXLINE);<br> while(strcmp(buf, “\r\n”)) {          //line:netp:readhdrs:checkterm<br> Rio_readlineb(rp, buf, MAXLINE);<br> printf(“%s”, buf);<br> }<br> return;<br>}<br>/<em> $end read_requesthdrs </em>/</p>
-</li>
-</ul>
-<p>/*</p>
-<ul>
-<li>parse_uri - parse URI into filename and CGI args</li>
-<li><p>return 0 if dynamic content, 1 if static<br><em>/<br>/</em> $begin parse_uri <em>/<br>int parse_uri(char </em>uri, char <em>filename, char </em>cgiargs)<br>{<br>char *ptr;</p>
-<p>if (!strstr(uri, “cgi-bin”)) {  /<em> Static content </em>/ //line:netp:parseuri:isstatic<br>strcpy(cgiargs, “”);                             //line:netp:parseuri:clearcgi<br>strcpy(filename, “.”);                           //line:netp:parseuri:beginconvert1<br>strcat(filename, uri);                           //line:netp:parseuri:endconvert1<br>if (uri[strlen(uri)-1] == ‘/‘)                   //line:netp:parseuri:slashcheck<br>strcat(filename, “index.html”);               //line:netp:parseuri:appenddefault<br>return 1;<br>}<br>else {  /<em> Dynamic content </em>/                        //line:netp:parseuri:isdynamic<br>ptr = index(uri, ‘?’);                           //line:netp:parseuri:beginextract<br>if (ptr) {<br>strcpy(cgiargs, ptr+1);<br><em>ptr = ‘\0’;<br>}<br>else<br>strcpy(cgiargs, “”);                         //line:netp:parseuri:endextract<br>strcpy(filename, “.”);                           //line:netp:parseuri:beginconvert2<br>strcat(filename, uri);                           //line:netp:parseuri:endconvert2<br>return 0;<br>}<br>}<br>/</em> $end parse_uri */</p>
-</li>
-</ul>
-<p>/*</p>
-<ul>
-<li><p>serve_static - copy a file back to the client<br><em>/<br>/</em> $begin serve_static <em>/<br>void serve_static(int fd, char </em>filename, int filesize)<br>{<br> int srcfd;<br> char *srcp, filetype[MAXLINE], buf[MAXBUF];</p>
-<p> /<em> Send response headers to client </em>/<br> get_filetype(filename, filetype);       //line:netp:servestatic:getfiletype<br> sprintf(buf, “HTTP/1.0 200 OK\r\n”);    //line:netp:servestatic:beginserve<br> sprintf(buf, “%sServer: Tiny Web Server\r\n”, buf);<br> sprintf(buf, “%sContent-length: %d\r\n”, buf, filesize);<br> sprintf(buf, “%sContent-type: %s\r\n\r\n”, buf, filetype);<br> Rio_writen(fd, buf, strlen(buf));       //line:netp:servestatic:endserve</p>
-<p> /<em> Send response body to client </em>/<br> srcfd = Open(filename, O_RDONLY, 0);    //line:netp:servestatic:open<br> srcp = Mmap(0, filesize, PROT_READ, MAP_PRIVATE, srcfd, 0);//line:netp:servestatic:mmap<br> Close(srcfd);                           //line:netp:servestatic:close<br> Rio_writen(fd, srcp, filesize);         //line:netp:servestatic:write<br> Munmap(srcp, filesize);                 //line:netp:servestatic:munmap<br>}</p>
-</li>
-</ul>
-<p>/*</p>
-<ul>
-<li>get_filetype - derive file type from file name<br><em>/<br>void get_filetype(char </em>filename, char <em>filetype)<br>{<br> if (strstr(filename, “.html”))<br> strcpy(filetype, “text/html”);<br> else if (strstr(filename, “.gif”))<br> strcpy(filetype, “image/gif”);<br> else if (strstr(filename, “.jpg”))<br> strcpy(filetype, “image/jpeg”);<br> else<br> strcpy(filetype, “text/plain”);<br>}<br>/</em> $end serve_static */</li>
-</ul>
-<p>/*</p>
-<ul>
-<li><p>serve_dynamic - run a CGI program on behalf of the client<br><em>/<br>/</em> $begin serve_dynamic <em>/<br>void serve_dynamic(int fd, char </em>filename, char <em>cgiargs)<br>{<br> char buf[MAXLINE], </em>emptylist[] = { NULL };</p>
-<p> /<em> Return first part of HTTP response </em>/<br> sprintf(buf, “HTTP/1.0 200 OK\r\n”);<br> Rio_writen(fd, buf, strlen(buf));<br> sprintf(buf, “Server: Tiny Web Server\r\n”);<br> Rio_writen(fd, buf, strlen(buf));</p>
-<p> if (Fork() == 0) { /<em> child </em>/ //line:netp:servedynamic:fork<br> /<em> Real server would set all CGI vars here </em>/<br> setenv(“QUERY_STRING”, cgiargs, 1); //line:netp:servedynamic:setenv<br> Dup2(fd, STDOUT_FILENO);         /<em> Redirect stdout to client </em>/ //line:netp:servedynamic:dup2<br> Execve(filename, emptylist, environ); /<em> Run CGI program </em>/ //line:netp:servedynamic:execve<br> }<br> Wait(NULL); /<em> Parent waits for and reaps child </em>/ //line:netp:servedynamic:wait<br>}<br>/<em> $end serve_dynamic </em>/</p>
-</li>
-</ul>
-<p>/*</p>
-<ul>
-<li><p>clienterror - returns an error message to the client<br><em>/<br>/</em> $begin clienterror <em>/<br>void clienterror(int fd, char </em>cause, char *errnum, </p>
-<pre><code><span class="keyword">char</span> *shortmsg, <span class="keyword">char</span> *longmsg) 
-</code></pre><p>{<br> char buf[MAXLINE], body[MAXBUF];</p>
-<p> /<em> Build the HTTP response body </em>/<br> sprintf(body, “<html><title>Tiny Error</title>“);<br> sprintf(body, “%s<body bgcolor="" ffffff""="">\r\n”, body);<br> sprintf(body, “%s%s: %s\r\n”, body, errnum, shortmsg);<br> sprintf(body, “%s<p>%s: %s\r\n”, body, longmsg, cause);<br> sprintf(body, “%s<hr><em>The Tiny Web server</em>\r\n”, body);</p>
-<p> /<em> Print the HTTP response </em>/<br> sprintf(buf, “HTTP/1.0 %s %s\r\n”, errnum, shortmsg);<br> Rio_writen(fd, buf, strlen(buf));<br> sprintf(buf, “Content-type: text/html\r\n”);<br> Rio_writen(fd, buf, strlen(buf));<br> sprintf(buf, “Content-length: %d\r\n\r\n”, (int)strlen(body));<br> Rio_writen(fd, buf, strlen(buf));<br> Rio_writen(fd, body, strlen(body));<br>}<br>/<em> $end clienterror </em>/</p>
-</body></html></p></li>
-</ul>
-<p>``` </p>
-<p>编译好后可以使用fixfox访问 locahost:post/index.html</p>
-<ol>
-<li>附录：</li>
-</ol>
-<p>github 链接：<a href="https://github.com/ylwdream/TinyWeb" target="_blank" rel="external">https://github.com/ylwdream/TinyWeb</a></p>
+<h3 id="附录">附录</h3><p>github 链接：<a href="https://github.com/ylwdream/TinyWeb" target="_blank" rel="external">https://github.com/ylwdream/TinyWeb</a></p>
 
       
     </div>

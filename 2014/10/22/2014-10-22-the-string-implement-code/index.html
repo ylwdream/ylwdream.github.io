@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a>
+						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -214,6 +214,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+
+          <!-- 文章目录开始 -->
+
+          
+            <div id="toc" class="toc-article">
+            <strong class="toc-title">contents</strong>
+            
+          </div>
+          
+
+          <!-- 文章目录结束 -->
         <p>最近在学习开源爬虫larbin的代码，里面有我觉得比较好的代码，想要记录下也想和大家分享下。<br><a id="more"></a><br>   1.扩大字符串容量的算法。先扩大一倍，然后不行就扩大到需要的大小。可以看看stl中vector的实现。</p>
 <pre><code><span class="keyword">void</span> LarbinString::addBuffer (<span class="keyword">char</span> *s, uint len) 
 {

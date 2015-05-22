@@ -5,19 +5,16 @@
   
   <title>C++ new 运算符 | ylw Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="首先看下面这句表达式
-string *sp = new string(&quot;initalliszed&quot;);">
+  <meta name="description" content="new 运算符调用函数 operator new。 对于任何类型的数组以及不属于 class、struct 或 union 类型的对象，调用全局函数 ::operator new 来分配存储。 类类型对象可基于每个类定义其自己的 operator new 静态成员函数。当编译器遇到用于分配类型 type 的对象的 new 运算符时，它将发布对 type::operator new( sizeof(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++ new 运算符">
 <meta property="og:url" content="http://ylwhere.tk/2014/10/31/2014-10-31-c-plus-plus-new-yun-suan-fu/index.html">
 <meta property="og:site_name" content="ylw Home">
-<meta property="og:description" content="首先看下面这句表达式
-string *sp = new string(&quot;initalliszed&quot;);">
-<meta property="og:updated_time" content="2015-05-22T04:59:22.072Z">
+<meta property="og:description" content="new 运算符调用函数 operator new。 对于任何类型的数组以及不属于 class、struct 或 union 类型的对象，调用全局函数 ::operator new 来分配存储。 类类型对象可基于每个类定义其自己的 operator new 静态成员函数。当编译器遇到用于分配类型 type 的对象的 new 运算符时，它将发布对 type::operator new( sizeof(">
+<meta property="og:updated_time" content="2015-05-22T12:52:04.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ new 运算符">
-<meta name="twitter:description" content="首先看下面这句表达式
-string *sp = new string(&quot;initalliszed&quot;);">
+<meta name="twitter:description" content="new 运算符调用函数 operator new。 对于任何类型的数组以及不属于 class、struct 或 union 类型的对象，调用全局函数 ::operator new 来分配存储。 类类型对象可基于每个类定义其自己的 operator new 静态成员函数。当编译器遇到用于分配类型 type 的对象的 new 运算符时，它将发布对 type::operator new( sizeof(">
   
     <link rel="alternative" href="/atom.xml" title="ylw Home" type="application/atom+xml">
   
@@ -112,7 +109,7 @@ string *sp = new string(&quot;initalliszed&quot;);">
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a>
+						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -207,7 +204,7 @@ string *sp = new string(&quot;initalliszed&quot;);">
         
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/c/">c++</a>
+	<a class="article-category-link" href="/categories/C-C/">C/C++</a>
 	</div>
 
 
@@ -217,12 +214,22 @@ string *sp = new string(&quot;initalliszed&quot;);">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>首先看下面这句表达式</p>
-<pre><code><span class="built_in">string</span> *<span class="keyword">sp</span> = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"initalliszed"</span>);
-</code></pre><a id="more"></a>
-<p>上面实际发三个步骤。首先，该表达式调用名为operator new 的标准库函数，分配足够大的原始的未类型化的内存，以保持指定类型的一个对象；接下来，运行该类型的一个构造函数，来指定初始化构造对象；最后，返回指向新分配并构造的对象的指针。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">  <span class="built_in">string</span> *sp = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"hello"</span>);</span><br><span class="line"><span class="number">0121439F</span>  <span class="function">call        <span class="keyword">operator</span> <span class="title">new</span> <span class="params">(0121137Ah)</span>  </span><br><span class="line">012143A4  add         esp,4  </span><br><span class="line">012143A7  mov         dword ptr [ebp-0E0h],eax  </span><br><span class="line">012143AD  mov         dword ptr [ebp-4],0  </span><br><span class="line">012143B4  cmp         dword ptr [ebp-0E0h],0  </span><br><span class="line">012143BB  je          main+75<span class="title">h</span> <span class="params">(012143D5h)</span>  </span><br><span class="line">012143BD  push        121CC80h  </span><br><span class="line">012143C2  mov         ecx,dword ptr [ebp-0E0h]  </span><br><span class="line">012143C8  call        <span class="built_in">std</span>::basic_string&lt;<span class="keyword">char</span>,<span class="built_in">std</span>::char_traits&lt;<span class="keyword">char</span>&gt;,<span class="built_in">std</span>::allocator&lt;<span class="keyword">char</span>&gt; &gt;::basic_string&lt;<span class="keyword">char</span>,<span class="built_in">std</span>::char_traits&lt;<span class="keyword">char</span>&gt;,<span class="built_in">std</span>::allocator&lt;<span class="keyword">char</span>&gt; &gt; <span class="params">(01211398h)</span>  </span><br><span class="line">012143CD  mov         dword ptr [ebp-0F4h],eax  </span><br><span class="line">012143D3  jmp         main+7<span class="title">Fh</span> <span class="params">(012143DFh)</span>  </span><br><span class="line">012143D5  mov         dword ptr [ebp-0F4h],0  </span><br><span class="line">012143DF  mov         eax,dword ptr [ebp-0F4h]  </span><br><span class="line">012143E5  mov         dword ptr [ebp-0ECh],eax  </span><br><span class="line">012143EB  mov         dword ptr [ebp-4],0FFFFFFFFh  </span><br><span class="line">012143F2  mov         ecx,dword ptr [ebp-0ECh]  </span><br><span class="line">012143F8  mov         dword ptr [sp],ecx</span></span><br></pre></td></tr></table></figure></p>
+
+          <!-- 文章目录开始 -->
+
+          
+
+          <!-- 文章目录结束 -->
+        <p>new 运算符调用函数 <code>operator new</code>。 对于任何类型的数组以及不属于 <code>class、struct</code> 或 <code>union</code> 类型的对象，调用全局函数 <code>::operator new</code> 来分配存储。 类类型对象可基于每个类定义其自己的 <code>operator new</code> 静态成员函数。<br>当编译器遇到用于分配类型 type 的对象的 <code>new</code> 运算符时，它将发布对 <code>type::operator new( sizeof( type ) )</code> 的调用；或者，如果未定义用户定义的 <code>operator new</code>，则为 <code>::operator new( sizeof( type ) )</code>。 因此，new 运算符可以为对象分配正确的内存量。</p>
+<p>首先看下面这句表达式<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> *sp = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"initalliszed"</span>);</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>上面实际发三个步骤。首先，该表达式调用名为operator new 的标准库函数，分配足够大的原始的未类型化的内存，以保持指定类型的一个对象；接下来，运行该类型的一个构造函数，来指定初始化构造对象；最后，返回指向新分配并构造的对象的指针。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">  <span class="built_in">string</span> *sp = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"hello"</span>);</span><br><span class="line"><span class="number">0121439F</span>  <span class="function">call        <span class="keyword">operator</span> <span class="title">new</span> <span class="params">(0121137Ah)</span>  </span><br><span class="line">012143A4  add         esp,4  </span><br><span class="line">012143A7  mov         dword ptr [ebp-0E0h],eax  </span><br><span class="line">012143AD  mov         dword ptr [ebp-4],0  </span><br><span class="line">012143B4  cmp         dword ptr [ebp-0E0h],0  </span><br><span class="line">012143BB  je          main+75<span class="title">h</span> <span class="params">(012143D5h)</span>  </span><br><span class="line">012143BD  push        121CC80h  </span><br><span class="line">012143C2  mov         ecx,dword ptr [ebp-0E0h]  </span><br><span class="line">012143C8  call        <span class="built_in">std</span>::basic_string&lt;<span class="keyword">char</span>,<span class="built_in">std</span>::char_traits&lt;<span class="keyword">char</span>&gt;,<span class="built_in">std</span>::allocator&lt;<span class="keyword">char</span>&gt; &gt;::basic_string&lt;<span class="keyword">char</span>,<span class="built_in">std</span>::char_traits&lt;<span class="keyword">char</span>&gt;,<span class="built_in">std</span>::allocator&lt;<span class="keyword">char</span>&gt; &gt; <span class="params">(01211398h)</span>  </span><br><span class="line">012143CD  mov         dword ptr [ebp-0F4h],eax  </span><br><span class="line">012143D3  jmp         main+7<span class="title">Fh</span> <span class="params">(012143DFh)</span>  </span><br><span class="line">012143D5  mov         dword ptr [ebp-0F4h],0  </span><br><span class="line">012143DF  mov         eax,dword ptr [ebp-0F4h]  </span><br><span class="line">012143E5  mov         dword ptr [ebp-0ECh],eax  </span><br><span class="line">012143EB  mov         dword ptr [ebp-4],0FFFFFFFFh  </span><br><span class="line">012143F2  mov         ecx,dword ptr [ebp-0ECh]  </span><br><span class="line">012143F8  mov         dword ptr [sp],ecx</span></span><br></pre></td></tr></table></figure></p>
 <p>new 运算符调用函数 operator new。 对于任何类型的数组以及不属于 class、struct 或 union 类型的对象，调用全局函数 ::operator new 来分配存储。 类类型对象可基于每个类定义其自己的 operator new 静态成员函数。</p>
-<p>operator new 的第一个参数的类型必须为 size_t（STDDEF.H 中定义的类型），并且返回类型始终为 void *。</p>
+<blockquote>
+<ul>
+<li>operator new 的第一个参数的类型必须为 size_t（STDDEF.H 中定义的类型），并且返回类型始终为 void *。</li>
+</ul>
+</blockquote>
 <p>在使用 new 运算符分配内置类型的对象、不包含用户定义的 operator new 函数的类类型的对象和任何类型的数组时，将调用全局 operator new 函数。 在使用 new 运算符分配类类型的对象时（其中定义了 operator new），将调用该类的 operator new。</p>
 <p>为类定义的 operator new 函数是静态成员函数（因此，它不能是虚函数），该函数隐藏此类类型的对象的全局 operator new 函数。 </p>
 <p>下面是微软官网给出的例子</p>

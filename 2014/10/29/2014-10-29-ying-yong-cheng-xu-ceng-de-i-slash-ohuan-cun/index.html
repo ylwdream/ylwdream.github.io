@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ylwhere.tk/2014/10/29/2014-10-29-ying-yong-cheng-xu-ceng-de-i-slash-ohuan-cun/index.html">
 <meta property="og:site_name" content="ylw Home">
 <meta property="og:description" content="缓存技术在计算机的各个层次中都有涉及，例如cache,i/o，web访问url的缓存，dns的缓存。缓存的目的就是为了减少对资源的调用次数，加速程序的执行。">
-<meta property="og:updated_time" content="2015-05-22T04:59:21.926Z">
+<meta property="og:updated_time" content="2015-05-22T13:04:00.376Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="应用程序层的I/O缓存">
 <meta name="twitter:description" content="缓存技术在计算机的各个层次中都有涉及，例如cache,i/o，web访问url的缓存，dns的缓存。缓存的目的就是为了减少对资源的调用次数，加速程序的执行。">
@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a>
+						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -202,6 +202,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/io/">io</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+	</div>
+
         
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/larbin/">larbin</a>
@@ -214,7 +218,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>缓存技术在计算机的各个层次中都有涉及，例如cache,i/o，web访问url的缓存，dns的缓存。缓存的目的就是为了减少对资源的调用次数，加速程序的执行。<br><a id="more"></a><br>我们知道，对文件读写的调用时系统调用，会设计到i/o读写，会发生中断等。如果我们先在内存缓存一部分数据，而不是每次有数据时都去调用i/o操作。而是当缓冲区满的时候才写入磁盘是会提高程序的执行效率的。这也是我今天看到larbin下面对文件的读写提供的应用程序级别的缓存。</p>
+
+          <!-- 文章目录开始 -->
+
+          
+
+          <!-- 文章目录结束 -->
+        <p>缓存技术在计算机的各个层次中都有涉及，例如cache,i/o，web访问url的缓存，dns的缓存。缓存的目的就是为了减少对资源的调用次数，加速程序的执行。<br><a id="more"></a></p>
+<p>我们知道，对文件读写的调用时系统调用，会设计到i/o读写，会发生中断等。如果我们先在内存缓存一部分数据，而不是每次有数据时都去调用i/o操作。而是当缓冲区满的时候才写入磁盘是会提高程序的执行效率的。这也是我今天看到larbin下面对文件的读写提供的应用程序级别的缓存。</p>
 <p>今天手贱搜了下别人对larbin 的分析，感觉自己突然坚持的东西就坚持不下去了，因为自己也看了大半了月了，感觉进展真的很慢，也不知道我的学习方式是否是正确的。本来都算改写larbin,现在都开始放弃的念头了。哎，学业很忙，心情又不太好。</p>
 <p>以下是larbin中的<code>PersistentFifo.cc</code>中的一部分代码。</p>
 <p>构造函数</p>

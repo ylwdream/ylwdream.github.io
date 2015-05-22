@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ylwhere.tk/2014/10/31/2014-10-31-c-plus-plus-mo-ban-te-hua/index.html">
 <meta property="og:site_name" content="ylw Home">
 <meta property="og:description" content="有些时候写的模板函数并不适用于所有的情况，这个时候需要对模板进行特化，意思也就是对于特殊情况下使用特化版本的模板。">
-<meta property="og:updated_time" content="2015-05-22T04:59:21.990Z">
+<meta property="og:updated_time" content="2015-05-22T12:56:20.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ 模板特化">
 <meta name="twitter:description" content="有些时候写的模板函数并不适用于所有的情况，这个时候需要对模板进行特化，意思也就是对于特殊情况下使用特化版本的模板。">
@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a>
+						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -204,7 +204,7 @@
         
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/c/">c++</a>
+	<a class="article-category-link" href="/categories/C-C/">C/C++</a>
 	</div>
 
 
@@ -214,6 +214,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+
+          <!-- 文章目录开始 -->
+
+          
+
+          <!-- 文章目录结束 -->
         <p>有些时候写的模板函数并不适用于所有的情况，这个时候需要对模板进行特化，意思也就是对于特殊情况下使用特化版本的模板。<br><a id="more"></a><br>1.模板的特化</p>
 <p>下面是compare函数模板</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">const</span> T&amp; v1, <span class="keyword">const</span> T&amp; v2)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(v1 &lt; v2) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(v2 &lt; v1) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -231,6 +237,7 @@
 <p>在模板定义语法中关键字class与typename的作用完全一样。<br>typename难道仅仅在模板定义中起作用吗？其实不是这样，typename另外一个作用为：使用嵌套依赖类型(nested depended name)，如下所示：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> MyArray </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>：</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> LengthType;</span><br><span class="line">.....</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MyMethod</span><span class="params">( T myarr )</span> </span><br><span class="line"></span>&#123; </span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">typename</span> T::LengthType LengthType; </span><br><span class="line">LengthType length = myarr.GetLength; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这个时候typename的作用就是告诉c++编译器，typename后面的字符串为一个类型名称，而不是成员函数或者成员变量，这个时候如果前面没有<br>typename，编译器没有任何办法知道T::LengthType是一个类型还是一个成员名称(静态数据成员或者静态函数)，所以编译不能够通过。 </p>
 <p>最后说一下stl中的alloc分配内存的函数。<br>看侯捷的《STL源码剖析》<br>SGI stl中的内存分配分为两个层次，大于128字节的内存直接使用malloc从堆区申请空间，否则向stl内部维护的一个内存池申请需要的空间。</p>
+<hr>
 <p>第一级配置器<br>__malloc_alloc_template</p>
 <ul>
 <li>allocae()直接使用malloc()</li>
@@ -242,6 +249,7 @@
 <li>维护16个自由链表，负责16中小型区块的次配置能力</li>
 <li>如果需求大于128字节，就转调第一级配置器</li>
 </ul>
+<hr>
 <p>其中第二配置器重的数据结构有</p>
 <pre><code><span class="keyword">union</span> obj {
     <span class="keyword">union</span> obj * free_list_link;
