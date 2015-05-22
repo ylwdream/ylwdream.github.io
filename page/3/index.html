@@ -108,7 +108,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/llvm/" style="font-size: 10px;">llvm</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/pthread/" style="font-size: 10px;">pthread</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/心路札记/" style="font-size: 10px;">心路札记</a> <a href="/tags/爬虫/" style="font-size: 16.67px;">爬虫</a>
+						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/llvm/" style="font-size: 10px;">llvm</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/pthread/" style="font-size: 10px;">pthread</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/爬虫/" style="font-size: 16.67px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -175,6 +175,62 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-2014-10-28-she-ji-mo-shi-zhi-gong-han-mo-shi" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/10/28/2014-10-28-she-ji-mo-shi-zhi-gong-han-mo-shi/" class="article-date">
+  	<time datetime="2014-10-28T15:41:38.000Z" itemprop="datePublished">2014-10-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/28/2014-10-28-she-ji-mo-shi-zhi-gong-han-mo-shi/">设计模式之工厂模式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天看了一点设计模式，是关于工厂模式的，简单的说就是你不会生产一个工具，交给工厂去生产，你只用告诉工厂工具的尺寸就好。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2014/10/28/2014-10-28-she-ji-mo-shi-zhi-gong-han-mo-shi/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-2014-10-27-linux-wang-luo-bian-cheng-epoll" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -714,75 +770,9 @@
 
 
   
-    <article id="post-2014-10-20-how-to-configure-octopress-in-cenos" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/10/21/2014-10-20-how-to-configure-octopress-in-cenos/" class="article-date">
-  	<time datetime="2014-10-21T04:23:46.000Z" itemprop="datePublished">2014-10-21</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/21/2014-10-20-how-to-configure-octopress-in-cenos/">how to configure octopress in Cenos</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1_先安装ruby">1 先安装ruby</h1><pre><code>bash &lt; &lt;(curl -<span class="keyword">s</span> http<span class="variable">s:</span>//raw.github.<span class="keyword">com</span>/wayneeseguin/rvm/master/binscripts/rvm-installer )
-<span class="keyword">echo</span> <span class="string">'[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; . "$HOME/.rvm/scripts/rvm" # Load RVM function'</span> &gt;&gt;$HOME/.bash_profile
-<span class="keyword">source</span> ~/.bash_profile
-<span class="built_in">type</span> rvm | head -<span class="number">1</span>  #验证rvm 安装 outpu<span class="variable">t:</span> rvm <span class="keyword">is</span> <span class="keyword">a</span> <span class="function"><span class="keyword">function</span></span>
-rvm install <span class="number">2.1</span>.<span class="number">0</span> &amp;&amp; rvm use <span class="number">2.1</span>.<span class="number">0</span>  #安装<span class="keyword">ruby</span> <span class="number">2.1</span>.<span class="number">0</span>
-<span class="keyword">ruby</span> -<span class="keyword">v</span>
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Octopress/">Octopress</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/blog/">blog</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2014/10/21/2014-10-20-how-to-configure-octopress-in-cenos/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </div>
