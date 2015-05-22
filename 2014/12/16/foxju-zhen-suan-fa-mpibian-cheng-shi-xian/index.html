@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>FOX矩阵算法MPI编程实现 | ylw Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Fox算法同样通过循环移位的办法来达到节省存储空间的目的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FOX矩阵算法MPI编程实现">
+<meta property="og:url" content="http://ylwhere.tk/2014/12/16/foxju-zhen-suan-fa-mpibian-cheng-shi-xian/index.html">
+<meta property="og:site_name" content="ylw Home">
+<meta property="og:description" content="Fox算法同样通过循环移位的办法来达到节省存储空间的目的。">
+<meta property="og:updated_time" content="2015-05-22T11:22:32.583Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FOX矩阵算法MPI编程实现">
+<meta name="twitter:description" content="Fox算法同样通过循环移位的办法来达到节省存储空间的目的。">
+  
+    <link rel="alternative" href="/atom.xml" title="ylw Home" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="/img/favicon.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ylw Home</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">More Code More Confidence</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/About">ABOUT ME</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wang-yu-lin-74" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/C-C/" style="font-size: 13.33px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/llvm/" style="font-size: 10px;">llvm</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/pthread/" style="font-size: 10px;">pthread</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/爬虫/" style="font-size: 16.67px;">爬虫</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">friends的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">ylw Home</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/favicon.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ylw Home</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">More Code More Confidence</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/About">ABOUT ME</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wang-yu-lin-74" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-foxju-zhen-suan-fa-mpibian-cheng-shi-xian" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/12/16/foxju-zhen-suan-fa-mpibian-cheng-shi-xian/" class="article-date">
+  	<time datetime="2014-12-15T16:23:20.000Z" itemprop="datePublished">2014-12-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      FOX矩阵算法MPI编程实现
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MPI/">MPI</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/parallel/">parallel</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+          <!-- 文章目录开始 -->
+
+          
+
+          <!-- 文章目录结束 -->
+        <p>Fox算法同样通过循环移位的办法来达到节省存储空间的目的。</p>
+<a id="more"></a>
+<p>设处理器个数p=q2，则算法的要点如下：</p>
+<ol>
+<li>所选中的对角线Aii向所在行的q个处理器进行一对多广播；</li>
+<li>各处理器将自己所拥有的A和B的子块进行矩阵相乘运算；</li>
+<li>B矩阵的块向上循环移动一位，从下面接受一个新的B矩阵块；</li>
+<li>选择A的一个矩阵块作为广播源，选择方法：如果Aij是上次的广播源，则本次的广播源是Ai,(j+1)%q。其中’%’表示取模运算。转步骤2。</li>
+</ol>
+<p>附链接：<br><a href="http://202.197.191.206:8080/06/text/ch06/se03/6_3_4_3.htm#" target="_blank" rel="external">http://202.197.191.206:8080/06/text/ch06/se03/6_3_4_3.htm#</a></p>
+<blockquote>
+<ul>
+<li>程序运行 mpirun -n proncs fox</li>
+<li>其中n必须是平方数，例如：4、8、16</li>
+</ul>
+<hr>
+<figure class="highlight c"><figcaption><span>FOX_MPI.c</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// wyl </span></span><br><span class="line"><span class="comment">// c[n][n] = a[n][n]*b[n][n]</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;mpi.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;math.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;malloc.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdlib.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> a(i, j) a[i*stock + j]</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> b(i, j) b[i*stock + j]</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> c(i, j) c[i*stock + j]</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> A(i, j) A[i*Len + j]</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> B(i, j) B[i*Len + j]</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> C(i, j) C[i*Len + j]</span></span><br><span class="line"><span class="comment">//令进程数为Len</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> myrank, numprocs;</span><br><span class="line"><span class="keyword">int</span> i, j, k;</span><br><span class="line"><span class="keyword">int</span> step;</span><br><span class="line"><span class="keyword">int</span> send_i, send_j;      <span class="comment">//广播的块号</span></span><br><span class="line"><span class="keyword">int</span> send_m, recv_m;         <span class="comment">//广播的线程号 </span></span><br><span class="line">MPI_Status status;</span><br><span class="line"><span class="keyword">int</span> Len;</span><br><span class="line"><span class="keyword">int</span> *A, *B, *C;</span><br><span class="line"><span class="keyword">int</span> *buf; <span class="comment">//缓冲区</span></span><br><span class="line"><span class="keyword">int</span> stock, sqrt_p; <span class="comment">//每块大小和处理器个数的根号值 </span></span><br><span class="line">MPI_Datatype colum_data; <span class="comment">//每个块的大小stock*stock </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clm</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> *b, <span class="keyword">int</span> *c, <span class="keyword">int</span> stock)</span></span><br><span class="line"></span>&#123;   </span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;stock; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">	  <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;stock; ++j)</span><br><span class="line">	  &#123;</span><br><span class="line">	      <span class="keyword">for</span>(k=<span class="number">0</span>; k&lt;stock; k++)</span><br><span class="line">	      c(i,j) += a(i,k) * b(k,j);</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_data</span><span class="params">(<span class="keyword">int</span> *A, <span class="keyword">int</span> *B, <span class="keyword">int</span> Len)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;Len; i++)</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;Len; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		A[i*Len+j] = rand() % <span class="number">100</span>;</span><br><span class="line">		B[i*Len+j] = rand() % <span class="number">100</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">out_data</span><span class="params">(<span class="keyword">int</span> *A, <span class="keyword">int</span> Len)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;Len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;Len; j++)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d "</span>, A[i*Len + j]);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Environment_Finalize</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> *b, <span class="keyword">int</span> *c)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="built_in">free</span>(a);</span><br><span class="line">    <span class="built_in">free</span>(b);</span><br><span class="line">    <span class="built_in">free</span>(c);</span><br><span class="line">    <span class="built_in">free</span>(buf);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">send_ms</span><span class="params">(<span class="keyword">int</span> rank, <span class="keyword">int</span> *a)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(myrank == rank)</span><br><span class="line">	&#123;</span><br><span class="line">		send_i = myrank / sqrt_p;</span><br><span class="line">		send_j = myrank % sqrt_p;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;sqrt_p; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(i % sqrt_p != send_j)</span><br><span class="line">			&#123;</span><br><span class="line">				MPI_Send(a,stock*stock, MPI_INT, send_i*sqrt_p + i, <span class="number">0</span>, MPI_COMM_WORLD);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		MPI_Recv(a,stock*stock, MPI_INT, rank, <span class="number">0</span>, MPI_COMM_WORLD, &amp;status);  </span><br><span class="line">	&#125;	</span><br><span class="line">		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> *a, *b, *c;</span><br><span class="line">	<span class="keyword">int</span> u, v;</span><br><span class="line">	<span class="keyword">double</span> <span class="keyword">start_t</span>ime, <span class="keyword">end_t</span>ime;</span><br><span class="line">		</span><br><span class="line">	srand(time(NULL));</span><br><span class="line">	</span><br><span class="line">	MPI_Init(&amp;argc, &amp;argv);</span><br><span class="line">	MPI_Comm_rank(MPI_COMM_WORLD, &amp;myrank);</span><br><span class="line">	MPI_Comm_size(MPI_COMM_WORLD, &amp;numprocs);</span><br><span class="line">  	</span><br><span class="line">	Len = <span class="number">10</span>;</span><br><span class="line">	sqrt_p = <span class="built_in">sqrt</span>(numprocs);</span><br><span class="line">	stock = Len / sqrt_p; </span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,stock);</span><br><span class="line"></span><br><span class="line">  	<span class="comment">//stock行的数据,每行的数据为stock,每个块间隔为len </span></span><br><span class="line">  	MPI_Type_vector(stock, stock, Len, MPI_INT, &amp;colum_data);  </span><br><span class="line">	MPI_Type_commit(&amp;colum_data);</span><br><span class="line">  	</span><br><span class="line">  	a = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(stock*stock*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">  	b = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(stock*stock*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	c = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(stock*stock*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">  	buf = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(stock*Len*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	</span><br><span class="line">  	<span class="keyword">if</span>(myrank == <span class="number">0</span>)</span><br><span class="line">  	&#123;</span><br><span class="line">  		A = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(Len*Len*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">  		B = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(Len*Len*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">  		C = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(Len*Len*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">  		init_data(A, B, Len);</span><br><span class="line">  		</span><br><span class="line">		out_data(A,Len);</span><br><span class="line">  		</span><br><span class="line">  		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;stock; ++i)</span><br><span class="line">  		<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;stock; ++j)</span><br><span class="line">  			a(i, j) = A(i, j);</span><br><span class="line">  			</span><br><span class="line">  		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;Len; i += stock)</span><br><span class="line">  		<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;Len; j += stock)</span><br><span class="line">  		&#123;</span><br><span class="line">  			<span class="keyword">if</span>(i || j )</span><br><span class="line">  			&#123;</span><br><span class="line">  				MPI_Send(&amp;A(i,j), <span class="number">1</span>, colum_data,(i/stock)*sqrt_p + j/stock, <span class="number">0</span>, MPI_COMM_WORLD);</span><br><span class="line">  				MPI_Send(&amp;B(i,j), <span class="number">1</span>, colum_data, (i/stock)*sqrt_p + j/stock, <span class="number">1</span>, MPI_COMM_WORLD);</span><br><span class="line">  			&#125;</span><br><span class="line">	  	&#125;</span><br><span class="line">  	&#125;</span><br><span class="line">	<span class="keyword">else</span> </span><br><span class="line">	&#123;</span><br><span class="line">		MPI_Recv(buf, <span class="number">1</span>, colum_data, <span class="number">0</span>, <span class="number">0</span>, MPI_COMM_WORLD, &amp;status);</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;stock; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;stock; j++)</span><br><span class="line">				a(i, j) = buf[i*Len+j];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		MPI_Recv(buf, <span class="number">1</span>, colum_data, <span class="number">0</span>, <span class="number">1</span>, MPI_COMM_WORLD, &amp;status);</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;stock; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;stock; j++)</span><br><span class="line">				b(i, j) = buf[i*Len+j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	MPI_Barrier(MPI_COMM_WORLD);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"this is rank %d\n"</span>, myrank);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;stock; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">  		<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;stock; ++j)</span><br><span class="line">  			<span class="built_in">printf</span>(<span class="string">"%d "</span>, a(i,j));</span><br><span class="line">  			<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">  	&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">//-------------------------------分配完毕--------------------------------------- </span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(step = <span class="number">0</span>; step&lt;sqrt_p; step++)          <span class="comment">//执行sqrt(p)次迭代 </span></span><br><span class="line">	&#123;	</span><br><span class="line">		<span class="keyword">if</span>(step == <span class="number">0</span>)         <span class="comment">//第一步 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(myrank / sqrt_p == myrank % sqrt_p)</span><br><span class="line">			&#123;</span><br><span class="line">				send_m = myrank;</span><br><span class="line">			   	send_i = myrank / sqrt_p;</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;sqrt_p; i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span>(send_m % sqrt_p != i)</span><br><span class="line">						MPI_Send(&amp;send_m, <span class="number">1</span>, MPI_INT, send_i * sqrt_p + i, <span class="number">0</span>, MPI_COMM_WORLD);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				send_i = myrank / sqrt_p;</span><br><span class="line">				MPI_Recv(&amp;send_m, <span class="number">1</span>, MPI_INT, send_i * sqrt_p + send_i, <span class="number">0</span>, MPI_COMM_WORLD, &amp;status);</span><br><span class="line">			&#125;	 </span><br><span class="line">			</span><br><span class="line">			send_ms(send_m, a);</span><br><span class="line">		</span><br><span class="line">			MPI_Barrier(MPI_COMM_WORLD);</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">		</span><br><span class="line">		clm(a, b, c, stock);             <span class="comment">//计算 </span></span><br><span class="line"> 	</span><br><span class="line">		     				    			<span class="comment">//第三步：B阵向上循环一步 </span></span><br><span class="line">		<span class="keyword">if</span>((myrank / sqrt_p) % <span class="number">2</span> == <span class="number">0</span>)      <span class="comment">//偶数进程先发送再接收 </span></span><br><span class="line">		&#123;</span><br><span class="line">			v = myrank / sqrt_p;</span><br><span class="line">			u = myrank % sqrt_p;</span><br><span class="line">			MPI_Send(b,stock*stock, MPI_INT, ((v - <span class="number">1</span> + sqrt_p) % sqrt_p) * sqrt_p + u, <span class="number">0</span>, MPI_COMM_WORLD);</span><br><span class="line">			MPI_Recv(buf,stock*stock, MPI_INT,((v + <span class="number">1</span>) % sqrt_p) * sqrt_p + u, <span class="number">0</span>, MPI_COMM_WORLD, &amp;status);</span><br><span class="line">			<span class="built_in">memcpy</span>(b,buf, <span class="keyword">sizeof</span>(stock*stock*<span class="keyword">sizeof</span>(<span class="keyword">int</span>)));      </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			v = myrank / sqrt_p;</span><br><span class="line">			u = myrank % sqrt_p;</span><br><span class="line">			MPI_Recv(buf,stock*stock, MPI_INT,((v + <span class="number">1</span>) % sqrt_p) * sqrt_p + u, <span class="number">0</span>, MPI_COMM_WORLD, &amp;status);</span><br><span class="line">			MPI_Send(b,stock*stock, MPI_INT, ((v - <span class="number">1</span> + sqrt_p) % sqrt_p) * sqrt_p + u, <span class="number">0</span>, MPI_COMM_WORLD);</span><br><span class="line">			<span class="built_in">memcpy</span>(b,buf, <span class="keyword">sizeof</span>(stock*stock*<span class="keyword">sizeof</span>(<span class="keyword">int</span>)));</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(myrank == send_m)        <span class="comment">//第四步     </span></span><br><span class="line">		&#123; </span><br><span class="line">			   </span><br><span class="line"><span class="comment">//同一组中的，其他线程并不知道send_m改变了，怎么通知？</span></span><br><span class="line">			<span class="keyword">int</span> n;</span><br><span class="line">			n =  (myrank/sqrt_p)*sqrt_p + (myrank % sqrt_p + <span class="number">1</span>) % sqrt_p;      </span><br><span class="line"><span class="comment">//用上一次的主发送进程告诉其他人下次主发送进程改变了</span></span><br><span class="line">			send_i = send_m / sqrt_p;</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;sqrt_p; i++)</span><br><span class="line">			<span class="keyword">if</span>(send_m % sqrt_p != i)</span><br><span class="line">				MPI_Send(&amp;n,<span class="number">1</span>, MPI_INT, send_i * sqrt_p + i, <span class="number">0</span>, MPI_COMM_WORLD);</span><br><span class="line">			send_m = n;    </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			MPI_Recv(&amp;send_m,<span class="number">1</span>, MPI_INT, send_m, <span class="number">0</span>, MPI_COMM_WORLD, &amp;status);</span><br><span class="line">		&#125; </span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		send_ms(send_m, a);</span><br><span class="line">		</span><br><span class="line">		MPI_Barrier(MPI_COMM_WORLD);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"> 		</span><br><span class="line"> 	<span class="comment">//-----------------------------------计算完成，收集结果---------------------------------------</span></span><br><span class="line">	 </span><br><span class="line">	 </span><br><span class="line">	<span class="keyword">if</span>(myrank != <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		MPI_Send(c,stock*stock, MPI_INT, <span class="number">0</span>, myrank, MPI_COMM_WORLD);</span><br><span class="line">	&#125;</span><br><span class="line"> 	<span class="keyword">else</span> <span class="keyword">if</span>(myrank == <span class="number">0</span>)</span><br><span class="line"> 	&#123;	</span><br><span class="line"> 		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;stock; i++)</span><br><span class="line"> 		<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;stock; j++)</span><br><span class="line"> 		C(i,j) = c(i,j);</span><br><span class="line"> 		</span><br><span class="line"> 		<span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;numprocs; i++)</span><br><span class="line"> 		&#123;</span><br><span class="line"> 			MPI_Recv(c,stock*stock, MPI_INT, i, i, MPI_COMM_WORLD, &amp;status);</span><br><span class="line"></span><br><span class="line">			v = i / sqrt_p;</span><br><span class="line">			u = i % sqrt_p;</span><br><span class="line">			</span><br><span class="line"> 			<span class="keyword">for</span>(j=v*stock; j&lt;(v+<span class="number">1</span>)*stock; j++)</span><br><span class="line"> 			<span class="keyword">for</span>(k=u*stock; k&lt;(u+<span class="number">1</span>)*stock; k++)</span><br><span class="line"> 			C(j,k) = c(j%stock,k%stock);</span><br><span class="line"> 		&#125;</span><br><span class="line">		</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="keyword">if</span>(myrank == <span class="number">0</span>)</span><br><span class="line"> 	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"the result C muterix \n"</span>);</span><br><span class="line"> 		out_data(c, Len);</span><br><span class="line"> 		<span class="keyword">end_t</span>ime = MPI_Wtime();</span><br><span class="line"> 		<span class="built_in">printf</span>(<span class="string">"the date M*M=%d p=%d cost time:%lf\n"</span>, Len, numprocs, <span class="keyword">end_t</span>ime-<span class="keyword">start_t</span>ime);</span><br><span class="line"> 	&#125;</span><br><span class="line">	 	</span><br><span class="line">	Environment_Finalize(a,b,c);</span><br><span class="line">	MPI_Finalize();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/17/linux-xia-wen-jian-de-yuan-shu-ju/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+           linux 下文件的元数据
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/11/22/yan-jiu-sheng-zhe-duan-ri-zi-de-gan-shou/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">研究生这段日子的感受</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="foxju-zhen-suan-fa-mpibian-cheng-shi-xian" data-title="FOX矩阵算法MPI编程实现" data-url="http://ylwhere.tk/2014/12/16/foxju-zhen-suan-fa-mpibian-cheng-shi-xian/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 ylw Home
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
