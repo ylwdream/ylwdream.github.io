@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>poll 函数调用 | ylw Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用非阻塞 I/O 的应用程序常常使用 poll, select, 和 epoll 系统调用.poll, select 和 epoll 本质上有相同的功能: 每个允许一个进程来决定它是否可读或者写一个或多个文件而不阻塞. 这些调用也可阻塞进程直到任何一个给定集合的文件描述符可用来读或写. 因此, 它们常常用在必须使用多输入输出流的应用程序, 而不必粘连在它们任何一个上.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="poll 函数调用">
+<meta property="og:url" content="http://ylwhere.tk/2014/11/02/poll-han-shu-diao-yong/index.html">
+<meta property="og:site_name" content="ylw Home">
+<meta property="og:description" content="使用非阻塞 I/O 的应用程序常常使用 poll, select, 和 epoll 系统调用.poll, select 和 epoll 本质上有相同的功能: 每个允许一个进程来决定它是否可读或者写一个或多个文件而不阻塞. 这些调用也可阻塞进程直到任何一个给定集合的文件描述符可用来读或写. 因此, 它们常常用在必须使用多输入输出流的应用程序, 而不必粘连在它们任何一个上.">
+<meta property="og:updated_time" content="2015-05-22T12:45:58.563Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="poll 函数调用">
+<meta name="twitter:description" content="使用非阻塞 I/O 的应用程序常常使用 poll, select, 和 epoll 系统调用.poll, select 和 epoll 本质上有相同的功能: 每个允许一个进程来决定它是否可读或者写一个或多个文件而不阻塞. 这些调用也可阻塞进程直到任何一个给定集合的文件描述符可用来读或写. 因此, 它们常常用在必须使用多输入输出流的应用程序, 而不必粘连在它们任何一个上.">
+  
+    <link rel="alternative" href="/atom.xml" title="ylw Home" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="/img/favicon.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ylw Home</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">More Code More Confidence</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/About">ABOUT ME</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wang-yu-lin-74" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/C-C/" style="font-size: 13.33px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/llvm/" style="font-size: 10px;">llvm</a> <a href="/tags/memory/" style="font-size: 13.33px;">memory</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/pthread/" style="font-size: 10px;">pthread</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/爬虫/" style="font-size: 16.67px;">爬虫</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">friends的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">ylw Home</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/favicon.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ylw Home</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">More Code More Confidence</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/About">ABOUT ME</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wang-yu-lin-74" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-poll-han-shu-diao-yong" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/11/02/poll-han-shu-diao-yong/" class="article-date">
+  	<time datetime="2014-11-02T02:41:18.000Z" itemprop="datePublished">2014-11-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      poll 函数调用
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/socket/">socket</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+          <!-- 文章目录开始 -->
+
+          
+            <div id="toc" class="toc-article">
+            <strong class="toc-title">contents</strong>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#select_函数"><span class="toc-number">1.</span> <span class="toc-text">select 函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#poll_函数"><span class="toc-number">2.</span> <span class="toc-text">poll 函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#poll_实例"><span class="toc-number">3.</span> <span class="toc-text">poll 实例</span></a></li></ol>
+          </div>
+          
+
+          <!-- 文章目录结束 -->
+        <p>使用非阻塞 I/O 的应用程序常常使用 poll, select, 和 epoll 系统调用.<br>poll, select 和 epoll 本质上有相同的功能: 每个允许一个进程来决定它是否可读或者写一个或多个文件而不阻塞. 这些调用也可阻塞进程直到任何一个给定集合的文件描述符可用来读或写. 因此, 它们常常用在必须使用多输入输出流的应用程序, 而不必粘连在它们任何一个上.<br><a id="more"></a></p>
+<h2 id="select_函数">select 函数</h2><p>select 在 BSD Unix 中引入, 而 poll 是 System V 的解决方案. epoll 调用[23]添加在 2.5.45, 作为使查询函数扩展到几千个文件描述符的方法<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="title">int</span> <span class="params">(*poll)</span> <span class="params">(<span class="keyword">struct</span> file *filp, poll_table *wait)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>这个驱动方法被调用, 无论何时用户空间程序进行一个 poll, select, 或者 epoll 系统调用, 涉及一个和驱动相关的文件描述符. 这个设备方法负责这 2 步:</p>
+<ol>
+<li><p>在一个或多个可指示查询状态变化的等待队列上调用 poll_wait. 如果没有文件描述符可用作 I/O, 内核使这个进程在等待队列上等待所有的传递给系统调用的文件描述符.</p>
+</li>
+<li><p>返回一个位掩码, 描述可能不必阻塞就立刻进行的操作.</p>
+<h2 id="poll_函数">poll 函数</h2><p>poll 函数的声明</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;poll.h&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poll</span><span class="params">(<span class="keyword">struct</span> pollfd fds[], nfds_t nfds, <span class="keyword">int</span> timeout)</span>；</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>fds：是一个struct pollfd结构类型的数组，用于存放需要检测其状态的Socket描述符；每当调用这个函数之后，系统不会清空这个数组，操作起来比较方便；特别是对于socket连接比较多的情况下，在一定程度上可以提高处理的效率；这一点与select()函数不同，调用select()函数之后，select()函数会清空它所检测的socket描述符集合，导致每次调用select()之前都必须把socket描述符重新加入到待检测的集合中。</p>
+<hr>
+<p>nfds：nfds_t类型的参数，用于标记数组fds中的结构体元素的总数量；</p>
+<p>timeout：是poll函数调用阻塞的时间，单位：毫秒。设置为-1时表示阻塞调用</p>
+<p>返回值:</p>
+<p>·&gt;0：数组fds中准备好读、写或出错状态的那些socket描述符的总数量</p>
+<p>·=0：数组fds中没有任何socket描述符准备好读、写，或出错；此时poll超时，超时时间是timeout毫秒</p>
+<p>·-1： poll函数调用失败，同时会自动设置全局变量errno</p>
+<hr>
+<p>下面是pollfd的定义<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> pollfd &#123;</span><br><span class="line"><span class="keyword">int</span> fd; <span class="comment">/*文件描述符*/</span></span><br><span class="line"><span class="keyword">short</span> events; <span class="comment">/* 等待的需要测试事件 */</span></span><br><span class="line"><span class="keyword">short</span> revents; <span class="comment">/* 实际发生了的事件，也就是返回结果 */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>与select()十分相似，当返回正值时，代表满足响应事件的文件描述符的个数，如果返回0则代表在规定时间内没有事件发生。如发现返回为负则应该立即查看 errno，因为这代表有错误发生。<br>如果没有事件发生，revents会被清空，所以你不必多此一举。</p>
+<p>poll是采用轮询的方式进行监控的，所以对于监控的文件描述符越多，效率越低。</p>
+<h2 id="poll_实例">poll 实例</h2><p>下面是一个例子：</p>
+<figure class="highlight c"><figcaption><span>poll.c</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdlib.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;time.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;errno.h&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;poll.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;fcntl.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;unistd.h&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MAX_BUFFER_SIZE 1024</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> IN_FILES 3</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> TIME_DELAY 60*5</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MAX(a,b) ((a&gt;b)?(a):(b))</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc ,<span class="keyword">char</span> **argv)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="keyword">struct</span> pollfd fds[IN_FILES];</span><br><span class="line">  <span class="keyword">char</span> buf[MAX_BUFFER_SIZE];</span><br><span class="line">  <span class="keyword">int</span> i,res,real_read, maxfd;</span><br><span class="line">  fds[<span class="number">0</span>].fd = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span>((fds[<span class="number">1</span>].fd=open(<span class="string">"data1"</span>,O_RDONLY|O_NONBLOCK)) &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">fprintf</span>(stderr,<span class="string">"open data1 error:%s"</span>,strerror(errno));</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">if</span>((fds[<span class="number">2</span>].fd=open(<span class="string">"data2"</span>,O_RDONLY|O_NONBLOCK)) &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">fprintf</span>(stderr,<span class="string">"open data2 error:%s"</span>,strerror(errno));</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; IN_FILES; i++)</span><br><span class="line">    &#123;</span><br><span class="line">      fds[i].events = POLLIN;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">while</span>(fds[<span class="number">0</span>].events || fds[<span class="number">1</span>].events || fds[<span class="number">2</span>].events)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> (poll(fds, IN_FILES, -<span class="number">1</span>) &lt;= <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">"Poll error\n"</span>);</span><br><span class="line">     <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">      <span class="keyword">for</span> (i = <span class="number">0</span>; i&lt; IN_FILES; i++)</span><br><span class="line">    &#123;</span><br><span class="line">     <span class="keyword">if</span> (fds[i].revents)</span><br><span class="line">       &#123;</span><br><span class="line">		   <span class="built_in">printf</span>(<span class="string">"fd %d start\n"</span>, i);</span><br><span class="line">         <span class="built_in">memset</span>(buf, <span class="number">0</span>, MAX_BUFFER_SIZE);</span><br><span class="line">         real_read = read(fds[i].fd, buf, MAX_BUFFER_SIZE);</span><br><span class="line">         <span class="keyword">if</span> (real_read &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">         <span class="keyword">if</span> (errno != EAGAIN)</span><br><span class="line">           &#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> (!real_read)</span><br><span class="line">        &#123;</span><br><span class="line">         close(fds[i].fd);</span><br><span class="line">         fds[i].events = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">         <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">         <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">           &#123;</span><br><span class="line">             <span class="keyword">if</span> ((buf[<span class="number">0</span>] == <span class="string">'q'</span>) || (buf[<span class="number">0</span>] == <span class="string">'Q'</span>))</span><br><span class="line">            &#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">           &#125;</span><br><span class="line">         <span class="keyword">else</span></span><br><span class="line">           &#123;</span><br><span class="line">             buf[real_read] = <span class="string">'\0'</span>;</span><br><span class="line">             <span class="built_in">printf</span>(<span class="string">"%s"</span>, buf);</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">	 <span class="built_in">printf</span>(<span class="string">"fd %d end\n"</span>, i);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/11/02/zui-xiao-dui-de-xing-zhi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          最小堆的性质
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/10/31/c-plus-plus-alloc-han-shu/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c++ alloc 函数</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="poll-han-shu-diao-yong" data-title="poll 函数调用" data-url="http://ylwhere.tk/2014/11/02/poll-han-shu-diao-yong/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 ylw Home
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
