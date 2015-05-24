@@ -176,6 +176,66 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-c-plus-plus-explicitgou-zao-han-shu" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/11/12/c-plus-plus-explicitgou-zao-han-shu/" class="article-date">
+  	<time datetime="2014-11-11T17:08:43.000Z" itemprop="datePublished">2014-11-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/12/c-plus-plus-explicitgou-zao-han-shu/">c++ explicit构造函数</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当c++的构造函数只有一个参数时，有时候在表达式运算时会调用c++隐式转换，生成一个临时对象。<br>按照默认规定，只有一个参数的构造函数也定义了一个隐式转换，将该构造函数对应数据类型的数据转换为该类对象。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/C-C/">C/C++</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2014/11/12/c-plus-plus-explicitgou-zao-han-shu/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-mpi-qiu-jie-huang-hou-wen-ti" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -686,67 +746,6 @@
       
         <p class="article-more-link">
           <a  href="/2014/10/31/c-plus-plus-mo-ban-te-hua/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-c-plus-plus-new-yun-suan-fu" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/10/31/c-plus-plus-new-yun-suan-fu/" class="article-date">
-  	<time datetime="2014-10-30T19:17:22.000Z" itemprop="datePublished">2014-10-31</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/31/c-plus-plus-new-yun-suan-fu/">C++ new 运算符</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>new 运算符调用函数 <code>operator new</code>。 对于任何类型的数组以及不属于 <code>class、struct</code> 或 <code>union</code> 类型的对象，调用全局函数 <code>::operator new</code> 来分配存储。 类类型对象可基于每个类定义其自己的 <code>operator new</code> 静态成员函数。<br>当编译器遇到用于分配类型 type 的对象的 <code>new</code> 运算符时，它将发布对 <code>type::operator new( sizeof( type ) )</code> 的调用；或者，如果未定义用户定义的 <code>operator new</code>，则为 <code>::operator new( sizeof( type ) )</code>。 因此，new 运算符可以为对象分配正确的内存量。</p>
-<p>首先看下面这句表达式<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> *sp = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"initalliszed"</span>);</span><br></pre></td></tr></table></figure></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/C-C/">C/C++</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2014/10/31/c-plus-plus-new-yun-suan-fu/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
