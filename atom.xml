@@ -104,7 +104,7 @@
     <link href="http://ylwhere.tk/2015/05/24/linux-malloc-%E5%87%BD%E6%95%B0/"/>
     <id>http://ylwhere.tk/2015/05/24/linux-malloc-函数/</id>
     <published>2015-05-24T05:58:53.000Z</published>
-    <updated>2015-05-31T13:36:29.548Z</updated>
+    <updated>2015-05-31T13:38:46.008Z</updated>
     <content type="html"><![CDATA[<h2 id="进程堆">进程堆</h2><p>想找个时间，看下malloc是如何实现的。有一种做法是，把进程的内存管理交给操作系统内核去做，既然内核管理者进程的地址空间，那么如何它提供一个系统调用，可以让程序使用这个系统调用申请内存，不久可以么？但是实际上这样做的性能比较差，因为每次程序申请或者释放内存都要进行系统调用。我们知道系统调用的性能开销是很大的，当程序中对堆的操作比较繁琐时，这样做的结果是会严重影响程序的性能。比较好的做法是程序向操作系统申请一块适当大小的堆空间，然后由程序自己管理这块空间，而具体来讲，管理者堆空间分配的往往是程序的运行库。</p>
 <a id="more"></a>
 <p>运行库相当于是向操作系统“批发”了一块较大的堆空间，然后“零售”给程序员用。当全部“售完”或者程序有大量的内存需求时，再根据实际需求想操作系统“进货”。当然运行库在程序零售堆空间时，必须管理它批发来的堆空间，不能把同一块地址出售两次，导致地址冲突。于是运行库需要一个算法来管理堆空间，这个算法就堆的分配算法。</p>
@@ -128,7 +128,9 @@
 <p>5.初始化vma结构中的各个字段。</p>
 <p>6.更新mm_struct结构中的vm_total字段，它用来同级当前进程所拥有的vma数量。</p>
 <p>7.如果当前vma设置了VM_LOCKED字段，那么通过mlock_vma_pages_range()立即为这个线性区分配物理页框。否则，do_brk()结束。</p>
-<h2 id="可以看到，do_brk()主要是为当前进程分配一个新的线性区，在没有设置VM_LOCKED标志的情况下，它不会立刻为该线性区分配物理页框，而是通过vma一直将分配物理内存的工作进行延迟，直至发生缺页异常。">可以看到，do_brk()主要是为当前进程分配一个新的线性区，在没有设置VM_LOCKED标志的情况下，它不会立刻为该线性区分配物理页框，而是通过vma一直将分配物理内存的工作进行延迟，直至发生缺页异常。</h2><p>mmap()的作用是向操作系统申请一段虚拟地址空间，当然这块虚拟地址空间可以映射到某个文件（这也是这个系统调用的最初作用），当它不将地址空间映射到某个文件时，我们称为匿名空间，匿名空间就可以拿来作为堆分配。</p>
+<p>可以看到，do_brk()主要是为当前进程分配一个新的线性区，在没有设置VM_LOCKED标志的情况下，它不会立刻为该线性区分配物理页框，而是通过vma一直将分配物理内存的工作进行延迟，直至发生缺页异常。</p>
+<hr>
+<p>mmap()的作用是向操作系统申请一段虚拟地址空间，当然这块虚拟地址空间可以映射到某个文件（这也是这个系统调用的最初作用），当它不将地址空间映射到某个文件时，我们称为匿名空间，匿名空间就可以拿来作为堆分配。</p>
 <p>关于mmap函数的详细介绍可以看后文的参考。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="preprocessor">#<span class="keyword">include</span> &lt;sys/mman.h&gt;</span></span><br><span class="line"><span class="keyword">void</span> *mmap(<span class="keyword">void</span> *addr, <span class="keyword">size_t</span> length, <span class="keyword">int</span> prot, <span class="keyword">int</span> flags,</span><br><span class="line">           <span class="keyword">int</span> fd, <span class="keyword">off_t</span> offset);</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">munmap</span><span class="params">(<span class="keyword">void</span> *addr, size_t length)</span></span>;</span><br><span class="line"></span><br><span class="line">prot：期望的内存保护标志，不能与文件的打开模式冲突。是以下的某个值，可以通过or运算合理地组合在一起</span><br><span class="line">PROT_EXEC</span><br><span class="line">Pages may be executed.</span><br><span class="line">PROT_READ</span><br><span class="line">Pages may be read.</span><br><span class="line">PROT_WRITE</span><br><span class="line">Pages may be written.</span><br><span class="line">PROT_NONE</span><br><span class="line">Pages may not be accessed.</span><br></pre></td></tr></table></figure>
 <p>flags：指定映射对象的类型，映射选项和映射页是否可以共享。它的值可以是一个或者多个以下位的组合体</p>
