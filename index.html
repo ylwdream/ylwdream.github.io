@@ -123,7 +123,7 @@ ga('send', 'pageview');
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C-C/" style="font-size: 13.33px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 16.67px;">MPI</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/compiler/" style="font-size: 10px;">compiler</a> <a href="/tags/io/" style="font-size: 13.33px;">io</a> <a href="/tags/llvm/" style="font-size: 10px;">llvm</a> <a href="/tags/memory/" style="font-size: 13.33px;">memory</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/pthread/" style="font-size: 10px;">pthread</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/爬虫/" style="font-size: 16.67px;">爬虫</a>
+						<a href="/tags/C-C/" style="font-size: 12.5px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 17.5px;">MPI</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/compiler/" style="font-size: 10px;">compiler</a> <a href="/tags/io/" style="font-size: 12.5px;">io</a> <a href="/tags/llvm/" style="font-size: 10px;">llvm</a> <a href="/tags/memory/" style="font-size: 15px;">memory</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/pthread/" style="font-size: 10px;">pthread</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/爬虫/" style="font-size: 17.5px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -332,20 +332,26 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-
-          <!-- 文章目录开始 -->
-
-          
-
-          <!-- 文章目录结束 -->
-        
+        <h2 id="进程堆">进程堆</h2><p>想找个时间，看下malloc是如何实现的。有一种做法是，把进程的内存管理交给操作系统内核去做，既然内核管理者进程的地址空间，那么如何它提供一个系统调用，可以让程序使用这个系统调用申请内存，不久可以么？但是实际上这样做的性能比较差，因为每次程序申请或者释放内存都要进行系统调用。我们知道系统调用的性能开销是很大的，当程序中对堆的操作比较繁琐时，这样做的结果是会严重影响程序的性能。比较好的做法是程序向操作系统申请一块适当大小的堆空间，然后由程序自己管理这块空间，而具体来讲，管理者堆空间分配的往往是程序的运行库。</p>
       
     </div>
     
     <div class="article-info article-info-index">
       
-      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/memory/">memory</a></li></ul>
+	</div>
 
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/05/24/linux-malloc-函数/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
