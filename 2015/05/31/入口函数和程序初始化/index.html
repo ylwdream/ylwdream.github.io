@@ -5,20 +5,20 @@
   
   <title>入口函数和程序初始化 | ylw Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="程序的入口函数，站在程序员的角度来说，往往会认为程序是从main函数来开始执行的，可是有一个问题是，那么main函数是由谁调用的呢？我们知道，在C++中全局变量的构造函数是在调用main之前就已经被调用构造函数而初始化完毕，那么这个机制是如何实现的？
-我们知道在shell脚本中执行一个程序，shell会接收输入的命令，利用fork()函数生成一个子进程，然后等待子进程运行完程序后返回。那么fork">
+  <meta name="description" content="入口函数程序的入口函数，站在程序员的角度来说，往往会认为程序是从main函数来开始执行的，可是有一个问题是，那么main函数是由谁调用的呢？我们知道，在C++中全局变量的构造函数是在调用main之前就已经被调用构造函数而初始化完毕，那么这个机制是如何实现的？
+我们知道在shell脚本中执行一个程序，shell会接收输入的命令，利用fork()函数生成一个子进程，然后等待子进程运行完程序后返回。那么">
 <meta property="og:type" content="article">
 <meta property="og:title" content="入口函数和程序初始化">
 <meta property="og:url" content="http://ylwhere.tk/2015/05/31/入口函数和程序初始化/index.html">
 <meta property="og:site_name" content="ylw Home">
-<meta property="og:description" content="程序的入口函数，站在程序员的角度来说，往往会认为程序是从main函数来开始执行的，可是有一个问题是，那么main函数是由谁调用的呢？我们知道，在C++中全局变量的构造函数是在调用main之前就已经被调用构造函数而初始化完毕，那么这个机制是如何实现的？
-我们知道在shell脚本中执行一个程序，shell会接收输入的命令，利用fork()函数生成一个子进程，然后等待子进程运行完程序后返回。那么fork">
+<meta property="og:description" content="入口函数程序的入口函数，站在程序员的角度来说，往往会认为程序是从main函数来开始执行的，可是有一个问题是，那么main函数是由谁调用的呢？我们知道，在C++中全局变量的构造函数是在调用main之前就已经被调用构造函数而初始化完毕，那么这个机制是如何实现的？
+我们知道在shell脚本中执行一个程序，shell会接收输入的命令，利用fork()函数生成一个子进程，然后等待子进程运行完程序后返回。那么">
 <meta property="og:image" content="http://ylwhere.tk/img/blog/fork.PNG">
-<meta property="og:updated_time" content="2015-05-31T07:53:15.131Z">
+<meta property="og:updated_time" content="2015-06-03T03:07:18.593Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="入口函数和程序初始化">
-<meta name="twitter:description" content="程序的入口函数，站在程序员的角度来说，往往会认为程序是从main函数来开始执行的，可是有一个问题是，那么main函数是由谁调用的呢？我们知道，在C++中全局变量的构造函数是在调用main之前就已经被调用构造函数而初始化完毕，那么这个机制是如何实现的？
-我们知道在shell脚本中执行一个程序，shell会接收输入的命令，利用fork()函数生成一个子进程，然后等待子进程运行完程序后返回。那么fork">
+<meta name="twitter:description" content="入口函数程序的入口函数，站在程序员的角度来说，往往会认为程序是从main函数来开始执行的，可是有一个问题是，那么main函数是由谁调用的呢？我们知道，在C++中全局变量的构造函数是在调用main之前就已经被调用构造函数而初始化完毕，那么这个机制是如何实现的？
+我们知道在shell脚本中执行一个程序，shell会接收输入的命令，利用fork()函数生成一个子进程，然后等待子进程运行完程序后返回。那么">
   
     <link rel="alternative" href="/atom.xml" title="ylw Home" type="application/atom+xml">
   
@@ -241,12 +241,12 @@ ga('send', 'pageview');
           
             <div id="toc" class="toc-article">
             <strong class="toc-title">contents</strong>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#fork_函数"><span class="toc-number">1.</span> <span class="toc-text">fork 函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序的装载"><span class="toc-number">2.</span> <span class="toc-text">程序的装载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序入口函数"><span class="toc-number">3.</span> <span class="toc-text">程序入口函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#入口函数"><span class="toc-number">1.</span> <span class="toc-text">入口函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fork_函数"><span class="toc-number">2.</span> <span class="toc-text">fork 函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序的装载"><span class="toc-number">3.</span> <span class="toc-text">程序的装载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序入口函数"><span class="toc-number">4.</span> <span class="toc-text">程序入口函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
           </div>
           
 
           <!-- 文章目录结束 -->
-        <p>程序的入口函数，站在程序员的角度来说，往往会认为程序是从main函数来开始执行的，可是有一个问题是，那么main函数是由谁调用的呢？我们知道，在C++中全局变量的构造函数是在调用main之前就已经被调用构造函数而初始化完毕，那么这个机制是如何实现的？</p>
+        <h2 id="入口函数">入口函数</h2><p>程序的入口函数，站在程序员的角度来说，往往会认为程序是从main函数来开始执行的，可是有一个问题是，那么main函数是由谁调用的呢？我们知道，在C++中全局变量的构造函数是在调用main之前就已经被调用构造函数而初始化完毕，那么这个机制是如何实现的？</p>
 <p>我们知道在shell脚本中执行一个程序，shell会接收输入的命令，利用<code>fork()</code>函数生成一个子进程，然后等待子进程运行完程序后返回。那么<code>fork()</code>函数又是怎么实现的，和程序的装载运行有什么关系？</p>
 <a id="more"></a>
 <h2 id="fork_函数">fork 函数</h2><p>先从<code>fork()</code>函数说起，它默认会创建一个新的进程，在父进程中返回值为子进程的pid，在子进程中返回的是0。</p>
