@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>makefile 入门学习 | ylw Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. make 的工作原理make 工具最基本的功能是调用makefile文件，通过makefile文件来描述程序编译的整个过程，不必每次输入gcc 或者 g++ 等命令来完成编译工作。makefile 关系到了整个工程的编译规则。一个工程中的源文件不计数，其按类型、功能、模块分别放在若干个目录中，makefile定义了一系列的规则来指定，哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="makefile 入门学习">
+<meta property="og:url" content="http://ylwhere.tk/2015/06/03/makefile-入门学习/index.html">
+<meta property="og:site_name" content="ylw Home">
+<meta property="og:description" content="1. make 的工作原理make 工具最基本的功能是调用makefile文件，通过makefile文件来描述程序编译的整个过程，不必每次输入gcc 或者 g++ 等命令来完成编译工作。makefile 关系到了整个工程的编译规则。一个工程中的源文件不计数，其按类型、功能、模块分别放在若干个目录中，makefile定义了一系列的规则来指定，哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编">
+<meta property="og:updated_time" content="2015-06-03T01:24:31.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="makefile 入门学习">
+<meta name="twitter:description" content="1. make 的工作原理make 工具最基本的功能是调用makefile文件，通过makefile文件来描述程序编译的整个过程，不必每次输入gcc 或者 g++ 等命令来完成编译工作。makefile 关系到了整个工程的编译规则。一个工程中的源文件不计数，其按类型、功能、模块分别放在若干个目录中，makefile定义了一系列的规则来指定，哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编">
+  
+    <link rel="alternative" href="/atom.xml" title="ylw Home" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-63335629-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="/img/favicon.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ylw Home</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">More Code More Confidence</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/About">ABOUT ME</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wang-yu-lin-74" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/C-C/" style="font-size: 12.5px;">C/C++</a> <a href="/tags/MPI/" style="font-size: 17.5px;">MPI</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/compiler/" style="font-size: 10px;">compiler</a> <a href="/tags/io/" style="font-size: 12.5px;">io</a> <a href="/tags/llvm/" style="font-size: 10px;">llvm</a> <a href="/tags/memory/" style="font-size: 15px;">memory</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/pthread/" style="font-size: 10px;">pthread</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/爬虫/" style="font-size: 17.5px;">爬虫</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">friends的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">ylw Home</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/favicon.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ylw Home</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">More Code More Confidence</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/About">ABOUT ME</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ylwdream" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ylwhere" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wang-yu-lin-74" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-makefile-入门学习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/03/makefile-入门学习/" class="article-date">
+  	<time datetime="2015-06-02T23:49:32.000Z" itemprop="datePublished">2015-06-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      makefile 入门学习
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+          <!-- 文章目录开始 -->
+
+          
+            <div id="toc" class="toc-article">
+            <strong class="toc-title">contents</strong>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_make_的工作原理"><span class="toc-number">1.</span> <span class="toc-text">1. make 的工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-_make的语法及参数选项"><span class="toc-number">2.</span> <span class="toc-text">2. make的语法及参数选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_makefile_文件"><span class="toc-number">3.</span> <span class="toc-text">3. makefile 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1_makefile_的包含"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 makefile 的包含</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2_makefile_的语法规则"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 makefile 的语法规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3_makefile_与命令"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 makefile 与命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4_makefile_与变量"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 makefile 与变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5_makefile_与条件语句"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 makefile 与条件语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-_伪目标"><span class="toc-number">4.</span> <span class="toc-text">4. 伪目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-_makefile_中的隐含规则"><span class="toc-number">5.</span> <span class="toc-text">5. makefile 中的隐含规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
+          </div>
+          
+
+          <!-- 文章目录结束 -->
+        <h2 id="1-_make_的工作原理">1. make 的工作原理</h2><p>make 工具最基本的功能是调用makefile文件，通过makefile文件来描述程序编译的整个过程，不必每次输入gcc 或者 g++ 等命令来完成编译工作。<br>makefile 关系到了整个工程的编译规则。一个工程中的源文件不计数，其按类型、功能、模块分别放在若干个目录中，makefile定义了一系列的规则来指定，哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为makefile就像一个Shell脚本一样，其中也可以执行操作系统的命令。<br><a id="more"></a></p>
+<p>makefile带来的好处就是——“自动化编译”，一旦写好，只需要一个make命令，整个工程完全自动编译，极大的提高了软件开发的效率。make是一个命令工具，是一个解释makefile中指令的命令工具，一般来说，大多数的IDE都有这个命令，比如：Delphi的make，Visual C++的nmake，Linux下GNU的make。可见，makefile都成为了一种在工程方面的编译方法。 </p>
+<hr>
+<p>来看一个例子：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">add:main.o add.o</span><br><span class="line">	gcc -o add main.o add.o</span><br><span class="line">main.o : main.c</span><br><span class="line">	gcc -c main.c</span><br><span class="line">add.o : add.c</span><br><span class="line">	gcc -c add.c</span><br><span class="line">    </span><br><span class="line">clean: </span><br><span class="line">	rm main.o add.o add</span><br></pre></td></tr></table></figure></p>
+<p>在当前目录下输入make命令，系统将自动完成如下操作：</p>
+<ol>
+<li>make 工具在当前目录下依次寻找GNUmakefile、makefile或者Makefile的文件，找到一个则停止查找；</li>
+<li>如果找到，它会查找文件中的第一个目标，如上面例子的add，并将这个文件作为最后一步生成的目标。</li>
+<li>如果add文件不存在或者add所依赖的后面的“.o”文件的修改时间比add文件晚，则系统执行后面所定义的命令来生成这个add文件；</li>
+<li>如果add所依赖的“.o”文件也不存在，则make工具会在当前文件中查找目标为“.o”文件的依赖文件，如果找到就根据相应的规则生成“.o”文件；</li>
+<li>如果makefile文件列出的源文件都存在，make工具就会先生成“.o”文件，然后再用“.o”文件链接成可执行文件，否则将提示“找不到目标”错误。</li>
+</ol>
+<p>这就是整个make的依赖性，make会一层又一层地去找文件的依赖关系，直到最终编译出第一个目标文件。在找寻的过程中，如果出现错误，比如最后被依赖的文件找不到，那么make就会直接退出，并报错，而对于所定义的命令的错误，或是编译不成功，make根本不理。<br>通过上述分析，我们知道，像clean这种，没有被第一个目标文件直接或间接关联，那么它后面所定义的命令将不会被自动执行，不过，我们可以显示要make执行。即命令——“make clean”，以此来清除所有的目标文件，以便重编译。 </p>
+<hr>
+<h2 id="2-_make的语法及参数选项">2. make的语法及参数选项</h2><p>make 命令主要有标志、宏定义和目标名三个可选参数，其标准形式：</p>
+<blockquote>
+<p>make [标志][宏定义][目标名]</p>
+</blockquote>
+<p>主要的标志选项及其含义如下: 可以通过 make —help 查看</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:left">对应的英文单词</th>
+<th style="text-align:left">功能和含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-f FILE</td>
+<td style="text-align:left">file</td>
+<td style="text-align:left">读取FILE文件作为一个makefile</td>
+</tr>
+<tr>
+<td>-i</td>
+<td style="text-align:left">ignore-errors</td>
+<td style="text-align:left">忽略命令执行返回的出错信息</td>
+</tr>
+<tr>
+<td>-n</td>
+<td style="text-align:left">just-print</td>
+<td style="text-align:left">非执行模式，输出所有执行命令，但并不执行</td>
+</tr>
+<tr>
+<td>-d</td>
+<td style="text-align:left">debug</td>
+<td style="text-align:left">Debug模式，输出有关文件和检测时间的详细信息</td>
+</tr>
+<tr>
+<td>-I dir</td>
+<td style="text-align:left">directory</td>
+<td style="text-align:left">包含makefile文件时，利用该选项指定搜索目录</td>
+</tr>
+</tbody>
+</table>
+<p>执行make命令时，可以通过参数为makefile文件内的宏变量CC赋值，通过宏变量CC指定不同的编译器来编译源文件，如下图：</p>
+<p><a href="/img/blog/make_ex1.png"></a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#this is a example </span></span><br><span class="line">CC=</span><br><span class="line"></span><br><span class="line">add:main.o add.o</span><br><span class="line">	$(CC) -o add main.o add.o</span><br><span class="line">main.o : main.c</span><br><span class="line">	$(CC) -c main.c</span><br><span class="line">add.o : add.c</span><br><span class="line">	$(CC) -c add.c</span><br><span class="line">    </span><br><span class="line">clean: </span><br><span class="line">	rm main.o add.o add</span><br></pre></td></tr></table></figure>
+<p>目标名选项用来指定make命令要编译或者执行的目标，并且允许同时指定多个目标，如上例中的<code>make clean</code>。操作时按照从左到右的顺序依次编译或执行各个目标。如果不指定目标选项，则系统默认指向makefile文件中的第一个目标，如上例中的add。</p>
+<h2 id="3-_makefile_文件">3. makefile 文件</h2><p>make 命令执行时，需要一个 Makefile 文件，以告诉make命令需要怎么样的去编译和链接程序。makefile 文件遵循一定的格式，它通常包含以下内容：</p>
+<ul>
+<li>需要由make命令创建的目标对象(targets)，可以是Object File，也可以是执行文件，还可以是一个标签（Label），对于标签这种特性，在后续的“伪目标”章节中会有叙述；</li>
+<li>要创建的目标对象所依赖的文件(dependent_files)；</li>
+<li>创建每个目标对象时需要运行的命令(command)。</li>
+</ul>
+<blockquote>
+<p>Makefile 的一般格式：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">targets ... : dependent_files ...</span><br><span class="line">    (tab)command</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<h3 id="3-1_makefile_的包含">3.1 makefile 的包含</h3><p>与C/C++ 的 “#include” 一样，makefile 可以使用include关键字将其他makefile包含进来，被包含的内容会原封不动的加载到当前makefile文件的包含位置。include 关键字后面指定要包含的文件名、路径或者变量，它们之间用一个或者多个空格隔开。举例来说，倘若有几个makefile如a.make、b.make、c.make，还有一个makefile相关文件make.rules，以及一个变量include_dir,则下面的语句：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">include_dir := /usr/include</span><br><span class="line">include *.make $(include_dir)make.rules</span><br></pre></td></tr></table></figure>
+<p>等价于：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include a.make b.make c.make /usr/include_dir/make.rules</span><br></pre></td></tr></table></figure></p>
+<p>makefile 命令执行时，先将include关键字后面指定的相关文件内容加载进来并安置在当前位置，如果文件是绝对路径，make 命令将在当前目录寻找，倘若未找到，make命令一般还会去下面几个目录中寻找：</p>
+<ul>
+<li>如果执行make命令时使用了“-I”参数指定了某个目录，make命令回去该目录中寻找相关文件；</li>
+<li>如果 /usr/local/bin 或 /usr/include 目录存在，make命令将会去该目录下寻找相关文件。</li>
+</ul>
+<p>make 命令如果未找到include关键字指定的某个文件，将会报错并且停止运行，想让make命令不去理会这些相关文件是否存在而继续执行，可以在include前面加上一个减号“-”，它表示include加载过程中出现的错误都将被忽略。</p>
+<h3 id="3-2_makefile_的语法规则">3.2 makefile 的语法规则</h3><p>一个基本的makefile主要是由目标对象、依赖文件、变量和命令4部分组成。一个makefile文件中可以有多个目标对象，要生成特定的目标对象，在执行make命令时跟上目标对象即可。如“make add.o”，倘若不指定，make命令自动将makefile文件中第一个目标对象作为默认对象来生成。</p>
+<p>Makefile里主要包含了五个东西：显式规则、隐晦规则、变量定义、文件指示和注释。 </p>
+<ol>
+<li><p>显式规则。显式规则说明了，如何生成一个或多的的目标文件。这是由Makefile的书写者明显指出，要生成的文件，文件的依赖文件，生成的命令。 </p>
+</li>
+<li><p>隐晦规则。由于我们的make有自动推导的功能，所以隐晦的规则可以让我们比较粗糙地简略地书写Makefile，这是由make所支持的。 </p>
+</li>
+<li><p>变量的定义。在Makefile中我们要定义一系列的变量，变量一般都是字符串，这个有点你C语言中的宏，当Makefile被执行时，其中的变量都会被扩展到相应的引用位置上。 </p>
+</li>
+<li><p>文件指示。其包括了三个部分，一个是在一个Makefile中引用另一个Makefile，就像C语言中的include一样；另一个是指根据某些情况指定Makefile中的有效部分，就像C语言中的预编译#if一样；还有就是定义一个多行的命令。有关这一部分的内容，我会在后续的部分中讲述。 </p>
+</li>
+<li><p>注释。Makefile中只有行注释，和UNIX的Shell脚本一样，其注释是用“#”字符，这个就像C/C++中的“//”一样。如果你要在你的Makefile中使用“#”字符，可以用反斜框进行转义，如：“#”。 </p>
+</li>
+</ol>
+<p>最后，还值得一提的是，在Makefile中的命令，必须要以[Tab]键开始。 </p>
+<h3 id="3-3_makefile_与命令">3.3 makefile 与命令</h3><p>makefile 中的命令由一些Shell 命令行组成，这些命令被一条条地执行，除了第一条紧跟在依赖关之后的命令需要使用分号隔开以外，其他每一行，其他每一行命令行必须以制表符tab开始。多个命令行之间可以有空行或者注释行。</p>
+<blockquote>
+<p>命令的执行</p>
+</blockquote>
+<p>当makefile中的目标需要被重建时，此条目标对应的依赖关系后面紧跟的命令将会被执行，如果有多行命令，则makefile将会为每一行命令分配一个子shell去执行，因此多行命令之间的执行是相互独立的，也不存在依赖关系。<br><strong>需要注意的是，</strong> 在一条依赖关系下的多个命令行中，前一行中的cd命令改变目录后不会对后面的命令行产生影响，也就是说后续命令行的执行目录不会是之前使用cd命令进入的那个目录。而Makefile中处于同一行、用分号分割的多个命令属于同一个子shell，前面cd 命令的目录切换动作可以影响到分号后面的其他命令。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello:src/hello.o src/hello.h</span><br><span class="line">    cd src/; gcc hello.c -o hello</span><br></pre></td></tr></table></figure></p>
+<p>如果需要将一个完整的Shell命令书写到多行上，可以使用反斜杠“\”来处理多行命令的连接，表示反斜杠前后的两行属于同一行命令。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hello:src/hello.o src/hello.h</span><br><span class="line">    cd src/; \</span><br><span class="line">    gcc hello.c -o hello</span><br></pre></td></tr></table></figure></p>
+<p><strong>并发执行命令</strong></p>
+<p>make 可以同时执行多条命令，默认情况下，make在同一时刻汁执行一条命令，后一条命令依赖前一天命令的执行完成，为了同时执行多条命令，可以执行make命令时添加“-J”选项来指导同时执行命令条数的上线。<br>如果“-j”之后跟一个整数，其含义表示make在同一时刻允许执行的最多命令条数；如果选项“-j”之后不跟整数，则表示不限制同时执行的命令条数，即每条依赖关系后有多条命令就同时执行多少条。make -j 的并发执行时按依赖关系并发执行的。没有依赖关系的命令可以并发执行。</p>
+<h3 id="3-4_makefile_与变量">3.4 makefile 与变量</h3><p>变量在makefile中定义的名字，用来代替一个文本字符串，该文本字符串成为变量的值。变量名是大小写敏感的。在makefile中定义变量有两种方式：一中是递归展开，另一种是简单方式。引用变量VAR的值的格式为$(VAR)。<br>递归展开方式的定义格式为：VAR=var。递归展开方式定义的变量实在引用该变量时进行替换的，即如果该变量包含了对其他变量的引用，则在引用该变量时一次性将内嵌变量全部展开。<br>简单展开变量的定义格式：VAR:=var。简单扩展类型变量的值在定义处展开，并且只展开一次，因此它不包含对任何其他的变量的引用，从而消除了嵌套引用。</p>
+<p>下面给出一个使用了变量的makefile例子，这里用OBJS代替main.o 和add.o，用CC代替gcc,用CFLAGS代替”-Wall -O -g”。这样在以后修改时，就可以只修改变量定义，而不需要修改下面的引用实体，从而大大简化了维护makefile的工作量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">OBJS=main.o add.o</span><br><span class="line">CC = gcc</span><br><span class="line">CFLAGS=-Wall -O -g</span><br><span class="line"></span><br><span class="line">add:$(OBJS)</span><br><span class="line">	$(CC) $(OBJS) -o add</span><br><span class="line">main.o : main.c</span><br><span class="line">	$(CC) $(CFLAGS) -c main.c -o main.o</span><br><span class="line">add.o : add.c</span><br><span class="line">	$(CC) $(CFLAGS) -c add.c -o add.o</span><br><span class="line">    </span><br><span class="line">clean: </span><br><span class="line">	rm *.o</span><br></pre></td></tr></table></figure>
+<p>可以看到，此处变量是以递归展开方式定义的。</p>
+<blockquote>
+<p>makefile 中的变量分为用户自定义变量、预定义变量、自动变量及环境变量。</p>
+</blockquote>
+<p>OBJS 就是用户自定义变量。未经用户定义，在makefile中默认存在的变量则为预定义变量和自动变量，其中部分有默认值，当然用户可以对其修改。<br>预定义变量包含了常见编译器、汇编器的名称及其编译选项。下表列出了常见的预定义变量及其部分默认值。</p>
+<table>
+<thead>
+<tr>
+<th>预定义变量</th>
+<th>名称或选项</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AR</td>
+<td>库文件维护程序的名称</td>
+<td>ar</td>
+</tr>
+<tr>
+<td>AS</td>
+<td>汇编程序的名称</td>
+<td>as</td>
+</tr>
+<tr>
+<td>CC</td>
+<td>C 编译器的名称</td>
+<td>cc</td>
+</tr>
+<tr>
+<td>CPP</td>
+<td>C 预编译器的名称</td>
+<td>$(CC) -E</td>
+</tr>
+<tr>
+<td>CXX</td>
+<td>C++ 编译器的名称</td>
+<td>g++</td>
+</tr>
+<tr>
+<td>FC</td>
+<td>Fortran 编译器的名称</td>
+<td>f77</td>
+</tr>
+<tr>
+<td>RM</td>
+<td>文件删除程序的名称</td>
+<td>rm -f</td>
+</tr>
+<tr>
+<td>CFLAGS</td>
+<td>C 编译器的选项</td>
+<td>无</td>
+</tr>
+<tr>
+<td>CXXFLAGS</td>
+<td>C++ 编译器的选项</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<p>由于常见的GCC编译语句通常包含了目标文件和依赖文件，而这些文件在makefile文件中的依赖关系一行已经有所体，因此，为了进一步简化makefile的编写，引入了自动变量。<strong>自定变量</strong>通常可以代表编译语句的目标文件和依赖文件等，并且具有本地含义。下表中列出了makefile 中常见的自动变量。</p>
+<table>
+<thead>
+<tr>
+<th>自定变量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$*</td>
+<td>不包含扩展名的目标文件名称</td>
+</tr>
+<tr>
+<td>$+</td>
+<td>所有的依赖文件，以空格分开，并以出现的先后为序</td>
+</tr>
+<tr>
+<td>$&lt;</td>
+<td>第一个依赖文件的名称</td>
+</tr>
+<tr>
+<td>$?</td>
+<td>所有时间戳比目标文件晚的依赖文件，并以空格分开</td>
+</tr>
+<tr>
+<td>$@</td>
+<td>目标文件的完整名称</td>
+</tr>
+<tr>
+<td>$^</td>
+<td>所有不重复的依赖文件，以空格分开</td>
+</tr>
+<tr>
+<td>$%</td>
+<td>如果目标是归档成员，则该变量表示目标文件的归档成员名称</td>
+</tr>
+</tbody>
+</table>
+<p>自动变量的书写比较难记，但是在熟练了之后会非常方便。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">OBJS=main.o add.o</span><br><span class="line">CC = gcc</span><br><span class="line">CFLAGS=-Wall -O -g</span><br><span class="line"></span><br><span class="line">add:$(OBJS)</span><br><span class="line">	$(CC) $^ -o $@</span><br><span class="line">main.o : main.c</span><br><span class="line">	$(CC) $(CFLAGS) -c $&lt; -o $@</span><br><span class="line">add.o : add.c</span><br><span class="line">	$(CC) $(CFLAGS) -c $&lt; -o $@</span><br><span class="line">    </span><br><span class="line">clean: </span><br><span class="line">	rm *.o</span><br></pre></td></tr></table></figure></p>
+<p>另外，在makefile中还可以使用环境变量，使用环境变量的方法相对比较简单，make在启动时会自动读取系统当前已经定义的环境变量，并且会创建与之具有相同名称和数值的变量。但是，如果用户在makefile中定义了相同名称的变量，则用户自定义变量将覆盖同名的环境变量。</p>
+<h3 id="3-5_makefile_与条件语句">3.5 makefile 与条件语句</h3><p>条件语句可以根据一个变量的值来控制 make 执行或者忽略 Makefile 的特定部分。条件语句可以是两个不同变量、或者变量和常量值的比较。要注意的是：条件语句只能用于控制 make 实际执行的makefile 文件部分，它不能控制规则的 shell 命令执行过程。Makefile 中使用条件控制可以做到处理的灵活性和高效性。</p>
+<ol>
+<li>条件语句</li>
+</ol>
+<p>首先我们来看一个使用条件判断的 Makefile 例子；对变量“CC”进行判断，其值如果是“gcc”那么在程序连接时使用库“libgnu.so”或者“libgnu.a”，否则不链接任何库。Makefile 中的条件判断部分如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">libs_for_gcc = -lgnu</span><br><span class="line">normal_libs =</span><br><span class="line"></span><br><span class="line">foo: $(objects)  </span><br><span class="line">ifeq ($(CC),gcc)  </span><br><span class="line">	$(CC) -o foo $(objects) $(libs_for_gcc)  </span><br><span class="line"><span class="keyword">else</span>  </span><br><span class="line">	$(CC) -o foo $(objects) $(normal_libs)  </span><br><span class="line">endif</span><br></pre></td></tr></table></figure>
+<p>该条件包含了三个指令：ifeq、else 和 endif。ifeq 指令时条件语句的开始，并且指明条件。它包含两个参数，被逗号隔开，并被扩在圆括号内。运行时首先将两个参数变量进行替换，然后进行比较。</p>
+<p>上面的例子一种更简洁的实现方式为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">libs_for_gcc = -lgnu  </span><br><span class="line">normal_libs =  </span><br><span class="line">ifeq ($(CC),gcc)  </span><br><span class="line">	libs=$(libs_for_gcc)  </span><br><span class="line"><span class="keyword">else</span>  </span><br><span class="line">	libs=$(normal_libs)  </span><br><span class="line">endif  </span><br><span class="line"></span><br><span class="line">foo: $(objects)  </span><br><span class="line">	$(CC) -o foo $(objects) $(libs)   </span><br><span class="line">```    </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 条件语句的语法</span><br><span class="line">    conditional-directive</span><br><span class="line">        text-<span class="keyword">if</span>-ture</span><br><span class="line">    endif </span><br><span class="line"></span><br><span class="line"><span class="string">"text-if-true"</span> 可以是任何文本行，在条件为真是它被认为是makefile中的一部分；如果为假则被忽略。</span><br><span class="line"></span><br><span class="line">完整条件语句的语法为：</span><br><span class="line">    conditional-directive</span><br><span class="line">        text-<span class="keyword">if</span>-ture</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        test-<span class="keyword">if</span>-<span class="keyword">false</span></span><br><span class="line">    endif </span><br><span class="line"></span><br><span class="line">conditiona-directive 有如下的一些条件语句：</span><br><span class="line"></span><br><span class="line">- ifeq(arg1, arg2) 测试arg1， arg2 是否相等</span><br><span class="line">- ifdef variable-name 测试变量variable-name是否被定义过</span><br><span class="line">- ifndef 与ifdef 的功能恰好相反，ifndef 用来判断变量是否没有被定义</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">### 3.6 makefile 与函数</span></span><br><span class="line"></span><br><span class="line">在makefile中可以使用函数来处理变量从而让命令或规则更为灵活和智能。make所支持的函数不算多，但是已经足够使用了。函数调用后，函数的返回值可以当作变量来使用。</span><br><span class="line"><span class="number">1.</span> 函数的用法</span><br><span class="line">函数调用很像变量的使用，也是以“$”来标识的，语法如下：</span><br><span class="line">    `$(&lt;function&gt;&lt;arguments&gt;)`</span><br><span class="line">或者是</span><br><span class="line">    `$&#123;&lt;function&gt;&lt;arguments&gt;&#125;`</span><br><span class="line">其中，&lt;function&gt; 是函数名，arguments是函数参数，参数间以逗号分隔，而函数名和参数之间以空格分隔。</span><br><span class="line">看下面的例子：</span><br><span class="line">``` c </span><br><span class="line">comma:= ,</span><br><span class="line">empty:=</span><br><span class="line">space:= $(empty) $(empty)</span><br><span class="line">foo:= a b c</span><br><span class="line">bar:= $(subst $(space),$(comma),$(foo)) </span><br><span class="line"></span><br><span class="line">.PHNOY:clearn</span><br><span class="line">clearn:</span><br><span class="line">	@echo $(bar)</span><br></pre></td></tr></table></figure>
+<p>这个例子中，“\$(comma)”的值是一个逗号，”\$(space)”使用”\$(empty)”定义了一个空格，“\$(foo)” 的值是“a b c”, “\$(bar)”的定义调用l函数subst,这是一个替换函数，这个函数有三个参数，第一个参数是被替换字符串，第二个参数是替换字符串，第三个参数是需要执行替换操作的字串。这个函数将“\$(foo)”中的空格替换成逗号，所以“\$(bar)”的值为“a,b,c”。<br>其他一些函数：</p>
+<ol>
+<li><code>$(subst FROM,TO,TEXT)</code><br>函数名称：字符串替换函数—subst。<br>函数功能：把字串“TEXT”中的“FROM”字符替换为“TO”。<br>返回值：替换后的新字符串。<br>示例：<br><code>$(subst ee,EE,feet on the street)</code><br>替换“feet on the street”中的“ee”为“EE”，结果得到字符串“fEEt on the strEEt”。</li>
+<li><code>$(strip STRINT)</code><br>函数名称：去空格函数—strip。<br>函数功能：去掉字串（若干单词，使用若干空字符分割）“STRINT”开头和结尾的<br>空字符，并将其中多个连续空字符合并为一个空字符。<br>返回值：无前导和结尾空字符、使用单一空格分割的多单词字符串。<br>函数说明：空字符包括空格、[Tab]等不可显示字符。<br>示例：<br><code>STR = a b c</code><br><code>LOSTR = $(strip $(STR))</code><br>结果是“a b c”。<br>“strip”函数经常用在条件判断语句的表达式中，确保表达式比较的可靠和健壮！</li>
+<li><code>$(findstring FIND,IN)</code><br>函数名称：查找字符串函数—findstring。<br>函数功能：搜索字串“IN”，查找“FIND”字串。<br>返回值：如果在“IN”之中存在“FIND”，则返回“FIND”，否则返回空。<br>函数说明：字串“IN”之中可以包含空格、[Tab]。搜索需要是严格的文本匹配。<br>示例：<br><code>$(findstring a,a b c)
+$(findstring a,b c)</code><br>第一个函数结果是字“a”；第二个值为空字符。</li>
+<li>shell函数<br>shell 函数，它的参数对应的就是shell的命令，它的反引号“`”具有相同的功能。shell 函数将执行系统命令后的输出作为返回值，可以用系统命令及字符串处理命令awk、sed 等命令来生成一个变量。例如：</li>
+</ol>
+<p><code>contents := $(shell cat foo)</code><br>将变量“contents”赋值为文件“foo”的内容，文件中的换行符在变量中使用空格代<br>替。</p>
+<h2 id="4-_伪目标">4. 伪目标</h2><p>伪目标是这样一个目标：它不代表一个真正的文件名，在执行 make 时可以指定这个目标来执行其所在规则定义的命令，有时也可以将一个伪目标称为标签。</p>
+<p>使用伪目标有两点原因： 1. 避免在我们的 Makefile 中定义的只执行命令的目标（此目标的目的为了执行执行一些列命令，而不需要创建这个目标）和工作目录下的实际文件出现名字冲突。 2. 提高执行 make 时的效率，特别是对于一个大型的工程来说，编译的效率也许你同样关心。以下就这两个问题我们进行分析讨论：</p>
+<ol>
+<li>如果我们需要书写这样的一个规则：规定所定义的命令不是去创建目标文件，而是通过make命令行明确指定它来执行一些特定的命令。像常见的clean 目标：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clean:</span><br><span class="line">    rm -rf *.o temp</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>规则中“ rm”不是创建文件“ clean”的命令，而是删除当前目录下的所有.o 文件和 temp文件。当工作目录下不存在“ clean”这个文件时，我们输入“ make clean”，“ rm *.o temp”总会被执行。这是我们的初衷。</p>
+<p>但是如果在当前工作目录下存在文件“clean”，情况就不一样了，同样我们输入<br>“ make clean”，由于这个规则没有任何依赖文件，所以目标被认为是最新的而不去执行规则所定义的命令，因此命令“rm”将不会被执行。这并不是我们的初衷。为了解决这个问题，我们需要将目标“clean”声明为伪目标。将一个目标声明为伪目标的方法是将它作为特殊目标<strong>.PHONY</strong>的依赖。</p>
+<p>这样目标“clean”就被声明为一个伪目标，无论在当前目录下是否存在“clean”这个文件。我们输入”make clean”之后。“rm”命令都会被执行。而且，当一个目标被声明为伪目标后，make 在执行此规则时不会去试图去查找隐含规则来创建它。这样也提高了 make 的执行效率，同时也不用担心由于目标和文件名重名而使我们的期望失败。在书写伪目标规则时，首先需要声明目标是一个伪目标，之后才是伪目标的规则定义。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.PHONY:clean</span><br><span class="line">clean:</span><br><span class="line">    rm -rf *.o temp    </span><br><span class="line">``` </span><br><span class="line"><span class="number">2.</span> 伪目标的另外一种使用场合是在 make 的并行和递归执行过程中。此情况下一般会存在一个变量，定义为所有需要 make 的子目录。对多个目录进行 make 的实现方 式可以是：在一个规则的命令行中使用 shell 循环来完成。</span><br><span class="line"></span><br><span class="line">在 Makefile 中，一个伪目标可以有自己的依赖（可以是一个或者多个文件、一个或者多个伪目标）。在一个目录下如果需要创建多个可执行程序，我们可以将所有程序的重建规则在一个 Makefile 中描述。因为 Makefile 中第一个目标是“终极目标”，约定的做法是使用一个称为**“all”**的伪目标来作为终极目标，它的依赖文件就是那些需要创建的程序。下面就是一个例子：</span><br><span class="line">``` c</span><br><span class="line"><span class="preprocessor">#sample Makefile</span></span><br><span class="line">all:prog1 prog2 prog3</span><br><span class="line">.PHONY:all</span><br><span class="line">prog1 : prog1.o utils.o</span><br><span class="line">    cc -o prog1 prog1.o utils.o</span><br><span class="line">prog2 : prog2.o</span><br><span class="line">    cc -o prog2 prog2.o</span><br><span class="line">prog3 : prog3.o sort.o utils.o</span><br><span class="line">    cc -o prog3 prog3.o sort.o utils.o</span><br></pre></td></tr></table></figure>
+<p>执行 make 时，目标“ all”被作为终极目标。为了完成对它的更新， make 会创建（不存在）或者重建（已存在）目标“ all”的所有依赖文件（ prog1、 prog2 和 prog3）。当需要单独更新某一个程序时，我们可以通过 make 的命令行选项来明确指定需要重建的程序。（例如：“ make prog1”）。</p>
+<h2 id="5-_makefile_中的隐含规则">5. makefile 中的隐含规则</h2><p>在使用make编译.c源文件时，编译.c源文件规则的命令可以不用明确给出。这是因为make本身存在一个默认的规则，能够自动完成对.c文件的编译并生成对应的.o文件。它执行命令“cc -c”来编译.c源文件。在Makefile中我们只需要给出需要重建的目标文件。</p>
+<p>“<em>隐含规则</em>”为 make 提供了重建一类目标文件通用方法，不需要在 Makefile 中明确地给出重建特定目标文件所需要的细节描述。例如：典型地；make 对 C 文件的编译过程是由.c 源文件编译生成.o 目标文件。当 Makefile 中出现一个.o 文件目标时，make 会使用这个通用的方式将后缀为.c 的文件编译称为目标的.o 文件。另外，在 make 执行时根据需要也可能是用多个隐含规则。比如：make 将从一个.y文件生成对应的.c 文件，最后再生成最终的.o 文件。就是说，只要目标文件名中除后缀以外其它部分相同，make 都能够使用若干个隐含规则来最终产生这个目标文件（当然最原始的那个文件必须存在）。例如；可以在 Makefile 中这样来实现一个规则：“foo : foo.h”，只要在当前目录下存在“foo.c”这个文件，就可以生成“foo”可执行文件。</p>
+<p>内嵌的“隐含规则”在其所定义的命令行中，会使用到一些变量（通常也是内嵌变量）。我们可以通过改变这些变量的值来控制隐含规则命令的执行情况。例如：内嵌变量“CFLAGS”代表了 gcc 编译器编译源文件的编译选项，我们就可以在 Makefile 中 重新定义它，来改变编译源文件所要使用的参数。<br>看下面的例子<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># sample Makefile</span></span><br><span class="line">CUR_DIR = $(shell pwd)</span><br><span class="line">INCS := $(CUR_DIR)/include</span><br><span class="line">CFLAGS := -Wall –I$(INCS)</span><br><span class="line">EXEF := foo bar</span><br><span class="line">.PHONY : all clean</span><br><span class="line">all : $(EXEF)</span><br><span class="line">foo : foo.c</span><br><span class="line">foo : CFLAGS+=-O2</span><br><span class="line">bar : bar.c</span><br><span class="line">bar : CFLAGS+=-g</span><br><span class="line"></span><br><span class="line">$(EXEF) : debug.h</span><br><span class="line">    $(CC) $(CFLAGS) $(addsuffix .c,$@) –o $@</span><br><span class="line">clean :</span><br><span class="line">    $(RM) *.o *.d $(EXES)</span><br></pre></td></tr></table></figure></p>
+<p>对应使用简化规则后的makefile 文件如下:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># sample Makefile</span></span><br><span class="line">CUR_DIR = $(shell pwd)</span><br><span class="line">INCS := $(CUR_DIR)/include</span><br><span class="line">CFLAGS := -Wall –I$(INCS)</span><br><span class="line">EXEF := foo bar</span><br><span class="line">.PHONY : all clean</span><br><span class="line">all : $(EXEF)</span><br><span class="line">foo : CFLAGS+=-O2</span><br><span class="line">bar : CFLAGS+=-g</span><br><span class="line">clean :</span><br><span class="line">    $(RM) *.o *.d $(EXES)</span><br></pre></td></tr></table></figure></p>
+<p>以下是一些常见的隐含规则：</p>
+<ol>
+<li>编译C程序<br>“N.o”自动由“N.c”生成，执行命令为<code>$(CC) -c $(CPPFLAGS) $(CFLAGS)</code>。</li>
+<li>编译C++程序<br>“N.o”自动由“N.cc”或者“N.C”生成，执行命令为<code>$(CXX) -c $(CPPFLAGS)
+$(CFLAGS)</code>。建议使用“.cc”作为C++源文件的后缀，而不是“.C”。</li>
+<li>编译Fortran/Ratfor程序<br>“N.o”自动由“N.r”、“N.F”或者“N.f” 生成，根据源文件后缀执行对应的<br>命令：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.f — “$(FC) –c $(FFLAGS)</span><br><span class="line">.F — “$(FC) –c $(FFLAGS) $(CPPFLAGS)</span><br><span class="line">.r — “$(FC) –c $(FFLAGS) $(RFLAGS)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="参考">参考</h2><ul>
+<li><a href="http://www.chinaunix.net/old_jh/23/408225.html" target="_blank" rel="external">跟我一起写makefile</a></li>
+<li><a href="">Linux 编程80例详解</a></li>
+<li><a href="http://www.mcuol.com/download/upfile/20080109021058_GNU_make_zh_CN.pdf" target="_blank" rel="external">GNU make中文手册</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/05/31/入口函数和程序初始化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">入口函数和程序初始化</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="makefile-入门学习" data-title="makefile 入门学习" data-url="http://ylwhere.tk/2015/06/03/makefile-入门学习/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 ylw Home
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-63335629-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

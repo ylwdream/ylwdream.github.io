@@ -2,6 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ylwhere.tk/2015/06/03/makefile-%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2015-06-03T01:24:31.566Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ylwhere.tk/2014/11/09/mpi-ju-zhen-xiang-cheng/</loc>
+    <lastmod>2015-06-03T00:07:29.231Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ylwhere.tk/2014/11/10/mpi-%E6%B1%82%E8%A7%A3%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2015-06-03T00:03:14.231Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ylwhere.tk/2014/11/13/MPI-%E5%AE%9E%E7%8E%B0%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2015-06-02T23:55:55.620Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ylwhere.tk/2015/05/24/linux-malloc-%E5%87%BD%E6%95%B0/</loc>
     <lastmod>2015-05-31T13:38:46.008Z</lastmod>
   </url>
@@ -37,7 +57,7 @@
   </url>
   
   <url>
-    <loc>http://ylwhere.tk/2014/11/12/c-plus-plus-explicitgou-zao-han-shu/</loc>
+    <loc>http://ylwhere.tk/2014/11/12/c++-explicit%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/</loc>
     <lastmod>2015-05-22T14:45:54.701Z</lastmod>
   </url>
   
@@ -154,21 +174,6 @@
   <url>
     <loc>http://ylwhere.tk/2014/11/07/miller-rabin-su-shu-pan-ding/</loc>
     <lastmod>2015-05-22T12:20:40.819Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ylwhere.tk/2014/11/09/mpi-ju-zhen-xiang-cheng/</loc>
-    <lastmod>2015-05-22T12:01:20.196Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ylwhere.tk/2014/11/10/mpi-qiu-jie-huang-hou-wen-ti/</loc>
-    <lastmod>2015-05-22T11:54:11.229Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ylwhere.tk/2014/11/13/mpi-shi-xian-liu-shui-xian-mo-xing/</loc>
-    <lastmod>2015-05-22T11:46:56.757Z</lastmod>
   </url>
   
   <url>
