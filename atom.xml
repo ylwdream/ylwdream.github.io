@@ -4,7 +4,7 @@
   <subtitle><![CDATA[More Code More Confidence]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ylwhere.tk/"/>
-  <updated>2015-06-03T05:26:15.445Z</updated>
+  <updated>2015-06-04T12:27:49.244Z</updated>
   <id>http://ylwhere.tk/</id>
   
   <author>
@@ -13,6 +13,170 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Git 资料整理]]></title>
+    <link href="http://ylwhere.tk/2015/06/04/Git-%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86/"/>
+    <id>http://ylwhere.tk/2015/06/04/Git-资料整理/</id>
+    <published>2015-06-04T08:38:07.000Z</published>
+    <updated>2015-06-04T12:27:49.244Z</updated>
+    <content type="html"><![CDATA[<h2 id="一、Git_是什么">一、Git 是什么</h2><p>一直在用git 和github，可是除了基本的git init 命令，对其他的git的分支啊，远端啊，恢复啊完全没有了解，所以想趁这个时间看不进书，整理一下git的资料。让自己有一个系统的了解，以后查询使用也会更加的方便。资料基本上都是参考文件的整理，为的就是自己对git有个整体的了解，仅供自己学习而用。</p>
+<a id="more"></a>
+<p>非常简单地说，Git 是一个快速、可扩展的分布式版本控制系统，它具有极为丰<br>富的命令集，对内部系统提供了高级操作和完全访问。所谓版本控制系统 (Version<br>Control System)，从狭义上来说，它是软件项目开发过程中用于储存我们所写的代<br>码所有修订版本的软件，但事实上我们可以将任何对项目有帮助的文档交付版本控<br>制系统进行管理。</p>
+<p>为什么使用版本控制系统</p>
+<blockquote>
+<font color="red">版本控制系统是为懒人准备的，它让懒人们比那些善于备份文档的勤劳人拥有<br>更干净的文件系统以及更多的可以活着的时间。</font>
+
+</blockquote>
+<h2 id="二、Git_安装和入门">二、Git 安装和入门</h2><p>1.Centos 上的安装为：</p>
+<pre><code>sudo yum <span class="keyword">install</span> git
+</code></pre><p>完成安装后还要进行初始化的配置<br>Git初始化配置<br>1） 配置使用git仓库的人员姓名</p>
+<pre><code>git config --global user<span class="class">.name</span> <span class="string">"Your Name Comes Here"</span>   
+</code></pre><p>2） 配置使用git仓库的人员email </p>
+<pre><code>git config --global user<span class="class">.email</span> you@yourdomain<span class="class">.example</span><span class="class">.com</span>
+</code></pre><p>因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。       </p>
+<p>2.创建新仓库<br>创建新文件夹，打开，然后执行 </p>
+<pre><code><span class="title">git</span> init
+</code></pre><p>以创建新的 git 仓库。<br>什么是版本库呢？版本库又名仓库，英文名repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。</p>
+<p>3.向仓库中添加文件</p>
+<p>由于 Git 在向仓库中添加文档时并非是简单地文档复制过去，势必要将所添加文档进行一番处理，生成 Git 仓库所能接受的数据格式，Git 称这个过程为 “take a snapshot”（生成快照）。文件会加入到index目录，但此时还并未真正的添加到仓库中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add&lt;filename&gt;</span><br><span class="line">或者 </span><br><span class="line">git add *</span><br></pre></td></tr></table></figure>
+<p>4.想仓库提交文件</p>
+<p>使用如下命令以实际提交改动：</p>
+<pre><code><span class="title">git</span> commit -m <span class="string">"代码提交信息"</span>  
+</code></pre><p><code>-m</code> 后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。</p>
+<h3 id="Git_概念">Git 概念</h3><p>Git库中由三部分组成</p>
+<p>的本地仓库由 git 维护的三棵“树”组成。第一个是你的 工作目录，它持有实际文件；第二个是 暂存区（Index），它像个缓存区域，临时保存你的改动；最后是 HEAD，它指向你最后一次提交的结果。</p>
+<p>1） 工作目录：用户本地的目录；</p>
+<p>2） Index（索引）：将工作目录下所有文件（包含子目录）生成快照，存放到一个临时的存储区域，Git 称该区域为索引。</p>
+<p>3） 仓库：将索引通过commit命令提交至仓库中，每一次提交都意味着版本在进行一次更新。<br>整个过程如下图所示：</p>
+<p><img src="/img/blog/git_flow.png" alt=""></p>
+<h3 id="Git_远程推送">Git 远程推送</h3><p><code>git commit</code> 后文件只是同步到了本地的仓库的HEAD中了。执行如下命令将这些改动提交到远端仓库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<p>可以把master 换成任何分支。如果你还没有克隆现有仓库，并欲将你的仓库连接到某个远程服务器，你可以使用如下命令添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin &#60;server&#62;</span><br></pre></td></tr></table></figure>
+<h2 id="分支">分支</h2><p>分支是用来将特性开发绝缘开来的。在你创建仓库的时候，master 是“默认的”分支。在其他分支上进行开发，完成后再将它们合并到主分支上。</p>
+<p>关于分支的相机介绍可以看下面的链接：<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000" target="_blank" rel="external">Git 分支</a></p>
+<p><img src="/img/blog/git_branch.png" alt=""></p>
+<p>创建一个叫做“feature_x”的分支，并切换过去：  </p>
+<pre><code>git checkout -<span class="tag">b</span> feature_x
+</code></pre><p>切换回主分支：  </p>
+<pre><code>git checkout master<span class="escape">` </span> 
+</code></pre><p>再把新建的分支删掉：  </p>
+<pre><code><span class="label">git</span> <span class="keyword">branch </span>-d feature_x
+</code></pre><p>除非你将分支推送到远端仓库，不然该分支就是 不为他人所见的：  </p>
+<p>git push origin <branch></branch></p>
+<h2 id="更新与合并">更新与合并</h2><p>要更新你的本地仓库至最新改动，执行：  </p>
+<pre><code><span class="title">git</span> pull
+</code></pre><p>以在你的工作目录中 获取（fetch） 并 合并（merge） 远端的改动。<br>要合并其他分支到你的当前分支（例如 master），执行：  </p>
+<pre><code>git merge <span class="tag">&lt;<span class="title">branch</span>&gt;</span>
+</code></pre><p>在这两种情况下，git 都会尝试去自动合并改动。遗憾的是，这可能并非每次都成功，并可能出现冲突（conflicts）。 这时候就需要你修改这些文件来手动合并这些冲突（conflicts）。改完之后，你需要执行如下命令以将它们标记为合并成功：   </p>
+<pre><code><span class="label">git</span> <span class="keyword">add </span>&lt;filename&gt;
+</code></pre><p>在合并改动之前，你可以使用如下命令预览差异：  </p>
+<pre><code>git diff <span class="tag">&lt;<span class="title">source_branch</span>&gt;</span> <span class="tag">&lt;<span class="title">target_branch</span>&gt;</span>
+</code></pre><h2 id="三、Git_命令介绍">三、Git 命令介绍</h2><p>1&gt; Git文档忽略机制 </p>
+<p>工作目录中有一些文件是不希望接受Git 管理的，譬如程序编译时生成的中间文件等等。Git 提供了文档忽略机制，可以将工作目录中不希望接受Git 管理的文档信息写到同一目录下的.gitignore 文件中。<br>如下图所示，忽略所有后缀.xlxs文件。</p>
+<p><img src="/img/blog/git_ignore.png" alt=""></p>
+<p>2&gt; Git help<br>       Git help 获取git基本命令<br>（如果要知道某个特定命令的使用方法，例如：使用Git help clone，来获取git clone的使用方法）。</p>
+<p>3&gt; Git init </p>
+<p>创建一个空的Git库。在当前目录中产生一个.git 的子目录。在.git目录下有一个config文件，可以修改其中的配置信息。</p>
+<p>4&gt; Git add </p>
+<p>将当前工作目录中更改或者新增的文件加入到Git的索引中，加入到Git的索引中就表示记入了版本历史中，这也是提交之前所需要执行的一步。 </p>
+<p>5&gt; Git commit </p>
+<p>提交当前工作目录的修改内容。 直接调用git commit命令，会提示填写注释。通过如下方式在命令行就填写提交注释：git commit -m “Initial commit of gittutor reposistory”。<br>git commit还有一个 -a的参数，可以将那些没有通过git add标识的变化一并强行提交，但是不建议使用这种方式。 </p>
+<p>6&gt; Git status </p>
+<p>查看版本库的状态。可以得知哪些文件发生了变化，哪些文件还没有添加到git库中等等。 建议每次commit前都要通过该命令确认库状态。 如果调用了git status命令，一定要格外注意那些提示为 “Changed but not updated:”的文件。 这些文件都是与上次commit相比发生了变化，但是却没有通过git add标识的文件。 </p>
+<p>7&gt; Git log </p>
+<p>查看历史日志，包含每次的版本变化。每次版本变化对应一个commit id.<br>在项目日志信息中，每条日志的首行（就是那一串字符）为版本更新提交所进行的命名，我们可以将该命名理解为项目版本号。项目版本号应该是唯一的，默认由 Git 自动生成，用以标示项目的某一次更新。如果我们将项目版本号用作git-show 命令的参数，即可查看该次项目版本的更新细节。</p>
+<p><img src="/img/blog/git_log.png" alt=""></p>
+<p>8&gt; Git merge </p>
+<p>把服务器上下载下来的代码和本地代码合并。或者进行分支合并。</p>
+<p>9&gt; Git reset </p>
+<p>库的逆转和恢复。</p>
+<pre><code>git reset [--mixed | --soft | --hard] <span class="annotation">[&lt;commit-ish&gt;]</span>。
+</code></pre><p>—mixed 是 git-reset 的默认选项，它的作用是重置索引内容，将其定位到指定的项目版本，而不改变你的工作树中的所有内容，只是提示你有哪些文件还未更新。  </p>
+<p>—soft 选项既不触动索引的位置，也不改变工作树中的任何内容，但是会要求它们处于一个良好的次序之内。该选项会保留你在工作树中的所有更新并使之处于待提交状态。</p>
+<p>—hard这个命令就会导致所有信息的回退， 包括文件内容。 一般只有在重置废弃代码时，才用它。 执行后，文件内容也无法恢复回来了。（回退了工作目录、index和仓库中的内容）。</p>
+<p><img src="/img/git_resert.png" alt=""></p>
+<p>10&gt; Git diff </p>
+<p>把本地的代码和index中的代码进行比较，或者是把index中的代码和本地仓库中的代码进行比较。<br>1） Git diff<br>比较工作目录和Index中的代码。<br>2） Git diff - - cached<br>比较index和本地仓库中的代码。   </p>
+<p>11&gt; Git checkout </p>
+<h4>切换到分支</h4>
+
+<p>1) 创建一个新分支，并切换到该分支上   </p>
+<pre><code>Git checkout –<span class="tag">b</span> 新分支名 
+</code></pre><p>2）切换到某个已经建立的本地分支local_branch   </p>
+<pre><code>Git checkout <span class="built_in">local</span>_branch   
+</code></pre><p>（使用cat .git/HEAD后，显示refs:refs/heads/ local_branch）   </p>
+<p>3）切换到某个分支：git checkout 分支名</p>
+<pre><code>切换到主分支：git checkout master
+</code></pre><p>4）删除分支</p>
+<pre><code><span class="label">git</span> <span class="keyword">branch </span>–D 分支名
+</code></pre><p>注意： 删除后，发生在该分支的所有变化都无法恢复。强制删除此分支。 </p>
+<p>5）比较两个分支上的文件的区别</p>
+<pre><code><span class="title">git</span> diff master 分支名 （比较主分支和另一个分支的区别）
+</code></pre><p>6）查看分支历史</p>
+<pre><code>git-<span class="literal">show</span>-branch （查看当前分支的提交注释及信息）
+
+git-<span class="literal">show</span>-branch -<span class="literal">all</span>（查看所有分支的提交注释及信息）
+</code></pre><p>7）合并分支</p>
+<p>法一：</p>
+<pre><code>git <span class="built_in">merge</span> “注释” 合并的目标分支 合并的来源分支
+</code></pre><p>如果合并有冲突，git会有提示。</p>
+<p>例如：</p>
+<pre><code>git checkout master （切换到master分支）
+
+git <span class="operator"><span class="keyword">merge</span> HEAD branch1 (合并<span class="keyword">master</span>分支和branch1分支)或者：git <span class="keyword">merge</span> <span class="keyword">master</span> branch1</span>
+</code></pre><p>法二：</p>
+<pre><code><span class="title">git</span> pull 合并的目标分支 合并的来源分支
+</code></pre><p>例如: </p>
+<pre><code>git checkout master （切换到master分支）
+
+git pull . bra<span class="label">nch1</span>（合并当前分支和bra<span class="label">nch1</span>分支）
+</code></pre><p>12&gt; Git config</p>
+<p>利用这个命令可以新增、更改Git的各种设置，例如: </p>
+<pre><code>git config branch<span class="class">.master</span><span class="class">.remote</span> origin
+</code></pre><p>就将master的远程版本库设置为别名叫做origin版本库。</p>
+<p>13&gt; Git tag</p>
+<p>创建、列出、删除或者验证一个标签对象（使用GPG签名的）。</p>
+<p>可以将某个具体的版本打上一个标签，这样就不需要记忆复杂的版本号哈希值字符串了，例如:</p>
+<pre><code>git tag revert_version bbaf6fb<span class="number">5060b4875</span>b18ff9ff637ce<span class="number">118256d6f20</span>
+</code></pre><p> 来标记这个被你还原的版本，那么以后你想查看该版本时，就可以使用 revert_version标签名，而不是哈希值了。</p>
+<h2 id="——">——</h2><p>14&gt; Git clone</p>
+<p>取出服务器的仓库的代码到本地建立的目录中（与服务器交互）。</p>
+<p>通过git clone获取远端git库后，.git/config中的开发者信息不会被一起clone过来。仍然需要为本地库的.git/config文件添加开发者信息。此外，开发者还需要自己添加 . gitignore文件。</p>
+<p>15&gt;  Git pull</p>
+<p>从服务器的仓库中获取代码，和本地代码合并。（与服务器交互，从服务器上下载最新代码，等同于： Git fetch + Git merge）<br>从其它的版本库（既可以是远程的也可以是本地的）将代码更新到本地，例如：</p>
+<pre><code><span class="title">git</span> pull origin master 
+</code></pre><p>就是将origin这个版本库的代码更新到本地的master主分支。</p>
+<p>git pull可以从任意一个git库获取某个分支的内容。用法如下：</p>
+<pre><code><span class="title">git</span> pull username<span class="variable">@ipaddr</span>:远端repository名远端分支名 本地分支名
+</code></pre><p>这条命令将从远端git库的远端分支名获取到本地git库的一个本地分支中。其中，如果不写本地分支名，则默认pull到本地当前分支。</p>
+<p>16&gt; Git push</p>
+<p>将本地commit的代码更新到远程版本库中，例如 “git push origin”就会将本地的代码更新到名为orgin的远程版本库中。</p>
+<p>git push和git pull正好想反，是将本地某个分支的内容提交到远端某个分支上。用法：</p>
+<pre><code><span class="title">git</span> push username<span class="variable">@ipaddr</span>:远端repository名本地分支名 远端分支名
+</code></pre><p>这条命令将本地git库的一个本地分支push到远端git库的远端分支名中。</p>
+<p>17&gt; Git fetch</p>
+<p>从服务器的仓库中下载代码。（与服务器交互，从服务器上下载最新代码）</p>
+<p>相当于从远程获取最新版本到本地，不会自动merge，比Git pull更安全些。<br>使用此方法来获取服务器上的更新。</p>
+<h2 id="四、参考">四、参考</h2><ul>
+<li><a href="http://files.cnblogs.com/files/phphuaibei/git%E6%90%AD%E5%BB%BA.pdf" target="_blank" rel="external">Git 使用指南</a></li>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">Git 教程</a></li>
+<li><a href="http://www.uml.org.cn/pzgl/201208073.asp" target="_blank" rel="external">Git 常用命令解说</a></li>
+<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">Git 简明指南</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="一、Git_是什么">一、Git 是什么</h2><p>一直在用git 和github，可是除了基本的git init 命令，对其他的git的分支啊，远端啊，恢复啊完全没有了解，所以想趁这个时间看不进书，整理一下git的资料。让自己有一个系统的了解，以后查询使用也会更加的方便。资料基本上都是参考文件的整理，为的就是自己对git有个整体的了解，仅供自己学习而用。</p>]]>
+    
+    </summary>
+    
+      <category term="Git" scheme="http://ylwhere.tk/tags/Git/"/>
+    
+      <category term="linux" scheme="http://ylwhere.tk/categories/linux/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[makefile 入门学习]]></title>
@@ -1258,48 +1422,6 @@ $(CFLAGS)</code>。建议使用“.cc”作为C++源文件的后缀，而不是�
     </summary>
     
       <category term="algorithm" scheme="http://ylwhere.tk/categories/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[poll 函数调用]]></title>
-    <link href="http://ylwhere.tk/2014/11/02/poll-han-shu-diao-yong/"/>
-    <id>http://ylwhere.tk/2014/11/02/poll-han-shu-diao-yong/</id>
-    <published>2014-11-02T02:41:18.000Z</published>
-    <updated>2015-05-22T12:45:58.563Z</updated>
-    <content type="html"><![CDATA[<p>使用非阻塞 I/O 的应用程序常常使用 poll, select, 和 epoll 系统调用.<br>poll, select 和 epoll 本质上有相同的功能: 每个允许一个进程来决定它是否可读或者写一个或多个文件而不阻塞. 这些调用也可阻塞进程直到任何一个给定集合的文件描述符可用来读或写. 因此, 它们常常用在必须使用多输入输出流的应用程序, 而不必粘连在它们任何一个上.<br><a id="more"></a></p>
-<h2 id="select_函数">select 函数</h2><p>select 在 BSD Unix 中引入, 而 poll 是 System V 的解决方案. epoll 调用[23]添加在 2.5.45, 作为使查询函数扩展到几千个文件描述符的方法<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="title">int</span> <span class="params">(*poll)</span> <span class="params">(<span class="keyword">struct</span> file *filp, poll_table *wait)</span></span>;</span><br></pre></td></tr></table></figure></p>
-<p>这个驱动方法被调用, 无论何时用户空间程序进行一个 poll, select, 或者 epoll 系统调用, 涉及一个和驱动相关的文件描述符. 这个设备方法负责这 2 步:</p>
-<ol>
-<li><p>在一个或多个可指示查询状态变化的等待队列上调用 poll_wait. 如果没有文件描述符可用作 I/O, 内核使这个进程在等待队列上等待所有的传递给系统调用的文件描述符.</p>
-</li>
-<li><p>返回一个位掩码, 描述可能不必阻塞就立刻进行的操作.</p>
-<h2 id="poll_函数">poll 函数</h2><p>poll 函数的声明</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;poll.h&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poll</span><span class="params">(<span class="keyword">struct</span> pollfd fds[], nfds_t nfds, <span class="keyword">int</span> timeout)</span>；</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>fds：是一个struct pollfd结构类型的数组，用于存放需要检测其状态的Socket描述符；每当调用这个函数之后，系统不会清空这个数组，操作起来比较方便；特别是对于socket连接比较多的情况下，在一定程度上可以提高处理的效率；这一点与select()函数不同，调用select()函数之后，select()函数会清空它所检测的socket描述符集合，导致每次调用select()之前都必须把socket描述符重新加入到待检测的集合中。</p>
-<hr>
-<p>nfds：nfds_t类型的参数，用于标记数组fds中的结构体元素的总数量；</p>
-<p>timeout：是poll函数调用阻塞的时间，单位：毫秒。设置为-1时表示阻塞调用</p>
-<p>返回值:</p>
-<p>·&gt;0：数组fds中准备好读、写或出错状态的那些socket描述符的总数量</p>
-<p>·=0：数组fds中没有任何socket描述符准备好读、写，或出错；此时poll超时，超时时间是timeout毫秒</p>
-<p>·-1： poll函数调用失败，同时会自动设置全局变量errno</p>
-<hr>
-<p>下面是pollfd的定义<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> pollfd &#123;</span><br><span class="line"><span class="keyword">int</span> fd; <span class="comment">/*文件描述符*/</span></span><br><span class="line"><span class="keyword">short</span> events; <span class="comment">/* 等待的需要测试事件 */</span></span><br><span class="line"><span class="keyword">short</span> revents; <span class="comment">/* 实际发生了的事件，也就是返回结果 */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>与select()十分相似，当返回正值时，代表满足响应事件的文件描述符的个数，如果返回0则代表在规定时间内没有事件发生。如发现返回为负则应该立即查看 errno，因为这代表有错误发生。<br>如果没有事件发生，revents会被清空，所以你不必多此一举。</p>
-<p>poll是采用轮询的方式进行监控的，所以对于监控的文件描述符越多，效率越低。</p>
-<h2 id="poll_实例">poll 实例</h2><p>下面是一个例子：</p>
-<figure class="highlight c"><figcaption><span>poll.c</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdlib.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;time.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;errno.h&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;poll.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;fcntl.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;unistd.h&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MAX_BUFFER_SIZE 1024</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> IN_FILES 3</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> TIME_DELAY 60*5</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MAX(a,b) ((a&gt;b)?(a):(b))</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc ,<span class="keyword">char</span> **argv)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="keyword">struct</span> pollfd fds[IN_FILES];</span><br><span class="line">  <span class="keyword">char</span> buf[MAX_BUFFER_SIZE];</span><br><span class="line">  <span class="keyword">int</span> i,res,real_read, maxfd;</span><br><span class="line">  fds[<span class="number">0</span>].fd = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span>((fds[<span class="number">1</span>].fd=open(<span class="string">"data1"</span>,O_RDONLY|O_NONBLOCK)) &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">fprintf</span>(stderr,<span class="string">"open data1 error:%s"</span>,strerror(errno));</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">if</span>((fds[<span class="number">2</span>].fd=open(<span class="string">"data2"</span>,O_RDONLY|O_NONBLOCK)) &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">fprintf</span>(stderr,<span class="string">"open data2 error:%s"</span>,strerror(errno));</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; IN_FILES; i++)</span><br><span class="line">    &#123;</span><br><span class="line">      fds[i].events = POLLIN;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">while</span>(fds[<span class="number">0</span>].events || fds[<span class="number">1</span>].events || fds[<span class="number">2</span>].events)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> (poll(fds, IN_FILES, -<span class="number">1</span>) &lt;= <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">"Poll error\n"</span>);</span><br><span class="line">     <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">      <span class="keyword">for</span> (i = <span class="number">0</span>; i&lt; IN_FILES; i++)</span><br><span class="line">    &#123;</span><br><span class="line">     <span class="keyword">if</span> (fds[i].revents)</span><br><span class="line">       &#123;</span><br><span class="line">		   <span class="built_in">printf</span>(<span class="string">"fd %d start\n"</span>, i);</span><br><span class="line">         <span class="built_in">memset</span>(buf, <span class="number">0</span>, MAX_BUFFER_SIZE);</span><br><span class="line">         real_read = read(fds[i].fd, buf, MAX_BUFFER_SIZE);</span><br><span class="line">         <span class="keyword">if</span> (real_read &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">         <span class="keyword">if</span> (errno != EAGAIN)</span><br><span class="line">           &#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> (!real_read)</span><br><span class="line">        &#123;</span><br><span class="line">         close(fds[i].fd);</span><br><span class="line">         fds[i].events = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">         <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">         <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">           &#123;</span><br><span class="line">             <span class="keyword">if</span> ((buf[<span class="number">0</span>] == <span class="string">'q'</span>) || (buf[<span class="number">0</span>] == <span class="string">'Q'</span>))</span><br><span class="line">            &#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">           &#125;</span><br><span class="line">         <span class="keyword">else</span></span><br><span class="line">           &#123;</span><br><span class="line">             buf[real_read] = <span class="string">'\0'</span>;</span><br><span class="line">             <span class="built_in">printf</span>(<span class="string">"%s"</span>, buf);</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">	 <span class="built_in">printf</span>(<span class="string">"fd %d end\n"</span>, i);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    <summary type="html">
-    <![CDATA[<p>使用非阻塞 I/O 的应用程序常常使用 poll, select, 和 epoll 系统调用.<br>poll, select 和 epoll 本质上有相同的功能: 每个允许一个进程来决定它是否可读或者写一个或多个文件而不阻塞. 这些调用也可阻塞进程直到任何一个给定集合的文件描述符可用来读或写. 因此, 它们常常用在必须使用多输入输出流的应用程序, 而不必粘连在它们任何一个上.<br>]]>
-    
-    </summary>
-    
-      <category term="socket" scheme="http://ylwhere.tk/tags/socket/"/>
-    
-      <category term="linux" scheme="http://ylwhere.tk/categories/linux/"/>
     
   </entry>
   
