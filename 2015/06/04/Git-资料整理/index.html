@@ -15,8 +15,8 @@
 <meta property="og:image" content="http://ylwhere.tk/img/blog/git_branch.png">
 <meta property="og:image" content="http://ylwhere.tk/img/blog/git_ignore.png">
 <meta property="og:image" content="http://ylwhere.tk/img/blog/git_log.png">
-<meta property="og:image" content="http://ylwhere.tk/img/git_resert.png">
-<meta property="og:updated_time" content="2015-06-04T12:27:49.244Z">
+<meta property="og:image" content="http://ylwhere.tk/img/blog/git_resert.png">
+<meta property="og:updated_time" content="2015-06-04T12:34:55.393Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 资料整理">
 <meta name="twitter:description" content="一、Git 是什么一直在用git 和github，可是除了基本的git init 命令，对其他的git的分支啊，远端啊，恢复啊完全没有了解，所以想趁这个时间看不进书，整理一下git的资料。让自己有一个系统的了解，以后查询使用也会更加的方便。资料基本上都是参考文件的整理，为的就是自己对git有个整体的了解，仅供自己学习而用。">
@@ -244,7 +244,7 @@ ga('send', 'pageview');
           
             <div id="toc" class="toc-article">
             <strong class="toc-title">contents</strong>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Git_是什么"><span class="toc-number">1.</span> <span class="toc-text">一、Git 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Git_安装和入门"><span class="toc-number">2.</span> <span class="toc-text">二、Git 安装和入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Git_概念"><span class="toc-number">2.1.</span> <span class="toc-text">Git 概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git_远程推送"><span class="toc-number">2.2.</span> <span class="toc-text">Git 远程推送</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支"><span class="toc-number">3.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新与合并"><span class="toc-number">4.</span> <span class="toc-text">更新与合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Git_命令介绍"><span class="toc-number">5.</span> <span class="toc-text">三、Git 命令介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">5.0.1.</span> <span class="toc-text">切换到分支</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#——"><span class="toc-number">6.</span> <span class="toc-text">——</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、参考"><span class="toc-number">7.</span> <span class="toc-text">四、参考</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Git_是什么"><span class="toc-number">1.</span> <span class="toc-text">一、Git 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Git_安装和入门"><span class="toc-number">2.</span> <span class="toc-text">二、Git 安装和入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Git_概念"><span class="toc-number">2.1.</span> <span class="toc-text">Git 概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git_远程推送"><span class="toc-number">2.2.</span> <span class="toc-text">Git 远程推送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支"><span class="toc-number">2.3.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新与合并"><span class="toc-number">2.4.</span> <span class="toc-text">更新与合并</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Git_命令介绍"><span class="toc-number">3.</span> <span class="toc-text">三、Git 命令介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、参考"><span class="toc-number">4.</span> <span class="toc-text">四、参考</span></a></li></ol>
           </div>
           
 
@@ -284,7 +284,7 @@ ga('send', 'pageview');
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
 <p>可以把master 换成任何分支。如果你还没有克隆现有仓库，并欲将你的仓库连接到某个远程服务器，你可以使用如下命令添加：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin &#60;server&#62;</span><br></pre></td></tr></table></figure>
-<h2 id="分支">分支</h2><p>分支是用来将特性开发绝缘开来的。在你创建仓库的时候，master 是“默认的”分支。在其他分支上进行开发，完成后再将它们合并到主分支上。</p>
+<h3 id="分支">分支</h3><p>分支是用来将特性开发绝缘开来的。在你创建仓库的时候，master 是“默认的”分支。在其他分支上进行开发，完成后再将它们合并到主分支上。</p>
 <p>关于分支的相机介绍可以看下面的链接：<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000" target="_blank" rel="external">Git 分支</a></p>
 <p><img src="/img/blog/git_branch.png" alt=""></p>
 <p>创建一个叫做“feature_x”的分支，并切换过去：  </p>
@@ -295,7 +295,7 @@ ga('send', 'pageview');
 <pre><code><span class="label">git</span> <span class="keyword">branch </span>-d feature_x
 </code></pre><p>除非你将分支推送到远端仓库，不然该分支就是 不为他人所见的：  </p>
 <p>git push origin <branch></branch></p>
-<h2 id="更新与合并">更新与合并</h2><p>要更新你的本地仓库至最新改动，执行：  </p>
+<h3 id="更新与合并">更新与合并</h3><p>要更新你的本地仓库至最新改动，执行：  </p>
 <pre><code><span class="title">git</span> pull
 </code></pre><p>以在你的工作目录中 获取（fetch） 并 合并（merge） 远端的改动。<br>要合并其他分支到你的当前分支（例如 master），执行：  </p>
 <pre><code>git merge <span class="tag">&lt;<span class="title">branch</span>&gt;</span>
@@ -326,12 +326,11 @@ ga('send', 'pageview');
 </code></pre><p>—mixed 是 git-reset 的默认选项，它的作用是重置索引内容，将其定位到指定的项目版本，而不改变你的工作树中的所有内容，只是提示你有哪些文件还未更新。  </p>
 <p>—soft 选项既不触动索引的位置，也不改变工作树中的任何内容，但是会要求它们处于一个良好的次序之内。该选项会保留你在工作树中的所有更新并使之处于待提交状态。</p>
 <p>—hard这个命令就会导致所有信息的回退， 包括文件内容。 一般只有在重置废弃代码时，才用它。 执行后，文件内容也无法恢复回来了。（回退了工作目录、index和仓库中的内容）。</p>
-<p><img src="/img/git_resert.png" alt=""></p>
+<p><img src="/img/blog/git_resert.png" alt=""></p>
 <p>10&gt; Git diff </p>
 <p>把本地的代码和index中的代码进行比较，或者是把index中的代码和本地仓库中的代码进行比较。<br>1） Git diff<br>比较工作目录和Index中的代码。<br>2） Git diff - - cached<br>比较index和本地仓库中的代码。   </p>
 <p>11&gt; Git checkout </p>
-<h4>切换到分支</h4>
-
+<p>切换到分支</p>
 <p>1) 创建一个新分支，并切换到该分支上   </p>
 <pre><code>Git checkout –<span class="tag">b</span> 新分支名 
 </code></pre><p>2）切换到某个已经建立的本地分支local_branch   </p>
@@ -371,7 +370,8 @@ git pull . bra<span class="label">nch1</span>（合并当前分支和bra<span cl
 <p>可以将某个具体的版本打上一个标签，这样就不需要记忆复杂的版本号哈希值字符串了，例如:</p>
 <pre><code>git tag revert_version bbaf6fb<span class="number">5060b4875</span>b18ff9ff637ce<span class="number">118256d6f20</span>
 </code></pre><p> 来标记这个被你还原的版本，那么以后你想查看该版本时，就可以使用 revert_version标签名，而不是哈希值了。</p>
-<h2 id="——">——</h2><p>14&gt; Git clone</p>
+<hr>
+<p>14&gt; Git clone</p>
 <p>取出服务器的仓库的代码到本地建立的目录中（与服务器交互）。</p>
 <p>通过git clone获取远端git库后，.git/config中的开发者信息不会被一起clone过来。仍然需要为本地库的.git/config文件添加开发者信息。此外，开发者还需要自己添加 . gitignore文件。</p>
 <p>15&gt;  Git pull</p>
