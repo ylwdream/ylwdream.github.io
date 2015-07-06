@@ -4,7 +4,7 @@
   <subtitle><![CDATA[More Code More Confidence]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ylwhere.tk/"/>
-  <updated>2015-07-06T05:35:30.060Z</updated>
+  <updated>2015-07-06T05:40:01.770Z</updated>
   <id>http://ylwhere.tk/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://ylwhere.tk/2015/07/06/python-%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/"/>
     <id>http://ylwhere.tk/2015/07/06/python-入门学习/</id>
     <published>2015-07-06T03:07:29.000Z</published>
-    <updated>2015-07-06T05:35:30.060Z</updated>
+    <updated>2015-07-06T05:40:01.770Z</updated>
     <content type="html"><![CDATA[<h2 id="python_介绍">python 介绍</h2><p>Python是一种计算机程序设计语言。你可能已经听说过很多种流行的编程语言，比如非常难学的C语言，非常流行的Java语言，适合初学者的Basic语言，适合网页编程的JavaScript语言等等。</p>
 <p>Python就为我们提供了非常完善的基础代码库，覆盖了网络、文件、GUI、数据库、文本等大量内容，被形象地称作“内置电池（batteries included）”。用Python开发，许多功能不必从零编写，直接使用现成的即可。</p>
 <a id="more"></a>
