@@ -4,7 +4,7 @@
   <subtitle><![CDATA[More Code More Confidence]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ylwhere.tk/"/>
-  <updated>2015-07-06T05:33:53.237Z</updated>
+  <updated>2015-07-06T05:35:30.060Z</updated>
   <id>http://ylwhere.tk/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://ylwhere.tk/2015/07/06/python-%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/"/>
     <id>http://ylwhere.tk/2015/07/06/python-入门学习/</id>
     <published>2015-07-06T03:07:29.000Z</published>
-    <updated>2015-07-06T05:33:53.237Z</updated>
+    <updated>2015-07-06T05:35:30.060Z</updated>
     <content type="html"><![CDATA[<h2 id="python_介绍">python 介绍</h2><p>Python是一种计算机程序设计语言。你可能已经听说过很多种流行的编程语言，比如非常难学的C语言，非常流行的Java语言，适合初学者的Basic语言，适合网页编程的JavaScript语言等等。</p>
 <p>Python就为我们提供了非常完善的基础代码库，覆盖了网络、文件、GUI、数据库、文本等大量内容，被形象地称作“内置电池（batteries included）”。用Python开发，许多功能不必从零编写，直接使用现成的即可。</p>
 <a id="more"></a>
@@ -29,8 +29,10 @@
 <p>我一直是看着这个链接的教程：<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001418612030427b1f1cf4ea04c41368e8a6753dca43070000" target="_blank" rel="external">python 教程</a> 里面提到一个练习题。用filter来实现1~100之内的素数过滤。</p>
 <p>程序代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_prime</span><span class="params">(n)</span>:</span></span><br><span class="line">	<span class="keyword">if</span>(n&lt;=<span class="number">1</span>):</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	<span class="keyword">elif</span>(n==<span class="number">2</span>):</span><br><span class="line">		<span class="keyword">return</span> n</span><br><span class="line">	<span class="keyword">elif</span>(n==<span class="number">3</span>):</span><br><span class="line">		<span class="keyword">return</span> n</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		sqrt_n = math.sqrt(n)</span><br><span class="line">		step = <span class="number">2</span></span><br><span class="line">		<span class="keyword">while</span> step &lt;= sqrt_n:</span><br><span class="line">			<span class="keyword">if</span> n % step == <span class="number">0</span>:</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				step = step + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> n</span><br><span class="line"></span><br><span class="line">x = filter(is_prime, range(<span class="number">1</span>,<span class="number">100</span>))</span><br><span class="line"><span class="keyword">print</span> x</span><br></pre></td></tr></table></figure>
-<p>运行结果：<br>    [wyl@localhost Code]$ python prime.py<br>    [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]</p>
-<p>总结：python 感觉很好用，因为是解释性语言，虽然效率没有编译型语言高，但是实际使用过程中并没有感觉到很慢。</p>
+<p>运行结果：</p>
+<pre><code>[wyl<span class="variable">@localhost</span> <span class="constant">Code]</span><span class="variable">$ </span>python prime.py 
+[<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">17</span>, <span class="number">19</span>, <span class="number">23</span>, <span class="number">29</span>, <span class="number">31</span>, <span class="number">37</span>, <span class="number">41</span>, <span class="number">43</span>, <span class="number">47</span>, <span class="number">53</span>, <span class="number">59</span>, <span class="number">61</span>, <span class="number">67</span>, <span class="number">71</span>, <span class="number">73</span>, <span class="number">79</span>, <span class="number">83</span>, <span class="number">89</span>, <span class="number">97</span>]
+</code></pre><p>总结：python 感觉很好用，因为是解释性语言，虽然效率没有编译型语言高，但是实际使用过程中并没有感觉到很慢。</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h2 id="python_介绍">python 介绍</h2><p>Python是一种计算机程序设计语言。你可能已经听说过很多种流行的编程语言，比如非常难学的C语言，非常流行的Java语言，适合初学者的Basic语言，适合网页编程的JavaScript语言等等。</p>
