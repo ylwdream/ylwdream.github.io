@@ -4,7 +4,7 @@
   <subtitle><![CDATA[More Code More Confidence]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ylwhere.tk/"/>
-  <updated>2015-09-08T12:19:18.091Z</updated>
+  <updated>2015-09-08T12:24:29.170Z</updated>
   <id>http://ylwhere.tk/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://ylwhere.tk/2015/08/20/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%A6-Lua/"/>
     <id>http://ylwhere.tk/2015/08/20/为什么学-Lua/</id>
     <published>2015-08-20T11:46:58.000Z</published>
-    <updated>2015-09-08T12:19:18.091Z</updated>
+    <updated>2015-09-08T12:24:29.170Z</updated>
     <content type="html"><![CDATA[<h2 id="为什么学_Lua">为什么学 Lua</h2><p>其实我是不想学习的，应为对脚本语言这么“开放”的语法一直感觉很不规范。但是由于工作需要，不得不开始学习lua。我想说第一眼看上去lua和python的数据类型和语法规则简直真相（因为我刚看了一点python）。好了，至于lua有什么用？一般看网上说是为了支持游戏脚本。lua怎么说？应该是一个胶水吧？把各种语言穿起来。lua完全符合ANSI 的C语言规范。也就是可以直接用c编译器编译了。</p>
 <a id="more"></a>
 <h2 id="lua_的特性">lua 的特性</h2><p>lua 可以返回多个结果。这个是C/C++语言做不到的，第一眼我就震惊了。（后面有更震惊的事情，可以把函数当变量用、以及闭包）。我觉得lua简直是把ak47.用起来肯定威力巨大。</p>
@@ -77,33 +77,9 @@
     
     </summary>
     
-  </entry>
-  
-  <entry>
-    <title><![CDATA[突然就学起了andriod]]></title>
-    <link href="http://ylwhere.tk/2015/08/20/%E7%AA%81%E7%84%B6%E5%B0%B1%E5%AD%A6%E8%B5%B7%E4%BA%86andriod/"/>
-    <id>http://ylwhere.tk/2015/08/20/突然就学起了andriod/</id>
-    <published>2015-08-20T11:18:12.000Z</published>
-    <updated>2015-09-08T12:21:35.844Z</updated>
-    <content type="html"><![CDATA[<h2 id="急冲冲的实习">急冲冲的实习</h2><p>本来是打算出去实习的，也确实现在在公司了。一句话，真是急冲冲，面试到入职就两天搞定了，一天面试，第二天打电话说通过了面试，第三天我就来了。面试先是笔试，当然是很基础的C/C++知识。并没有涉及太多的算法或者很深很广的东西，数据结构啦，或者操作系统，网络等等都没有。就是基础的C语言题目。不过还是有几道选择题不确定，而且笔试的话，每一次都在提醒我把字写得更好看点把，真是字如其人。这点倒是在我身上验证了。</p>
-<a id="more"></a>
-<p>来公司以后，我本来以为会让我先自我学习，没想到立马就开始干活了。每一个实习生都会给配一个师兄吧。叫师兄是应为他们看起来也就大两三岁的样子。带我的师兄，小宝宝马上就出生了。咩哈哈，要当爸爸的节奏啊。应该很激动有木有，不过公司好像年假和产假一起请也没有几天。哎，这就是不仁慈的地方，别人家的it公司不说朝九晚五，最起码也不会这样吧。目前公司是早上8:30上班。下午5:30下班。有的部门还要加班，一三五六加班，晚上到8:30。我真的想呵呵（因为和实习工资比起来）。。。。</p>
-<h2 id="突然就学习了android">突然就学习了android</h2><p>本来我一向是自诩学C/C++的人。心里鄙视学java的。好吧，其实是我内心害怕学java。但是看了三天代码和android书。感觉android设计的编程框架如此的美。真是太方便使用了。UI 和数据显示分开，数据显示和业务逻辑也可以分开。总之，真心棒。</p>
-<p>推荐一本书就是：&gt; 开始启程，你的第一行Android 代码</p>
-<p>还有就是突然转到android new一个类的时候总感觉怪怪的。不过也只是语法不同。底层还是指针在玩。<br>放一张图吧，介绍的是View 类的继承关系。</p>
-<p><img src="/img/blog/View.png" alt=""></p>
-<p>还有一点就是android的界面就是编写xml文件，用起来好放心，属性一大堆，当然也不用记，用的时候查文档就好。java 中支持匿名类，就如C++的lambda表达式一样，第一眼看上起我竟然发现也不是不可以接受。<br>举个例子也算是记忆吧。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.app.Activity;</span><br><span class="line"><span class="keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="keyword">import</span> android.net.Uri;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"><span class="keyword">import</span> android.view.Menu;</span><br><span class="line"><span class="keyword">import</span> android.view.MenuItem;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.view.View.OnClickListener;</span><br><span class="line"><span class="keyword">import</span> android.view.Window;</span><br><span class="line"><span class="keyword">import</span> android.widget.Button;</span><br><span class="line"><span class="keyword">import</span> android.widget.EditText;</span><br><span class="line"><span class="keyword">import</span> android.widget.ImageView;</span><br><span class="line"><span class="keyword">import</span> android.widget.ProgressBar;</span><br><span class="line"><span class="keyword">import</span> android.widget.Toast;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Button button;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        getWindow().requestFeature(Window.FEATURE_NO_TITLE);</span><br><span class="line">        setContentView(R.layout.search_result);</span><br><span class="line">        </span><br><span class="line">        button = (ButtonView) findViewById(R.id.button);</span><br><span class="line">		<span class="comment">//button new了一个匿名监听类对象</span></span><br><span class="line">        button.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</span><br><span class="line">			<span class="annotation">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">				</span><br><span class="line">				EditText editText = (EditText) findViewById(R.id.edit_text);</span><br><span class="line">				</span><br><span class="line">				String textContent = editText.getText().toString();</span><br><span class="line">				</span><br><span class="line">				ImageView imageView = (ImageView) findViewById(R.id.image_view);</span><br><span class="line">				ProgressBar progress_bar = (ProgressBar) findViewById(R.id.progress_bar);</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">int</span> progress = progress_bar.getProgress();</span><br><span class="line">				</span><br><span class="line">				progress += <span class="number">10</span>;</span><br><span class="line">				</span><br><span class="line">				progress_bar.setProgress(progress);</span><br><span class="line">				</span><br><span class="line">			<span class="comment">//	imageView.setImageResource(R.drawable.img1);</span></span><br><span class="line">			<span class="comment">//	Toast.makeText(FirstActivity.this, textContent,</span></span><br><span class="line">			<span class="comment">//			Toast.LENGTH_SHORT).show();</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="总结">总结</h2><p>继续学看书了，每天对着手机调试程序，每天对着手机说话。。。呵呵哒。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="急冲冲的实习">急冲冲的实习</h2><p>本来是打算出去实习的，也确实现在在公司了。一句话，真是急冲冲，面试到入职就两天搞定了，一天面试，第二天打电话说通过了面试，第三天我就来了。面试先是笔试，当然是很基础的C/C++知识。并没有涉及太多的算法或者很深很广的东西，数据结构啦，或者操作系统，网络等等都没有。就是基础的C语言题目。不过还是有几道选择题不确定，而且笔试的话，每一次都在提醒我把字写得更好看点把，真是字如其人。这点倒是在我身上验证了。</p>]]>
+      <category term="Lua" scheme="http://ylwhere.tk/tags/Lua/"/>
     
-    </summary>
-    
-      <category term="android" scheme="http://ylwhere.tk/tags/android/"/>
-    
-      <category term="java" scheme="http://ylwhere.tk/categories/java/"/>
+      <category term="shell" scheme="http://ylwhere.tk/categories/shell/"/>
     
   </entry>
   
@@ -176,6 +152,34 @@ struct {                                \
       <category term="libevent" scheme="http://ylwhere.tk/tags/libevent/"/>
     
       <category term="linux" scheme="http://ylwhere.tk/categories/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[突然就学起了andriod]]></title>
+    <link href="http://ylwhere.tk/2015/08/09/%E7%AA%81%E7%84%B6%E5%B0%B1%E5%AD%A6%E8%B5%B7%E4%BA%86andriod/"/>
+    <id>http://ylwhere.tk/2015/08/09/突然就学起了andriod/</id>
+    <published>2015-08-09T11:18:12.000Z</published>
+    <updated>2015-09-08T12:23:25.301Z</updated>
+    <content type="html"><![CDATA[<h2 id="急冲冲的实习">急冲冲的实习</h2><p>本来是打算出去实习的，也确实现在在公司了。一句话，真是急冲冲，面试到入职就两天搞定了，一天面试，第二天打电话说通过了面试，第三天我就来了。面试先是笔试，当然是很基础的C/C++知识。并没有涉及太多的算法或者很深很广的东西，数据结构啦，或者操作系统，网络等等都没有。就是基础的C语言题目。不过还是有几道选择题不确定，而且笔试的话，每一次都在提醒我把字写得更好看点把，真是字如其人。这点倒是在我身上验证了。</p>
+<a id="more"></a>
+<p>来公司以后，我本来以为会让我先自我学习，没想到立马就开始干活了。每一个实习生都会给配一个师兄吧。叫师兄是应为他们看起来也就大两三岁的样子。带我的师兄，小宝宝马上就出生了。咩哈哈，要当爸爸的节奏啊。应该很激动有木有，不过公司好像年假和产假一起请也没有几天。哎，这就是不仁慈的地方，别人家的it公司不说朝九晚五，最起码也不会这样吧。目前公司是早上8:30上班。下午5:30下班。有的部门还要加班，一三五六加班，晚上到8:30。我真的想呵呵（因为和实习工资比起来）。。。。</p>
+<h2 id="突然就学习了android">突然就学习了android</h2><p>本来我一向是自诩学C/C++的人。心里鄙视学java的。好吧，其实是我内心害怕学java。但是看了三天代码和android书。感觉android设计的编程框架如此的美。真是太方便使用了。UI 和数据显示分开，数据显示和业务逻辑也可以分开。总之，真心棒。</p>
+<p>推荐一本书就是：&gt; 开始启程，你的第一行Android 代码</p>
+<p>还有就是突然转到android new一个类的时候总感觉怪怪的。不过也只是语法不同。底层还是指针在玩。<br>放一张图吧，介绍的是View 类的继承关系。</p>
+<p><img src="/img/blog/View.png" alt=""></p>
+<p>还有一点就是android的界面就是编写xml文件，用起来好放心，属性一大堆，当然也不用记，用的时候查文档就好。java 中支持匿名类，就如C++的lambda表达式一样，第一眼看上起我竟然发现也不是不可以接受。<br>举个例子也算是记忆吧。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.app.Activity;</span><br><span class="line"><span class="keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="keyword">import</span> android.net.Uri;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"><span class="keyword">import</span> android.view.Menu;</span><br><span class="line"><span class="keyword">import</span> android.view.MenuItem;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.view.View.OnClickListener;</span><br><span class="line"><span class="keyword">import</span> android.view.Window;</span><br><span class="line"><span class="keyword">import</span> android.widget.Button;</span><br><span class="line"><span class="keyword">import</span> android.widget.EditText;</span><br><span class="line"><span class="keyword">import</span> android.widget.ImageView;</span><br><span class="line"><span class="keyword">import</span> android.widget.ProgressBar;</span><br><span class="line"><span class="keyword">import</span> android.widget.Toast;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Button button;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        getWindow().requestFeature(Window.FEATURE_NO_TITLE);</span><br><span class="line">        setContentView(R.layout.search_result);</span><br><span class="line">        </span><br><span class="line">        button = (ButtonView) findViewById(R.id.button);</span><br><span class="line">		<span class="comment">//button new了一个匿名监听类对象</span></span><br><span class="line">        button.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</span><br><span class="line">			<span class="annotation">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">				</span><br><span class="line">				EditText editText = (EditText) findViewById(R.id.edit_text);</span><br><span class="line">				</span><br><span class="line">				String textContent = editText.getText().toString();</span><br><span class="line">				</span><br><span class="line">				ImageView imageView = (ImageView) findViewById(R.id.image_view);</span><br><span class="line">				ProgressBar progress_bar = (ProgressBar) findViewById(R.id.progress_bar);</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">int</span> progress = progress_bar.getProgress();</span><br><span class="line">				</span><br><span class="line">				progress += <span class="number">10</span>;</span><br><span class="line">				</span><br><span class="line">				progress_bar.setProgress(progress);</span><br><span class="line">				</span><br><span class="line">			<span class="comment">//	imageView.setImageResource(R.drawable.img1);</span></span><br><span class="line">			<span class="comment">//	Toast.makeText(FirstActivity.this, textContent,</span></span><br><span class="line">			<span class="comment">//			Toast.LENGTH_SHORT).show();</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="总结">总结</h2><p>继续学看书了，每天对着手机调试程序，每天对着手机说话。。。呵呵哒。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="急冲冲的实习">急冲冲的实习</h2><p>本来是打算出去实习的，也确实现在在公司了。一句话，真是急冲冲，面试到入职就两天搞定了，一天面试，第二天打电话说通过了面试，第三天我就来了。面试先是笔试，当然是很基础的C/C++知识。并没有涉及太多的算法或者很深很广的东西，数据结构啦，或者操作系统，网络等等都没有。就是基础的C语言题目。不过还是有几道选择题不确定，而且笔试的话，每一次都在提醒我把字写得更好看点把，真是字如其人。这点倒是在我身上验证了。</p>]]>
+    
+    </summary>
+    
+      <category term="android" scheme="http://ylwhere.tk/tags/android/"/>
+    
+      <category term="java" scheme="http://ylwhere.tk/categories/java/"/>
     
   </entry>
   
