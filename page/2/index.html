@@ -123,7 +123,7 @@ ga('send', 'pageview');
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C-C/" style="font-size: 12.5px;">C/C++</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/MPI/" style="font-size: 17.5px;">MPI</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/compiler/" style="font-size: 10px;">compiler</a> <a href="/tags/intern/" style="font-size: 10px;">intern</a> <a href="/tags/io/" style="font-size: 12.5px;">io</a> <a href="/tags/linking/" style="font-size: 10px;">linking</a> <a href="/tags/llvm/" style="font-size: 10px;">llvm</a> <a href="/tags/memory/" style="font-size: 15px;">memory</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/pthread/" style="font-size: 10px;">pthread</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/爬虫/" style="font-size: 17.5px;">爬虫</a>
+						<a href="/tags/C-C/" style="font-size: 12.5px;">C/C++</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/MPI/" style="font-size: 17.5px;">MPI</a> <a href="/tags/Octopress/" style="font-size: 10px;">Octopress</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/compiler/" style="font-size: 10px;">compiler</a> <a href="/tags/intern/" style="font-size: 10px;">intern</a> <a href="/tags/io/" style="font-size: 12.5px;">io</a> <a href="/tags/libevent/" style="font-size: 10px;">libevent</a> <a href="/tags/linking/" style="font-size: 10px;">linking</a> <a href="/tags/llvm/" style="font-size: 10px;">llvm</a> <a href="/tags/memory/" style="font-size: 15px;">memory</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/pthread/" style="font-size: 10px;">pthread</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/socket/" style="font-size: 20px;">socket</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/爬虫/" style="font-size: 17.5px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -194,6 +194,182 @@ ga('send', 'pageview');
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-linux-malloc-函数" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/24/linux-malloc-函数/" class="article-date">
+  	<time datetime="2015-05-24T05:58:53.000Z" itemprop="datePublished">2015-05-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/24/linux-malloc-函数/">linux malloc 函数</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="进程堆">进程堆</h2><p>想找个时间，看下malloc是如何实现的。有一种做法是，把进程的内存管理交给操作系统内核去做，既然内核管理者进程的地址空间，那么如何它提供一个系统调用，可以让程序使用这个系统调用申请内存，不久可以么？但是实际上这样做的性能比较差，因为每次程序申请或者释放内存都要进行系统调用。我们知道系统调用的性能开销是很大的，当程序中对堆的操作比较繁琐时，这样做的结果是会严重影响程序的性能。比较好的做法是程序向操作系统申请一块适当大小的堆空间，然后由程序自己管理这块空间，而具体来讲，管理者堆空间分配的往往是程序的运行库。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/memory/">memory</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/05/24/linux-malloc-函数/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-linux-栈和堆空间" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/23/linux-栈和堆空间/" class="article-date">
+  	<time datetime="2015-05-23T03:21:14.000Z" itemprop="datePublished">2015-05-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/23/linux-栈和堆空间/">linux 栈和堆空间</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="运行时栈">运行时栈</h2><p>程序的运行离不开栈空间和堆空间。栈中保存着程序运行的局部变量还有最重要的是，维持了函数调用的活动记录和关系。因为程序语言设计的允许递归调用，所以程序的局部变量必须存储在栈空间中，每一次函数调用都会有不同的活动记录。而函数执行完成后会回收当前的栈帧，所以无法通过函数返回值来访问回收后的局部变量，当然，<code>static</code> 变量除外。 因为编译器遇到<code>static</code> 变量时是按全局变量处理的，在符号表中有<code>static</code>变量的位置。只不过其访问权限只能在函数内。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/memory/">memory</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/05/23/linux-栈和堆空间/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-大一下学期" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/22/大一下学期/" class="article-date">
+  	<time datetime="2015-05-22T14:17:45.000Z" itemprop="datePublished">2015-05-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/22/大一下学期/">大一下学期</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="即逝的半学期">即逝的半学期</h2><p>前几天看到别人的博客，和我一样，也是研究生一年级的学生，看完感觉我整个人都安静下来。因为你突然发现有一个人，和你那么的像，也有一个姐姐。一个爱我们的父母。可是看到他这学期写的博客，感觉出了他的努力和认真。也感觉到了自己如此的浮躁。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/心路札记/">心路札记</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/05/22/大一下学期/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-tiny-webfu-wu-qi" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -613,185 +789,9 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-mpi-求解皇后问题" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/11/10/mpi-求解皇后问题/" class="article-date">
-  	<time datetime="2014-11-09T17:09:40.000Z" itemprop="datePublished">2014-11-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/10/mpi-求解皇后问题/">mpi 求解皇后问题</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一直好奇，怎么用slave模型知道从属线程是否已经结束了分发给他的任务，然后当总认为还没有结束时，主线程可以再次给他分配任务。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MPI/">MPI</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/parallel/">parallel</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2014/11/10/mpi-求解皇后问题/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-mpi-ju-zhen-xiang-cheng" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/11/09/mpi-ju-zhen-xiang-cheng/" class="article-date">
-  	<time datetime="2014-11-08T20:34:43.000Z" itemprop="datePublished">2014-11-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/09/mpi-ju-zhen-xiang-cheng/">MPI矩阵相乘</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="MPI_介绍">MPI 介绍</h2><p>MPI和openMP都可以用于并行计算，但是MPI的并行粒度是进程级别的。一般运行在SMP集群中。MPI 是通过消息传递模型进行并行计算，所以mpi编写的程序即可以运行在统一的共享模型机器上或者运行在同一编制的共享内存模型中。<br>MPI 提供的只是消息传递的语言接口，有 <code>C</code> 和 <code>C++</code> 接口。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MPI/">MPI</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/parallel/">parallel</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2014/11/09/mpi-ju-zhen-xiang-cheng/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-miller-rabin-su-shu-pan-ding" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/11/07/miller-rabin-su-shu-pan-ding/" class="article-date">
-  	<time datetime="2014-11-07T15:46:08.000Z" itemprop="datePublished">2014-11-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/07/miller-rabin-su-shu-pan-ding/">Miller–Rabin 素数判定</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Miller–Rabin">Miller–Rabin</h2><p>Miller–Rabin是MonteCarlo算法的一种，也就是概率算法，但是在实际应用中因为效率比较高，而出错概率跟小，所以应用很广。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2014/11/07/miller-rabin-su-shu-pan-ding/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>
