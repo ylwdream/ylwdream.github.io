@@ -195,6 +195,67 @@ ga('send', 'pageview');
 </nav>
       <div class="body-wrap">
   
+    <article id="post-linux-Dynamic-linking" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/24/linux-Dynamic-linking/" class="article-date">
+  	<time datetime="2015-05-24T05:59:53.000Z" itemprop="datePublished">2015-05-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/24/linux-Dynamic-linking/">linux Dynamic linking</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="动态链接">动态链接</h2><p>动态链接英文是Dynamic Linking，需要解决空间浪费和更新困难这两个问题。最简单的办法就是把程序的模块相互划分开来，形成独立的文件，而不再将他们静态的链接在一起。简单地讲，就是不对那些组成程序的目标文件进行链接，等到程序要运行时才进行链接。也就是说，把链接这个过程推迟到了运行时再进行，这就是动态链接(Dynamic Linking)的基本思想。</p>
+<p>动态链接还有一个特点，就是程序在运行时可以动态地选择加载各种程序模块，这个优点就是后来被人们用来制作程序的插件(plug-in)。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linking/">linking</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/compiler/">compiler</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/05/24/linux-Dynamic-linking/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-linux-malloc-函数" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -714,66 +775,6 @@ ga('send', 'pageview');
       
         <p class="article-more-link">
           <a  href="/2014/11/13/MPI-实现流水线模型/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-c++-explicit构造函数" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/11/12/c++-explicit构造函数/" class="article-date">
-  	<time datetime="2014-11-11T17:08:43.000Z" itemprop="datePublished">2014-11-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/12/c++-explicit构造函数/">c++ explicit构造函数</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>当c++的构造函数只有一个参数时，有时候在表达式运算时会调用c++隐式转换，生成一个临时对象。<br>按照默认规定，只有一个参数的构造函数也定义了一个隐式转换，将该构造函数对应数据类型的数据转换为该类对象。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/C-C/">C/C++</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2014/11/12/c++-explicit构造函数/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
