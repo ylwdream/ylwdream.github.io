@@ -195,67 +195,6 @@ ga('send', 'pageview');
 </nav>
       <div class="body-wrap">
   
-    <article id="post-入口函数和程序初始化" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/31/入口函数和程序初始化/" class="article-date">
-  	<time datetime="2015-05-31T02:22:56.000Z" itemprop="datePublished">2015-05-31</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/31/入口函数和程序初始化/">入口函数和程序初始化</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="入口函数">入口函数</h2><p>程序的入口函数，站在程序员的角度来说，往往会认为程序是从main函数来开始执行的，可是有一个问题是，那么main函数是由谁调用的呢？我们知道，在C++中全局变量的构造函数是在调用main之前就已经被调用构造函数而初始化完毕，那么这个机制是如何实现的？</p>
-<p>我们知道在shell脚本中执行一个程序，shell会接收输入的命令，利用<code>fork()</code>函数生成一个子进程，然后等待子进程运行完程序后返回。那么<code>fork()</code>函数又是怎么实现的，和程序的装载运行有什么关系？</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compiler/">compiler</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/05/31/入口函数和程序初始化/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
     <article id="post-linux-Dynamic-linking" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -776,6 +715,66 @@ ga('send', 'pageview');
       
         <p class="article-more-link">
           <a  href="/2014/11/22/yan-jiu-sheng-zhe-duan-ri-zi-de-gan-shou/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-MPI-实现流水线模型" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/11/13/MPI-实现流水线模型/" class="article-date">
+  	<time datetime="2014-11-13T15:38:34.000Z" itemprop="datePublished">2014-11-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/13/MPI-实现流水线模型/">MPI 实现流水线模型</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>cpu在单处理器执行指令时，采用的是流水线模型。在一个流水线多次执行时可以加速。<br>超标量介于标量和向量之间，因为处理器处理一条指令：去指令，解析/取数，计算/写数五步。<br>而随着其他算数部件，例如ALU和PLU的增加，标量的话会令处理器的处理性能降低，而有些机器和操作却并不支持向量操作。而多处理器同样可以加速指令的执行速度，在每个指令处理的过程中依然是超标量的，也就是多条流水线。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MPI/">MPI</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/parallel/">parallel</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2014/11/13/MPI-实现流水线模型/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

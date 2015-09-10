@@ -195,66 +195,6 @@ ga('send', 'pageview');
 </nav>
       <div class="body-wrap">
   
-    <article id="post-MPI-实现流水线模型" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/11/13/MPI-实现流水线模型/" class="article-date">
-  	<time datetime="2014-11-13T15:38:34.000Z" itemprop="datePublished">2014-11-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/13/MPI-实现流水线模型/">MPI 实现流水线模型</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>cpu在单处理器执行指令时，采用的是流水线模型。在一个流水线多次执行时可以加速。<br>超标量介于标量和向量之间，因为处理器处理一条指令：去指令，解析/取数，计算/写数五步。<br>而随着其他算数部件，例如ALU和PLU的增加，标量的话会令处理器的处理性能降低，而有些机器和操作却并不支持向量操作。而多处理器同样可以加速指令的执行速度，在每个指令处理的过程中依然是超标量的，也就是多条流水线。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MPI/">MPI</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/parallel/">parallel</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2014/11/13/MPI-实现流水线模型/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
     <article id="post-c++-explicit构造函数" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -769,6 +709,62 @@ ga('send', 'pageview');
       
         <p class="article-more-link">
           <a  href="/2014/10/31/c-plus-plus-alloc-han-shu/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-c-plus-plus-mo-ban-te-hua" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/10/31/c-plus-plus-mo-ban-te-hua/" class="article-date">
+  	<time datetime="2014-10-31T13:55:13.000Z" itemprop="datePublished">2014-10-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/31/c-plus-plus-mo-ban-te-hua/">C++ 模板特化</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有些时候写的模板函数并不适用于所有的情况，这个时候需要对模板进行特化，意思也就是对于特殊情况下使用特化版本的模板。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/C-C/">C/C++</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2014/10/31/c-plus-plus-mo-ban-te-hua/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
